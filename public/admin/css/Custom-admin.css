@@ -1,0 +1,29 @@
+.Variant-control {
+	width: 10%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	margin-bottom: 10px;
+	transition: border-color 0.3s ease-in-out;
+}
+
+.Variant-control:focus {
+	border-color: #007bff;
+	outline: none;
+	box-shadow: 0 0 0 2px rgba(141, 174, 208, 0.25);
+}
+
+#remove-variant {
+	font-size: large;
+}
+
+#add-variant {
+	font-size: large;
+}
+
+.admin-footer {
+	position: absolute;
+	bottom: 0;
+	width: -webkit-fill-available;
+}

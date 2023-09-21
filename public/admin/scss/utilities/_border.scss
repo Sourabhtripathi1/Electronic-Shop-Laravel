@@ -1,0 +1,15 @@
+@each $color, $value in $theme-colors {
+    @each $position in [bottom] {
+        .border-#{$position}-#{$color} {
+            border-#{$position}: 0.25rem solid $value !important;
+        }
+    }
+}
+
+@each $color, $value in $theme-colors {
+    @each $position in [left] {
+        .border-#{$position}-#{$color} {
+            border-#{$position}: 0.25rem solid $value !important;
+        }
+    }
+}
