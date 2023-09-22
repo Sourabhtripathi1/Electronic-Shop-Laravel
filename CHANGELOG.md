@@ -1,5 +1,9 @@
 # git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
+# composer install
+
+# php artisan serve
+
 # Release Notes
 
 ## [Unreleased](https://github.com/laravel/laravel/compare/v10.2.5...10.x)
