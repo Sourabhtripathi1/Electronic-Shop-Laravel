@@ -6,6 +6,6 @@ About Page
 
 @section('main-section')
 
-<h1>this is about page</h1> 
+<h1>this is My about page</h1>
 
 @endsection
