@@ -1,8 +1,8 @@
-# git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
+git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
-# composer install
+composer install
 
-# php artisan serve
+php artisan serve
 
 # Release Notes
 
