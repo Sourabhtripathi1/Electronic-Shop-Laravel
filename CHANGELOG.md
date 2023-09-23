@@ -1,6 +1,5 @@
 # command to run code
 
-
 git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
 cd Electronic-Shop-Laravel
@@ -11,9 +10,7 @@ php artisan key:generate
 
 php artisan Storage:link
 
-php artisan serve
-
-
+code .
 
 # Release Notes
 
