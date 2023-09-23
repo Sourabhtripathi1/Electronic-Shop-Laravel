@@ -4,6 +4,8 @@ composer install
 
 php artisan serve
 
+php artisan Storage:link
+
 # Release Notes
 
 ## [Unreleased](https://github.com/laravel/laravel/compare/v10.2.5...10.x)
