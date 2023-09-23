@@ -104,7 +104,7 @@ array_filter($pictures, function ($val) use ($b) {
                                                                     <input type="file" class="form-control"
                                                                         name="edBrpic">
                                                                     <p class="form-text text-muted">
-                                                                        Select if want to update brad pic
+                                                                        Select if want to update brand pic
                                                                     </p>
                                                                 </div>
 

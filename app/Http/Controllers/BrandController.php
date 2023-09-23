@@ -94,7 +94,28 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // 
+        $br = Brand::where("Brand_id", $id)->first();
+
+        echo "<pre>";
+
+        $p = Picture::where("Picture_id", $br->Brand_Pic)->first();
+
+        if ($request->file('edBrpic')) {
+
+            unlink(public_path("/storage/site-assets/" . $p->Source));
+
+            $nw_pic = getID(35) . "." . $request->file('edBrpic')->getClientOriginalExtension();
+
+            $request->file('edBrpic')->storeAs('/public/site-assets', $nw_pic);
+
+            DB::update('update pictures set Source = ? where Picture_id = ?', [$nw_pic, $br->Brand_Pic]);
+        }
+
+        if ($request->edBrna != $br->Brand_Name) {
+            DB::update('update brands set Brand_Name = ? where Brand_id = ?', [$request->edBrna, $id]);
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -110,11 +131,11 @@ class BrandController extends Controller
 
         $pic = $p->toArray();
 
-        // unlink(public_path("/storage/site-assets/" . $pic[0]['Source']));
-
         DB::table('brands')->where('Brand_id', $id)->delete();
-        DB::table('pictures')->where('Picture_id', $brand[0]['Brand_Pic'])->delete();
 
+        unlink(public_path("/storage/site-assets/" . $pic[0]['Source']));
+
+        DB::table('pictures')->where('Picture_id', $brand[0]['Brand_Pic'])->delete();
         return redirect()->back();
     }
 }
