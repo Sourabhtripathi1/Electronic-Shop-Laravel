@@ -50,3 +50,9 @@ Route::get('/shop', function () {
 Route::get('/about', function () {
     return view('frontend.about');
 });
+
+Route::get('/product', function () {
+    return view('frontend.ProductPage');
+});
+
+

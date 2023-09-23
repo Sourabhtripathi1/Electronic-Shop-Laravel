@@ -82,15 +82,37 @@ array_filter($pictures, function ($val) use ($c) {
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            {{ $c['Category_Name'] }}
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save
-                                                                changes</button>
-                                                        </div>
+                                                        <form action="/admins-category/{{ $c['Category_id'] }}"
+                                                            method="post" enctype="multipart/form-data">
+                                                            <div class="modal-body">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="form-group">
+                                                                    <label>Category Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="edCatna" id=""
+                                                                        value="{{ $c['Category_Name'] }}">
+                                                                    <small id="helpId" class="form-text text-muted">Help
+                                                                        text</small>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Category Picture</label>
+                                                                    <input type="file" class="form-control"
+                                                                        name="edCatpic">
+                                                                    <p class="form-text text-muted">
+                                                                        Select if want to update Category pic
+                                                                    </p>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Update
+                                                                </button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

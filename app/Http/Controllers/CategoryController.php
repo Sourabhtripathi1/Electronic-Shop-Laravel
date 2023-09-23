@@ -92,7 +92,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $c = Category::where("Category_id",  $id)->first();
+
+        $p = Picture::where("Picture_id",  $c->Category_Pic)->first();
+
+        if ($request->file('edCatpic')) {
+
+            unlink(public_path("/storage/site-assets/" . $p->Source));
+
+            $nw_pic = getID(35) . "." . $request->file('edCatpic')->getClientOriginalExtension();
+
+            $request->file('edCatpic')->storeAs('/public/site-assets', $nw_pic);
+
+            DB::update('update pictures set Source = ? where Picture_id = ?', [$nw_pic, $c->Category_Pic]);
+        }
+
+        if ($request->edCatna != $c->Category_Name) {
+            DB::update('update categories set Category_Name = ? where Category_id = ?', [$request->edCatna, $id]);
+        }
+
+        return redirect()->back();
     }
 
     /**

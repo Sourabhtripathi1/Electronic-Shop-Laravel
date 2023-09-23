@@ -120,7 +120,12 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $prod = Product::where("Product_id", $id)->first()->toArray();
+        $pna=$prod['Product_name'];
+
+        $data=compact('id','prod','pna');
+
+        return view('frontend.ProductPage')->with($data);
     }
 
     /**

@@ -17,7 +17,7 @@ Shop Page
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-									<img src="./frontend/img/logo.png" alt="">
+									<img src="{{env('APP_URL')}}/frontend/img/logo.png" alt="">
 								</a>
 							</div>
 						</div>
@@ -63,7 +63,7 @@ Shop Page
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./frontend/img/product01.png" alt="">
+													<img src="{{env('APP_URL')}}/frontend/img/product01.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -74,7 +74,7 @@ Shop Page
 
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./frontend/img/product02.png" alt="">
+													<img src="{{env('APP_URL')}}/frontend/img/product02.png" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -311,7 +311,7 @@ Shop Page
 							<h3 class="aside-title">Top selling</h3>
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./frontend/img/product01.png" alt="">
+									<img src="{{env('APP_URL')}}/frontend/img/product01.png" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -322,7 +322,7 @@ Shop Page
 
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./frontend/img/product02.png" alt="">
+									<img src="{{env('APP_URL')}}/frontend/img/product02.png" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -333,7 +333,7 @@ Shop Page
 
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./frontend/img/product03.png" alt="">
+									<img src="{{env('APP_URL')}}/frontend/img/product03.png" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
@@ -380,7 +380,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product01.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product01.png" alt="">
 										<div class="product-label">
 											<span class="sale">-30%</span>
 											<span class="new">NEW</span>
@@ -414,7 +414,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product02.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product02.png" alt="">
 										<div class="product-label">
 											<span class="new">NEW</span>
 										</div>
@@ -449,7 +449,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product03.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product03.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -476,7 +476,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product04.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product04.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -503,7 +503,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product05.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product05.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -528,7 +528,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product06.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product06.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -560,7 +560,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product07.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product07.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -590,7 +590,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product08.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product08.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -617,7 +617,7 @@ Shop Page
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
 									<div class="product-img">
-										<img src="./frontend/img/product09.png" alt="">
+										<img src="{{env('APP_URL')}}/frontend/img/product09.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
