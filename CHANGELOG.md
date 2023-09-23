@@ -1,3 +1,6 @@
+# command to run code
+
+
 git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
 composer install
