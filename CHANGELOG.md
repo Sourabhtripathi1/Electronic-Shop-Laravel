@@ -10,6 +10,8 @@ php artisan key:generate
 
 php artisan Storage:link
 
+php artisan migrate 
+
 code .
 
 # Release Notes
