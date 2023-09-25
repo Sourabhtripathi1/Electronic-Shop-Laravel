@@ -133,7 +133,13 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $prod = Product::where("Product_id", $id)->first()->toArray();
+        $br = Brand::all();
+        $cat = Category::all();
+
+        $data = compact('prod',"br", "cat");
+
+        return view('admin.EditProduct')->with($data);
     }
 
     /**
@@ -141,7 +147,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        echo "<pre>";
+        print_r($request->all());
     }
 
     /**

@@ -90,7 +90,7 @@
                                     </a>
                                 </div>
                                 <div class="mx-1">
-                                    <a href="/admins-product/{{ $p['Product_id'] }}">
+                                    <a href="/admins-product/{{ $p['Product_id'] }}/edit">
                                         <button class="btn btn-primary btn-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">
                                                 <style>
