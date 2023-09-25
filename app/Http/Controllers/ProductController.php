@@ -136,8 +136,10 @@ class ProductController extends Controller
         $prod = Product::where("Product_id", $id)->first()->toArray();
         $br = Brand::all();
         $cat = Category::all();
+        $var = Variants::where("Product_id", "=", $id)->get()->toArray();
+        $pics=Picture::all()->toArray();
 
-        $data = compact('prod',"br", "cat");
+        $data = compact('prod',"br", "cat","var","pics");
 
         return view('admin.EditProduct')->with($data);
     }
