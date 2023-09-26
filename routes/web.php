@@ -4,7 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\VariantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,9 @@ Route::resource('/admins-product', ProductController::class);
 Route::resource('/admins-category', CategoryController::class);
 Route::resource('/admins-brand', BrandController::class);
 
+Route::get('/del/{id}/{pic}',[VariantController::class,'delImg'])->name('delImg.del');
+
+Route::resource('/admins-product/variant', VariantController::class);
 
 Route::get('/admins-index', function () {
     return view('admin.admin-index');

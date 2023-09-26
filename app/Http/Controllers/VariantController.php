@@ -63,6 +63,30 @@ class VariantController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $p = Variants::where('variant_id', $id)->first();
+        $ps = json_decode($p['Picture']);
+
+        echo "<pre>";
+
+        print_r($ps);
+    }
+
+    public function delImg($id, $pic)
+    {
+        echo "<pre>";
+
+        $p = Variants::where('variant_id', $id)->first()->toArray();
+        $ps = json_decode($p['Picture']);
+        $ps = array_diff($ps, [$pic]);
+
+        $x = Picture::where('Picture_id', $pic)->first()->toArray();
+
+        DB::table('variants')->where('variant_id', $id)->update([
+            'Picture' => json_encode($ps)
+        ]);
+        unlink(public_path("/storage/site-assets/" . $x['Source']));
+
+        DB::table('pictures')->where('Picture_id', $x['Picture_id'])->delete();
     }
 }
