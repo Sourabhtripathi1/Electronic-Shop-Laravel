@@ -69,7 +69,15 @@ class VariantController extends Controller
 
         echo "<pre>";
 
-        print_r($ps);
+        foreach ($ps as $s) {
+            $x=Picture::where('Picture_id', $s)->first()->toArray();
+
+            unlink(public_path("/storage/site-assets/" . $x['Source']));
+            DB::table('pictures')->where('Picture_id', $x['Picture_id'])->delete();
+        }
+
+        DB::table('variants')->where('variant_id', $id)->delete();
+
     }
 
     public function delImg($id, $pic)
