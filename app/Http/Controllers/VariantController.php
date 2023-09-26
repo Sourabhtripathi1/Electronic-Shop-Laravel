@@ -8,6 +8,17 @@ use App\Models\Variants;
 use Illuminate\Support\Facades\DB;
 use App\Models\Picture;
 
+function getID($length)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $id = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomIndex = rand(0, strlen($characters) - 1);
+        $id .= $characters[$randomIndex];
+    }
+    return $id;
+}
+
 class VariantController extends Controller
 {
     /**
@@ -31,7 +42,46 @@ class VariantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "<pre>";
+
+        $var = new Variants;
+
+        $var->variant_id =getID(10);
+        $var->Product_id = $request->product;
+        $var->Color = $request->color;
+        $var->Stock = $request->stock;
+        $var->Price = $request->price;
+
+        $pics = $request->file('pics');
+
+        $pcs = [];
+
+        foreach ($pics as $x) {
+            $pic = new Picture;
+
+            $pic_id = getID(10);
+            $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
+
+
+            $pic->Picture_id = $pic_id;
+            $pic->Source = $pic_na;
+
+            $x->storeAs('/public/site-assets', $pic_na);
+
+            $pic->save();
+
+            array_push($pcs, $pic_id);
+        }
+
+
+        $var->Picture =json_encode($pcs);
+        print_r($pcs);
+        print_r($var->toArray());
+
+        $var->save();
+
+        return redirect()->back();
+
     }
 
     /**
@@ -64,13 +114,14 @@ class VariantController extends Controller
     public function destroy(string $id)
     {
 
+
         $p = Variants::where('variant_id', $id)->first();
         $ps = json_decode($p['Picture']);
 
         echo "<pre>";
 
         foreach ($ps as $s) {
-            $x=Picture::where('Picture_id', $s)->first()->toArray();
+            $x = Picture::where('Picture_id', $s)->first()->toArray();
 
             unlink(public_path("/storage/site-assets/" . $x['Source']));
             DB::table('pictures')->where('Picture_id', $x['Picture_id'])->delete();
@@ -78,6 +129,7 @@ class VariantController extends Controller
 
         DB::table('variants')->where('variant_id', $id)->delete();
 
+        return redirect()->back();
     }
 
     public function delImg($id, $pic)
@@ -85,10 +137,11 @@ class VariantController extends Controller
         echo "<pre>";
 
         $p = Variants::where('variant_id', $id)->first()->toArray();
-        $ps = json_decode($p['Picture']);
+        $ps = json_decode($p['Picture'],true);
         $ps = array_diff($ps, [$pic]);
 
         $x = Picture::where('Picture_id', $pic)->first()->toArray();
+
 
         DB::table('variants')->where('variant_id', $id)->update([
             'Picture' => json_encode($ps)
@@ -96,5 +149,38 @@ class VariantController extends Controller
         unlink(public_path("/storage/site-assets/" . $x['Source']));
 
         DB::table('pictures')->where('Picture_id', $x['Picture_id'])->delete();
+
+        return redirect()->back();
+    }
+
+    public function addImg(Request $req,$id){
+        echo "<pre><br>";
+
+        $p = Variants::where('variant_id', $id)->first()->toArray();
+        $ps = json_decode($p['Picture'],true);
+
+
+        $x=$req->file('img');
+
+        $pic = new Picture;
+
+        $pic_id = getID(10);
+        $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
+
+
+        $pic->Picture_id = $pic_id;
+        $pic->Source = $pic_na;
+
+        array_push($ps,$pic_id);
+
+        DB::table('variants')->where('variant_id', $id)->update([
+            'Picture' => json_encode($ps)
+        ]);
+
+        $x->storeAs('/public/site-assets', $pic_na);
+
+        $pic->save();
+
+        return redirect()->back();
     }
 }

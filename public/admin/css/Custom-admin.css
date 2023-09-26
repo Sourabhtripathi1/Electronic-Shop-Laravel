@@ -27,3 +27,9 @@
 	bottom: 0;
 	width: -webkit-fill-available;
 }
+
+.var-cont{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

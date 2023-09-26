@@ -23,6 +23,7 @@ Route::resource('/admins-category', CategoryController::class);
 Route::resource('/admins-brand', BrandController::class);
 
 Route::get('/del/{id}/{pic}',[VariantController::class,'delImg'])->name('delImg.del');
+Route::post('/add/{id}',[VariantController::class,'addImg']);
 
 Route::resource('/admins-product/variant', VariantController::class);
 

@@ -75,3 +75,11 @@ function removeVariant() {
         variant[x - 1].remove();
     }
 }
+
+
+function addImg(){
+    const myform=document.getElementById('submitimg');
+    myform.submit()
+
+    // console.log(e.target.element);
+}

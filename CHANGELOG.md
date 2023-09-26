@@ -12,6 +12,8 @@ php artisan Storage:link
 
 php artisan migrate 
 
+php artisan migrate:refresh
+
 code .
 
 # Release Notes
