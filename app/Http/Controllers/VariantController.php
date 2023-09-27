@@ -103,9 +103,24 @@ class VariantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $req, string $id)
     {
-        //
+       
+        echo "<pre>";
+
+        $var = Variants::where('variant_id', $id)->first();
+
+        $var->Color=$req->color;
+        $var->Stock=$req->stock;
+        $var->price=$req->price;
+      
+        DB::table('variants')->where('variant_id', $id)->update([
+            'Color' => $req->color,
+            'Stock'=>$req->stock,
+            'price'=>$req->price,
+        ]);
+       
+        return redirect()->back();
     }
 
     /**
@@ -153,7 +168,8 @@ class VariantController extends Controller
         return redirect()->back();
     }
 
-    public function addImg(Request $req,$id){
+    public function addImg(Request $req,$id)
+    {
         echo "<pre><br>";
 
         $p = Variants::where('variant_id', $id)->first()->toArray();

@@ -83,3 +83,9 @@ function addImg(){
 
     // console.log(e.target.element);
 }
+
+function editVariantForm(){
+    const myform=document.getElementById('editVariantForm');
+     myform.submit()
+
+}

@@ -1,4 +1,4 @@
-.Variant-control {
+.Variant-control { 
 	width: 10%;
 	padding: 10px;
 	border: 1px solid #ccc;
@@ -32,4 +32,37 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+/* .deletelogo {
+    position: absolute;
+    top: 10px;
+    left: 8em;
+    display: none;
+} */
+
+
+.deletelogo {
+    position: absolute;
+    top: 10px; 
+    left: 6rem; 
+    opacity: 0;
+    transition: opacity 0.3s ease; 
+    cursor: pointer;
+}
+
+.prologo-container:hover .deletelogo {
+    opacity: 1;
+}
+
+.prologo-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    
+}
+
+.prologo-container img{
+    border: rgb(191, 182, 182) 5px solid;
+    border-radius: 10px;  
 }

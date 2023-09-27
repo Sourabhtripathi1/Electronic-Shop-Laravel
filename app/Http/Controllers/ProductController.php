@@ -62,9 +62,6 @@ class ProductController extends Controller
     {
         $vars = $req->var_no;
 
-        echo "<pre>";
-        // print_r($req->all());
-
 
         $prod = new Product;
         $prod_id = getID(15);
@@ -123,7 +120,15 @@ class ProductController extends Controller
         $prod = Product::where("Product_id", $id)->first()->toArray();
         $pna=$prod['Product_name'];
 
-        $data=compact('id','prod','pna');
+        $pics=Picture::all()->toArray();
+        $var = Variants::where("Product_id", $id)->get();
+        $cat = Category::where('Category_id',$prod['Category'])->first();
+        $br = Brand::where('Brand_id',$prod['Brand'])->first();
+
+        $cat_na=$cat->Category_Name;
+        $br_na=$br->Brand_Name;
+
+        $data=compact('id','prod','pna','var','cat_na','br_na','pics');
 
         return view('frontend.ProductPage')->with($data);
     }
@@ -150,7 +155,20 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         echo "<pre>";
-        print_r($request->all());
+       
+        $prod = Product::where("Product_id", $id)->first();
+
+        DB::table('products')->where('Product_id', $id)->update([
+            'Product_name' => $request->pname ,
+            'Material' => $request->material ,
+            'Dimention' => $request->dimention ,
+            'Brand' => $request->brand ,
+            'Category' => $request->category,
+            'Description' => $request->desc ,
+            
+        ]);
+
+        return redirect()->back();
     }
 
     /**
