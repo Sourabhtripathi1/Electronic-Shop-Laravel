@@ -191,7 +191,7 @@
                         <h2 class="product-name">{{ $prod['Product_name'] }}</h2>
 
                         <div>
-                            <h3 class="product-price">{{ $prod['Product_name'] }}</h3>
+                            <h3 class="product-price">{{ $var[0]['Price'] }}</h3>
 
                         </div>
                         <p>{{ $prod['Description'] }}</p>
@@ -200,9 +200,12 @@
                             <label>
                                 Color
                                 <select class="input-select">
-                                    
 
-                                    <option value="0">Red</option>
+                                    @foreach ($var as $v)
+                                        <option value="{{ $v['Color'] }}">{{ $v['Color'] }}</option>
+                                    @endforeach
+
+
                                 </select>
                             </label>
                         </div>
@@ -211,21 +214,22 @@
                             <div class="qty-label">
                                 Qty
                                 <div class="input-number">
-                                    <input type="number">
+                                    <input type="number" value=1>
                                     <span class="qty-up">+</span>
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
 
-                            <button class="add-to-cart-btn"  onClick="clicked()"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                            <button class="add-to-cart-btn" onClick="clicked()"><i class="fa fa-shopping-cart"></i> add to
+                                cart</button>
 
 
                             <script>
-                                function clicked(){
+                                function clicked() {
                                     @php
-
-                                    echo "alert('123');";
-
+                                        
+                                        echo "alert('".$v['Color']."');";
+                                        
                                     @endphp
                                 }
                             </script>
