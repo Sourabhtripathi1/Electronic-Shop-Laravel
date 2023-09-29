@@ -7,13 +7,13 @@
 @section('main-section')
     <pre>
 @php
-    
+
     $v = [];
-    
+
     foreach ($var as $a) {
         $v = array_merge($v, json_decode($a['Picture'], true));
     }
-    
+
 @endphp
 </pre>
     <!-- MAIN HEADER -->
@@ -191,22 +191,42 @@
                         <h2 class="product-name">{{ $prod['Product_name'] }}</h2>
 
                         <div>
-                            <h3 class="product-price">{{ $var[0]['Price'] }}</h3>
-
+                            <h3 class="product-price" id="product-price">₹{{ $var[0]['Price'] }}</h3>
                         </div>
-                        <p>{{ $prod['Description'] }}</p>
+
+                        <ul class="product-links">
+                            <li>Category:</li>
+                            <li><a href="#">{{ $cat_na }}</a></li>
+                        </ul>
+                        <ul class="product-links">
+                            <li>Brand:</li>
+                            <li><a href="#">{{ $br_na }}</a></li>
+                        </ul>
+
+                  
 
                         <div class="product-options">
                             <label>
                                 Color
-                                <select class="input-select">
+                                <select class="input-select" id="varCol" onChange="changePr()">
 
                                     @foreach ($var as $v)
-                                        <option value="{{ $v['Color'] }}">{{ $v['Color'] }}</option>
+                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}">{{ $v['Color'] }}</option>
                                     @endforeach
 
 
                                 </select>
+
+                                <script>
+                                    function changePr(){
+                                        var selectBox =document.getElementById('varCol');
+
+                                        const selectedOption = selectBox.options[selectBox.selectedIndex];
+                                        const selectedAction = selectedOption.getAttribute('data-price');
+
+                                        document.getElementById('product-price').innerText="₹"+selectedAction;
+                                    }
+                                </script>
                             </label>
                         </div>
 
@@ -226,10 +246,13 @@
 
                             <script>
                                 function clicked() {
+
+                                    var x=document.getElementById('varCol').value;
+
                                     @php
-                                        
-                                        echo "alert('".$v['Color']."');";
-                                        
+
+                                        echo "alert(x);";
+
                                     @endphp
                                 }
                             </script>
@@ -243,14 +266,7 @@
 
                         </ul>
 
-                        <ul class="product-links">
-                            <li>Category:</li>
-                            <li><a href="#">{{ $cat_na }}</a></li>
-                        </ul>
-                        <ul class="product-links">
-                            <li>Brand:</li>
-                            <li><a href="#">{{ $br_na }}</a></li>
-                        </ul>
+
 
                         <ul class="product-links">
                             <li>Share:</li>

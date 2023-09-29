@@ -77,15 +77,4 @@ function removeVariant() {
 }
 
 
-function addImg(){
-    const myform=document.getElementById('submitimg');
-    myform.submit()
 
-    // console.log(e.target.element);
-}
-
-function editVariantForm(){
-    const myform=document.getElementById('editVariantForm');
-     myform.submit()
-
-}

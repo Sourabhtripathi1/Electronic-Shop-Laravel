@@ -159,7 +159,7 @@ if ($x->Brand_id==$prod['Brand']) {
                             <td>
                                 @php
 
-                                    $check = json_decode($v['Picture'],true);
+                                    $check = json_decode($v['Picture'], true);
 
                                     $x = array_filter($pics, function ($pic) use ($check) {
                                         if (in_array($pic['Picture_id'], $check)) {
@@ -174,7 +174,7 @@ if ($x->Brand_id==$prod['Brand']) {
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    
+
                                     <div class="mx-1">
 
                                         <button class="btn btn-primary btn-sm" data-toggle="modal"
@@ -203,7 +203,9 @@ if ($x->Brand_id==$prod['Brand']) {
                                                         </button>
                                                     </div>
 
-                                                    <form action="/admins-product/variant/{{ $v['variant_id'] }}" method="post" enctype="multipart/form-data" id="editVariantForm">
+                                                    <form action="/admins-product/variant/{{ $v['variant_id'] }}"
+                                                        method="post" enctype="multipart/form-data"
+                                                        id="editVariantForm{{ $v['variant_id'] }}">
                                                         <div class="modal-body">
                                                             @csrf
                                                             @method('PUT')
@@ -229,73 +231,103 @@ if ($x->Brand_id==$prod['Brand']) {
                                                             </div>
 
                                                             @foreach ($x as $p)
-
-                                                                    <div class="prologo-container">
-                                                                        <img height="100px" width="150px" src="{{ asset('/storage/site-assets/') }}/{{ $p['Source'] }}" class="prologo ">
-                                                                        <div class="delete-container">
-                                                                            <a class="deletelogo"
+                                                                <div class="prologo-container">
+                                                                    <img height="100px" width="150px"
+                                                                        src="{{ asset('/storage/site-assets/') }}/{{ $p['Source'] }}"
+                                                                        class="prologo ">
+                                                                    <div class="delete-container">
+                                                                        <a class="deletelogo"
                                                                             href="{{ env('APP_URL') }}/del/{{ $v['variant_id'] }}/{{ $p['Picture_id'] }}">
-                                                                            <button  type="button" class="btn btn-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#fafcff}</style><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg></button>
-                                                                            </a>
-                                                                        </div>
+                                                                            <button type="button"
+                                                                                class="btn btn-danger btn-sm"><svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    height="1em" viewBox="0 0 448 512">
+                                                                                    <style>
+                                                                                        svg {
+                                                                                            fill: #fafcff
+                                                                                        }
+                                                                                    </style>
+                                                                                    <path
+                                                                                        d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                                                                                </svg></button>
+                                                                        </a>
                                                                     </div>
-                                                               
+                                                                </div>
                                                             @endforeach
                                                             <input type="submit" class="d-none">
-                                                        </form>
-                                                        <form action="{{ env('APP_URL') }}/add/{{ $v['variant_id'] }}" method="post" id="submitimg" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <input type="file" class="btn btn-primary btn-sm" onChange="addImg()" name="img">
-    
-                                                            </form>
-                                                        </div>
+                                                    </form>
+                                                    <form action="{{ env('APP_URL') }}/add/{{ $v['variant_id'] }}"
+                                                        method="post" id="submitimg{{ $v['variant_id'] }}"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="file" class="btn btn-primary btn-sm"
+                                                            onChange="addImg{{ $v['variant_id'] }}()" name="img">
+
+                                                    </form>
+
+                                                    <script>
+                                                        function addImg{{ $v['variant_id'] }}() {
+                                                            const myform = document.getElementById('submitimg{{ $v['variant_id'] }}');
+                                                            myform.submit()
 
 
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary" onClick="editVariantForm()">Update
-                                                            </button>
-                                                        </div>
-
-                                                    
+                                                        }
+                                                    </script>
                                                 </div>
+
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onClick="editVariantForm{{ $v['variant_id'] }}()">Update
+                                                    </button>
+                                                </div>
+
+                                                <script>
+                                                    function editVariantForm{{ $v['variant_id'] }}(){
+    const myform=document.getElementById('editVariantForm{{ $v['variant_id'] }}');
+     myform.submit()
+
+}
+                                                </script>
+
                                             </div>
                                         </div>
-
                                     </div>
 
-
-                                    <form method="post"
-                                        action="{{ env('APP_URL') }}/admins-product/variant/{{ $v['variant_id'] }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em"
-                                                viewBox="0 0 448 512">
-                                                <style>
-                                                    svg {
-                                                        fill: #ffffff
-                                                    }
-                                                </style>
-                                                <path
-                                                    d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
-                                            </svg>
-                                        </button>
-                                    </form>
                                 </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-
-                <br><br><br><br>
-            @endif
 
 
-
-
+                                <form method="post"
+                                    action="{{ env('APP_URL') }}/admins-product/variant/{{ $v['variant_id'] }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512">
+                                            <style>
+                                                svg {
+                                                    fill: #ffffff
+                                                }
+                                            </style>
+                                            <path
+                                                d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                                        </svg>
+                                    </button>
+                                </form>
         </div>
+        </td>
+        </tr>
+        @endforeach
+        </table>
+
+        <br><br><br><br>
+        @endif
+
+
+
+
+    </div>
 
     </div>
 
