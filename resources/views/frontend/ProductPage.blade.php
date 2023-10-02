@@ -132,9 +132,9 @@
             <div id="responsive-nav">
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Hot Deals</a></li>
-                    <li><a href="#">Categories</a></li>
+                    <li ><a href="/">Home</a></li>
+                    <li><a href="/shop">Shop </a></li>
+                    <li><a href="/about">About</a></li>
                     <li><a href="#">Laptops</a></li>
                     <li><a href="#">Smartphones</a></li>
                     <li><a href="#">Cameras</a></li>
@@ -330,7 +330,7 @@
                                                     <div class="review-heading">
                                                         <h5 class="name">John</h5>
                                                         <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                      
+
                                                     </div>
                                                     <div class="review-body">
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -341,7 +341,7 @@
                                                     <div class="review-heading">
                                                         <h5 class="name">John</h5>
                                                         <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                       
+
                                                     </div>
                                                     <div class="review-body">
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -352,7 +352,7 @@
                                                     <div class="review-heading">
                                                         <h5 class="name">John</h5>
                                                         <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                       
+
                                                     </div>
                                                     <div class="review-body">
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -378,7 +378,7 @@
                                                 <input class="input" type="text" placeholder="Your Name">
                                                 <input class="input" type="email" placeholder="Your Email">
                                                 <textarea class="input" placeholder="Your Review"></textarea>
-                                               
+
                                                 <button class="primary-btn">Submit</button>
                                             </form>
                                         </div>
