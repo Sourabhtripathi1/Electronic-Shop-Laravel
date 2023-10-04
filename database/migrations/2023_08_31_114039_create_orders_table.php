@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('Order_id', 15)->primary();
             $table->date('Order_Date');
             $table->string('User_id', 15);
+            $table->string('Username', 30);
             $table->string('Hno', 10);
             $table->string('Address', 70);
             $table->string('Payment_Method', 15);
