@@ -16,15 +16,7 @@ return new class extends Migration
             $table->string('Username', 30);
             $table->string('Password', 15);
             $table->string('Name', 40);
-            $table->date('DOB');
-            $table->string('Profile_pic', 40);
-            $table->foreign('Profile_pic')->references('Picture_id')->on('pictures');
-            $table->string('House_no', 15);
-            $table->string('Street', 30);
-            $table->string('Area', 20);
-            $table->string('District', 30);
-            $table->string('State', 30);
-            $table->string('PIN_CODE', 10);
+            $table->string('Email',60);
             $table->timestamps();
         });
     }

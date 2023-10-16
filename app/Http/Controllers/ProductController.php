@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Picture;
+use App\Models\Review;
 use App\Models\Variants;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -155,7 +156,7 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         echo "<pre>";
-       
+
         $prod = Product::where("Product_id", $id)->first();
 
         DB::table('products')->where('Product_id', $id)->update([
@@ -165,7 +166,7 @@ class ProductController extends Controller
             'Brand' => $request->brand ,
             'Category' => $request->category,
             'Description' => $request->desc ,
-            
+
         ]);
 
         return redirect()->back();
@@ -213,5 +214,16 @@ class ProductController extends Controller
         DB::table('products')->where('Product_id', $id)->delete();
 
         return redirect()->back();
+    }
+
+    public function add_review(Request $request, string $id){
+        // echo $id;
+
+        // $rev=new Review;
+
+        // $rev->
+
+        // echo "<pre>";
+        // print_r($request->all());
     }
 }

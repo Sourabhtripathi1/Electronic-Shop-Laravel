@@ -132,7 +132,7 @@
             <div id="responsive-nav">
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
-                    <li ><a href="/">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/shop">Shop </a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="#">Laptops</a></li>
@@ -211,20 +211,21 @@
                                 <select class="input-select" id="varCol" onChange="changePr()">
 
                                     @foreach ($var as $v)
-                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}">{{ $v['Color'] }}</option>
+                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}">
+                                            {{ $v['Color'] }}</option>
                                     @endforeach
 
 
                                 </select>
 
                                 <script>
-                                    function changePr(){
-                                        var selectBox =document.getElementById('varCol');
+                                    function changePr() {
+                                        var selectBox = document.getElementById('varCol');
 
                                         const selectedOption = selectBox.options[selectBox.selectedIndex];
                                         const selectedAction = selectedOption.getAttribute('data-price');
 
-                                        document.getElementById('product-price').innerText="₹"+selectedAction;
+                                        document.getElementById('product-price').innerText = "₹" + selectedAction;
                                     }
                                 </script>
                             </label>
@@ -240,18 +241,19 @@
                                 </div>
                             </div>
 
-                            <button class="add-to-cart-btn" onClick="clicked()"><i class="fa fa-shopping-cart"></i> add to
+                            <button class="add-to-cart-btn" onClick="clicked()"><i class="fa fa-shopping-cart"></i> add
+                                to
                                 cart</button>
 
 
                             <script>
                                 function clicked() {
 
-                                    var x=document.getElementById('varCol').value;
+                                    var x = document.getElementById('varCol').value;
 
                                     @php
 
-                                        echo "alert(x);";
+                                        echo 'alert(x);';
 
                                     @endphp
                                 }
@@ -374,12 +376,15 @@
                                     <!-- Review Form -->
                                     <div class="col-md-6">
                                         <div id="review-form">
-                                            <form class="review-form">
-                                                <input class="input" type="text" placeholder="Your Name">
-                                                <input class="input" type="email" placeholder="Your Email">
-                                                <textarea class="input" placeholder="Your Review"></textarea>
+                                            <form class="review-form"
+                                                action="{{ env('APP_URL') }}/products/{{ $id }}/add-review"
+                                                method="POST">
+                                                @csrf
+                                                <input class="input" type="text" placeholder="Your Name" name="name">
+                                                <input class="input" type="text" placeholder="Your Email" name="mail">
+                                                <textarea class="input" placeholder="Your Review" name="content"></textarea >
 
-                                                <button class="primary-btn">Submit</button>
+                                                <button class="primary-btn" type="submit">Submit</button>
                                             </form>
                                         </div>
                                     </div>

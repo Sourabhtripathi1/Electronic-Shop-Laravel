@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VariantController;
+use App\Http\Controllers\CustomerController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,10 @@ Route::resource('/admins-brand', BrandController::class);
 
 Route::get('/del/{id}/{pic}',[VariantController::class,'delImg'])->name('delImg.del');
 Route::post('/add/{id}',[VariantController::class,'addImg']);
+
+Route::post('/user/sign-up',[CustomerController::class,'Customer_signup']);
+Route::post('/user/sign-in',[CustomerController::class,'Customer_login']);
+
 
 Route::resource('/admins-product/variant', VariantController::class);
 
@@ -59,4 +64,9 @@ Route::get('/product', function () {
     return view('frontend.ProductPage');
 });
 
+Route::post('/products/{id}/add-review', [ProductController::class,'add_review'] );
+
+Route::get('/user/login',function(){
+    return view('frontend.LoginPage');
+});
 
