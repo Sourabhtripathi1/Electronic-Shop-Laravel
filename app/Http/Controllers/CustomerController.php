@@ -94,7 +94,9 @@ class CustomerController extends Controller
     }
 
     public function Customer_login(Request $req){
-        echo "<pre>";
-        print_r($req->all());
+        // echo "<pre>";
+        // print_r($req->all());
+        session()->put('user_id',1);
+        return redirect()->back();
     }
 }

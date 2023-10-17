@@ -64,7 +64,7 @@ Route::get('/product', function () {
     return view('frontend.ProductPage');
 });
 
-Route::post('/products/{id}/add-review', [ProductController::class,'add_review'] );
+Route::post('/products/{id}/add-review', [ProductController::class,'add_review'] )->middleware('isValidUser');
 
 Route::get('/user/login',function(){
     return view('frontend.LoginPage');

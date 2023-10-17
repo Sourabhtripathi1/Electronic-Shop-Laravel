@@ -168,6 +168,9 @@
   }
 })(jQuery);
 
-
+function add_click() {
+    document.getElementById("detail").style.display = "none";
+    document.getElementById("pswd_section").style.display = "block";
+}
 
 
