@@ -119,20 +119,10 @@
 </head>
 
 <body>
-    @if (session('success'))
-    <h2 class="display-heading">Record Saved Successfully!</h2>
-    @endif
 
-    @if (session('error'))
-    <h2 class="display-heading">Email or Username Already Exist!</h2>
-    @endif
-
-    @if (session('Invalid_Password'))
-    <h2 class="display-heading">Invalid Password !</h2>
-    @endif
-
-    @if (session('Invalid_Username'))
-    <h2 class="display-heading">Invalid Username !</h2>
+    @if (session('msg'))
+    {{-- <h2 class="display-heading">Email or Username Already Exist! </h2> --}}
+    <h2 class="display-heading">{{session('msg')}} </h2>
     @endif
 
 

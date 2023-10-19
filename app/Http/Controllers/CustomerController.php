@@ -78,8 +78,8 @@ class CustomerController extends Controller
 
     public function Customer_signup(Request $req)
     {
-        echo "<pre>";
-        print_r($req->all());
+        // echo "<pre>";
+        // print_r($req->all());
 
         $req->validate([
             'email' => 'required|email',
@@ -105,9 +105,9 @@ class CustomerController extends Controller
             $cus->Email = $req->email;
 
             $cus->save();
-             return redirect('/user/login')->with('success');
+            return redirect('/user/login')->with('msg', 'User Successfully Saved');
         } else {
-             return redirect('/user/login')->with('error');
+            return redirect('/user/login')->with('msg', 'Username or Email Already Exists !');
         }
 
 
@@ -116,26 +116,29 @@ class CustomerController extends Controller
 
     public function Customer_login(Request $req)
     {
-        echo "<pre>";
-        print_r($req->all());
+        // echo "<pre>";
+        // print_r($req->all());
 
         $x = Customer::where('Email', $req->Uname)->orWhere('Username', $req->Uname)->get()->toArray();
-        print_r($x);
+        // print_r($x);
 
-        if($x[0]['Username']==$req->Uname || $x[0]['Email']==$req->Uname){
-          if( $x[0]['Password']==$req->pswd){
-            echo $x[0]['Password'];
+        if (count($x) > 0) {
 
-            return redirect('/');
-          }else{
-            return redirect('/user/login')->with('Invalid_Password');
-          }
+            if ($x[0]['Username'] == $req->Uname || $x[0]['Email'] == $req->Uname) {
+                if ($x[0]['Password'] == $req->pswd) {
+                    echo $x[0]['Password'];
 
-        }else{
-            return redirect('/user/login')->with('Invalid_Username');
+                    return redirect('/');
+                } else {
+                    return redirect('/user/login')->with('msg', 'Invalid Password !');
+                }
+
+            } else {
+                return redirect('/user/login')->with('msg', 'Invalid Username or Email !');
+            }
+        } else {
+            return redirect('/user/login')->with('msg', 'Invalid Username or Email !');
         }
-
-
 
     }
 }
