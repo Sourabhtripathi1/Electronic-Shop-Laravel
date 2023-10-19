@@ -76,27 +76,66 @@ class CustomerController extends Controller
         //
     }
 
-    public function Customer_signup(Request $req){
+    public function Customer_signup(Request $req)
+    {
         echo "<pre>";
         print_r($req->all());
 
-        $cus=new Customer;
+        $req->validate([
+            'email' => 'required|email',
+            'Uname' => 'required',
+            'name' => 'required',
+            'password' => 'required',
+            'cnf_password' => 'required|same:password'
+        ]);
 
-        $cus->User_id=getID(15);
-        $cus->Username=$req->Uname;
-        $cus->Password=$req->password;
-        $cus->Name=$req->name;
-        $cus->Email=$req->email;
+        $x = Customer::where('Email', $req->email)->orWhere('Username', $req->Uname)->get();
 
-        $cus->save();
+        print_r($x);
 
-        return redirect('/user/login');
+        echo count($x);
+
+        if (count($x) == 0) {
+            $cus = new Customer;
+
+            $cus->User_id = getID(15);
+            $cus->Username = $req->Uname;
+            $cus->Password = $req->password;
+            $cus->Name = $req->name;
+            $cus->Email = $req->email;
+
+            $cus->save();
+             return redirect('/user/login')->with('success');
+        } else {
+             return redirect('/user/login')->with('error');
+        }
+
+
+
     }
 
-    public function Customer_login(Request $req){
-        // echo "<pre>";
-        // print_r($req->all());
-        session()->put('user_id',1);
-        return redirect()->back();
+    public function Customer_login(Request $req)
+    {
+        echo "<pre>";
+        print_r($req->all());
+
+        $x = Customer::where('Email', $req->Uname)->orWhere('Username', $req->Uname)->get()->toArray();
+        print_r($x);
+
+        if($x[0]['Username']==$req->Uname || $x[0]['Email']==$req->Uname){
+          if( $x[0]['Password']==$req->pswd){
+            echo $x[0]['Password'];
+
+            return redirect('/');
+          }else{
+            return redirect('/user/login')->with('Invalid_Password');
+          }
+
+        }else{
+            return redirect('/user/login')->with('Invalid_Username');
+        }
+
+
+
     }
 }

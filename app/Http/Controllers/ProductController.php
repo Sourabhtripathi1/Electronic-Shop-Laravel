@@ -217,13 +217,9 @@ class ProductController extends Controller
     }
 
     public function add_review(Request $request, string $id){
-        // echo $id;
 
-        // $rev=new Review;
+        echo "<pre>";
+        print_r($request->all());
 
-        // $rev->
-
-        // echo "<pre>";
-        // print_r($request->all());
     }
 }
