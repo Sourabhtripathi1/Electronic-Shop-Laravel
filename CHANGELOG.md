@@ -10,11 +10,16 @@ php artisan key:generate
 
 php artisan Storage:link
 
+php artisan lang:publish  
+
 php artisan migrate 
 
 php artisan migrate:refresh
 
 code .
+
+
+
 
 # Release Notes
 
