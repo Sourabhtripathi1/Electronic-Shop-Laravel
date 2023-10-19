@@ -116,17 +116,15 @@ class CustomerController extends Controller
 
     public function Customer_login(Request $req)
     {
-        // echo "<pre>";
-        // print_r($req->all());
-
         $x = Customer::where('Email', $req->Uname)->orWhere('Username', $req->Uname)->get()->toArray();
-        // print_r($x);
 
         if (count($x) > 0) {
 
             if ($x[0]['Username'] == $req->Uname || $x[0]['Email'] == $req->Uname) {
                 if ($x[0]['Password'] == $req->pswd) {
                     echo $x[0]['Password'];
+
+                    session()->put('user_id', $x[0]['User_id']);
 
                     return redirect('/');
                 } else {
