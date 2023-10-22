@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\NavigationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +24,11 @@ Route::resource('/admins-product', ProductController::class);
 Route::resource('/admins-category', CategoryController::class);
 Route::resource('/admins-brand', BrandController::class);
 
-Route::get('/del/{id}/{pic}',[VariantController::class,'delImg'])->name('delImg.del');
-Route::post('/add/{id}',[VariantController::class,'addImg']);
+Route::get('/del/{id}/{pic}', [VariantController::class, 'delImg'])->name('delImg.del');
+Route::post('/add/{id}', [VariantController::class, 'addImg']);
 
-Route::post('/user/sign-up',[CustomerController::class,'Customer_signup']);
-Route::post('/user/sign-in',[CustomerController::class,'Customer_login']);
+Route::post('/user/sign-up', [CustomerController::class, 'Customer_signup']);
+Route::post('/user/sign-in', [CustomerController::class, 'Customer_login']);
 
 
 Route::resource('/admins-product/variant', VariantController::class);
@@ -44,13 +45,7 @@ Route::get('/orders-list', function () {
     return view('admin.ViewOrders');
 });
 
-// Route::get('',function(){
-
-// });
-
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', [NavigationController::class, 'indexPage']);
 
 Route::get('/shop', function () {
     return view('frontend.Shop');
@@ -64,9 +59,17 @@ Route::get('/product', function () {
     return view('frontend.ProductPage');
 });
 
-Route::post('/products/{id}/add-review', [ProductController::class,'add_review'] )->middleware('isValidUser');
+Route::post('/products/{id}/add-review', [ProductController::class, 'add_review'])->middleware('isValidUser');
 
-Route::get('/user/login',function(){
+Route::get('/user/login', function () {
     return view('frontend.LoginPage');
 });
 
+
+
+
+
+
+// Route::get('',function(){
+
+// });
