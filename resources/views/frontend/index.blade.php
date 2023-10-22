@@ -11,7 +11,7 @@
     <pre>
         @php
 
-            print_r($category);
+            print_r(getPrice('FNUKZmfIJMOmB0e', $variants));
 
         @endphp
     </pre>
@@ -256,19 +256,22 @@
                                     @foreach ($products as $item)
                                         <div class="product">
                                             <div class="product-img">
-                                                <img src="{{ env('APP_URL') }}/frontend/img/product01.png" alt="">
+                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getImage($item['Product_id'], $variants, $images) }}"
+                                                    alt="">
                                                 <div class="product-label">
                                                     {{-- <span class="sale">-30%</span>
                                                 <span class="new">NEW</span> --}}
                                                 </div>
                                             </div>
                                             <div class="product-body">
-                                                <p class="product-category">{{ getCategory($item['Category'], $category) }}
+                                                <p class="product-category">
+                                                    {{ getCategory($item['Category'], $category) }}
                                                 </p>
-                                                <h3 class="product-name"><a href="#">
+                                                <h3 class="product-name"><a
+                                                        href="{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}">
                                                         {{ $item['Product_name'] }}
                                                     </a></h3>
-                                                <h4 class="product-price">$980.00
+                                                <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
                                                     {{-- <del
                                                         class="product-old-price">$990.00</del> --}}
                                                 </h4>
@@ -280,8 +283,10 @@
                                                             class="tooltipp">add to wishlist</span></button>
                                                     <button class="add-to-compare"><i class="fa fa-exchange"></i><span
                                                             class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                            class="tooltipp">quick view</span></button>
+                                                    <button class="quick-view"
+                                                        onclick="window.location.href='{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}';"><i
+                                                            class="fa fa-eye"></i><span class="tooltipp">quick
+                                                            view</span></button>
                                                 </div>
                                             </div>
                                             <div class="add-to-cart">

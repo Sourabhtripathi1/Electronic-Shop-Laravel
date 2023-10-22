@@ -212,7 +212,8 @@
 
                                     @foreach ($var as $v)
                                         <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}">
-                                            {{ $v['Color'] }}</option>
+                                            {{ $v['Color'] }}
+                                        </option>
                                     @endforeach
 
 
@@ -241,23 +242,12 @@
                                 </div>
                             </div>
 
-                            <button class="add-to-cart-btn" onClick="clicked()"><i class="fa fa-shopping-cart"></i> add
+                            <button class="add-to-cart-btn" onClick=""><i class="fa fa-shopping-cart"></i> add
                                 to
                                 cart</button>
 
 
-                            <script>
-                                function clicked() {
 
-                                    var x = document.getElementById('varCol').value;
-
-                                    @php
-
-                                        echo 'alert(x);';
-
-                                    @endphp
-                                }
-                            </script>
                         </div>
                         <span class="product-available">In Stock</span>
                         <br><br>
@@ -380,9 +370,11 @@
                                                 action="{{ env('APP_URL') }}/products/{{ $id }}/add-review"
                                                 method="POST">
                                                 @csrf
-                                                <input class="input" type="text" placeholder="Your Name" name="name">
-                                                <input class="input" type="text" placeholder="Your Email" name="mail">
-                                                <textarea class="input" placeholder="Your Review" name="content"></textarea >
+                                                <input class="input" type="text" placeholder="Your Name"
+                                                    name="name">
+                                                <input class="input" type="text" placeholder="Your Email"
+                                                    name="mail">
+                                                <textarea class="input" placeholder="Your Review" name="content"></textarea>
 
                                                 <button class="primary-btn" type="submit">Submit</button>
                                             </form>

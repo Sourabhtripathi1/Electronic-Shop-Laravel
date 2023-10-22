@@ -13,10 +13,33 @@ function getCategory($id, $category)
 
 function getPrice($id, $variants)
 {
-    return $id;
+
+    $vars = array_values(array_filter($variants, function ($item) use ($id) {
+        return $item['Product_id'] == $id;
+    }));
+
+    $price = array();
+
+    foreach ($vars as $item) {
+        array_push($price, $item['Price']);
+    }
+
+
+    return min($price);
 }
 
 function getImage($id, $variants, $picture)
 {
-    return $id;
+
+    $vars = array_values(array_filter($variants, function ($item) use ($id) {
+        return $item['Product_id'] == $id;
+    }));
+
+    $pics = json_decode($vars[0]['Picture'], true);
+
+    $img = array_values(array_filter($picture, function ($item) use ($pics) {
+        return $item['Picture_id'] == $pics[0];
+    }))[0]['Source'];
+
+    return $img;
 }
