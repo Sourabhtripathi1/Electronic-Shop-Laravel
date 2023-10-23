@@ -11,7 +11,7 @@
     <pre>
         @php
 
-            print_r(getPrice('FNUKZmfIJMOmB0e', $variants));
+
 
         @endphp
     </pre>
