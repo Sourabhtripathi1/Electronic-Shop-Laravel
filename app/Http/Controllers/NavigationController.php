@@ -24,4 +24,10 @@ class NavigationController extends Controller
 
         return view('frontend.index')->with($data);
     }
+
+    public function userDashboard(){
+
+
+        return view('frontend.UserDashboard');
+    }
 }

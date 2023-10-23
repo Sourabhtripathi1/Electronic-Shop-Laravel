@@ -693,9 +693,7 @@
 
 
 
-    <section id="categories">
-        vsvdjdvdhdjj
-    </section>
+   
 
 
 

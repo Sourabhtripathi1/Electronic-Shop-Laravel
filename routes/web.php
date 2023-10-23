@@ -66,6 +66,7 @@ Route::get('/user/login', function () {
 });
 
 
+Route::get('/user-dashboard',[NavigationController::class, 'userDashboard']);
 
 
 
