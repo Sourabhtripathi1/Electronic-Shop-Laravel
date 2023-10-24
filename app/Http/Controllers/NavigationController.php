@@ -48,4 +48,14 @@ class NavigationController extends Controller
 
         return view('frontend.UserProfile');
     }
+
+    public function userLogin(){
+
+        return view('frontend.LoginPage');
+    }
+
+    public function userLogout(){
+
+       return redirect("/");
+    }
 }

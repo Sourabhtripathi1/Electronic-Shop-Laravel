@@ -165,33 +165,33 @@
         <div class="sidebar">
 
             <ul>
-                <li class="active">
-                    <a href="#">
+                <li>
+                    <a href="{{env('APP_URL')}}/user/dashboard">
                         <i class="fa-solid fa-chart-column"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{env('APP_URL')}}/user/profile">
                         <i class="fa-regular fa-file-lines"></i>
                         <span>Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{env('APP_URL')}}/user/active-orders">
                         <i class="fa-solid fa-building-user"></i>
                         <span>Active Orders</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li class="active">
+                    <a href="{{env('APP_URL')}}/user/all-orders">
                         <i class="fa-regular fa-file-lines"></i>
                         <span>All Orders</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ env('APP_URL') }}/logout">
+                    <a href="{{ env('APP_URL') }}/user/logout">
                         <i class="fa-regular fa-file-lines"></i>
                         <span>Logout</span>
                     </a>
