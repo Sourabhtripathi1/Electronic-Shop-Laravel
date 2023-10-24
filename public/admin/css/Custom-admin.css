@@ -1,34 +1,34 @@
-.Variant-control { 
-	width: 10%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	font-size: 16px;
-	margin-bottom: 10px;
-	transition: border-color 0.3s ease-in-out;
+.Variant-control {
+    width: 10%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease-in-out;
 }
 
 .Variant-control:focus {
-	border-color: #007bff;
-	outline: none;
-	box-shadow: 0 0 0 2px rgba(141, 174, 208, 0.25);
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(141, 174, 208, 0.25);
 }
 
 #remove-variant {
-	font-size: large;
+    font-size: large;
 }
 
 #add-variant {
-	font-size: large;
+    font-size: large;
 }
 
 .admin-footer {
-	position: absolute;
-	bottom: 0;
-	width: -webkit-fill-available;
+    position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
 }
 
-.var-cont{
+.var-cont {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -44,10 +44,10 @@
 
 .deletelogo {
     position: absolute;
-    top: 10px; 
-    left: 6rem; 
+    top: 10px;
+    left: 6rem;
     opacity: 0;
-    transition: opacity 0.3s ease; 
+    transition: opacity 0.3s ease;
     cursor: pointer;
 }
 
@@ -59,10 +59,10 @@
     position: relative;
     display: inline-block;
     margin: 10px;
-    
+
 }
 
-.prologo-container img{
+.prologo-container img {
     border: rgb(191, 182, 182) 5px solid;
-    border-radius: 10px;  
+    border-radius: 10px;
 }
