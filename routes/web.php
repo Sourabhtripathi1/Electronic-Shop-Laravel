@@ -67,9 +67,9 @@ Route::get('/user/login', function () {
 
 
 Route::get('/user-dashboard',[NavigationController::class, 'userDashboard']);
-
-
-
+Route::get('/user-all-orders',[NavigationController::class, 'userAllOrders']);
+Route::get('/user-active-orders',[NavigationController::class, 'userActiveOrders']);
+Route::get('/user-profile',[NavigationController::class, 'userProfile']);
 
 // Route::get('',function(){
 

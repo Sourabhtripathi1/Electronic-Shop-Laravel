@@ -1,7 +1,7 @@
 @extends('frontend.layout.main')
 
 @push('title')
-    User Dashboard Page
+   All Orders Page
 @endpush
 
 @push('custom')
@@ -200,7 +200,7 @@
         </div>
 
         <div class="main-container">
-            <h1>hello</h1>
+            <h1>   All Orders Page</h1>
         </div>
     </div>
 @endsection

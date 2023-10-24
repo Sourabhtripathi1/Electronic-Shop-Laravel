@@ -30,4 +30,22 @@ class NavigationController extends Controller
 
         return view('frontend.UserDashboard');
     }
+
+    public function userAllOrders(){
+
+
+        return view('frontend.UserAllOrders');
+    }
+
+    public function userActiveOrders(){
+
+
+        return view('frontend.UserActiveOrders');
+    }
+
+    public function userProfile(){
+
+
+        return view('frontend.UserProfile');
+    }
 }
