@@ -63,18 +63,27 @@ Route::post('/products/{id}/add-review', [ProductController::class, 'add_review'
 
 Route::get('/user/login', [NavigationController::class, 'userLogin']);
 
-Route::get('/user/logout',[NavigationController::class, 'userLogout']);
+Route::get('/user/logout', [NavigationController::class, 'userLogout']);
 
 
-Route::group(["prefix"=>"/user","middleware"=>"isValidUser"],function(){
+Route::group(["prefix" => "/user", "middleware" => "isValidUser"], function () {
 
-Route::get('dashboard',[NavigationController::class, 'userDashboard']);
-Route::get('all-orders',[NavigationController::class, 'userAllOrders']);
-Route::get('active-orders',[NavigationController::class, 'userActiveOrders']);
-Route::get('profile',[NavigationController::class, 'userProfile']);
-
+    Route::get('dashboard', [NavigationController::class, 'userDashboard']);
+    Route::get('all-orders', [NavigationController::class, 'userAllOrders']);
+    Route::get('active-orders', [NavigationController::class, 'userActiveOrders']);
+    Route::get('profile', [NavigationController::class, 'userProfile']);
 });
 
-// Route::get('',function(){
 
-// });
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('', [NavigationController::class, '']);

@@ -25,37 +25,44 @@ class NavigationController extends Controller
         return view('frontend.index')->with($data);
     }
 
-    public function userDashboard(){
+    public function userDashboard()
+    {
 
 
         return view('frontend.UserDashboard');
     }
 
-    public function userAllOrders(){
+    public function userAllOrders()
+    {
 
 
         return view('frontend.UserAllOrders');
     }
 
-    public function userActiveOrders(){
+    public function userActiveOrders()
+    {
 
 
         return view('frontend.UserActiveOrders');
     }
 
-    public function userProfile(){
+    public function userProfile()
+    {
 
 
         return view('frontend.UserProfile');
     }
 
-    public function userLogin(){
+    public function userLogin()
+    {
 
         return view('frontend.LoginPage');
     }
 
-    public function userLogout(){
+    public function userLogout()
+    {
+        session()->remove('user_id');
 
-       return redirect("/");
+        return redirect("/");
     }
 }
