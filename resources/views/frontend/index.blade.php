@@ -283,7 +283,7 @@
                                                     </button>
 
                                                     <button class="quick-view"
-                                                        onclick="window.location.href='{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}'">
+                                                        onclick="window.location.href='{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}' ">
                                                         <i class="fa fa-eye"></i><span class="tooltipp">quick
                                                             view</span>
                                                     </button>
