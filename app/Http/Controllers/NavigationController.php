@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Picture;
 use App\Models\Product;
 use App\Models\Variants;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class NavigationController extends Controller
@@ -75,6 +76,10 @@ class NavigationController extends Controller
     public function userWishlist()
     {
 
-        return view('frontend.UserWishlist');
+        $wishlist=Wishlist::where("User_id",  session('user_id'))->get()->toArray();
+
+
+        $data=compact('wishlist');
+        return view('frontend.UserWishlist')->with($data);
     }
 }

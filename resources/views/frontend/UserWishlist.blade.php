@@ -45,7 +45,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
@@ -218,7 +218,11 @@
         <div class="main-container">
             <h1>Wishlist</h1>
 
-
+<pre>
+   @php
+       print_r($wishlist)
+   @endphp
+</pre>
 
         </div>
     </div>

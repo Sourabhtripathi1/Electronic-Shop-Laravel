@@ -45,7 +45,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
@@ -179,7 +179,7 @@
             <div class="sidebar" id="sidebar">
 
                 <ul>
-                    <li>
+                    <li class="active">
                         <a href="{{env('APP_URL')}}/user/dashboard">
                             <i class="fa-solid fa-chart-column"></i>
                             <span>Dashboard</span>

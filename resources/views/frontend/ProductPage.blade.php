@@ -53,7 +53,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
@@ -257,6 +257,12 @@
                             <li><a href="{{env('APP_URL')}}/products/wishlist/add/{{$id}}"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 
                         </ul>
+
+                        @if (session('error'))
+                            <script>
+                                alert("{{session('error')}}")
+                            </script>
+                        @endif
 
 
 
