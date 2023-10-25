@@ -20,7 +20,6 @@ return new class extends Migration
             $table->float('Price', 7);
 
             $table->foreign('Product_id')->references('Product_id')->on('products');
-
             $table->timestamps();
         });
     }
