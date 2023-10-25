@@ -4,9 +4,9 @@
     User Dashboard Page
 @endpush
 
-@push('custom')
+{{-- @push('custom')
     <link type="text/css" rel="stylesheet" href="{{ env('APP_URL') }}/frontend/css/UserDashboard.css" />
-@endpush
+@endpush --}}
 
 @section('main-section')
     <div id="header">
@@ -161,7 +161,7 @@
     <!-- /NAVIGATION -->
 
 
-    <div class="sidebar-container">
+    {{-- <div class="sidebar-container">
         <div class="sidebar">
 
             <ul>
@@ -202,5 +202,5 @@
         <div class="main-container">
             <h1>hello</h1>
         </div>
-    </div>
+    </div> --}}
 @endsection

@@ -1,11 +1,34 @@
+window.addEventListener("resize", () => {
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth >= 992) {
+        document.getElementById("sidebar").classList.remove("menuOpen");
+        document
+            .getElementById("sidebar-container")
+            .classList.remove("menuContainerOpen");
+    }
+});
+
 document.getElementById("menu2").addEventListener("click", function () {
-    document.querySelector(".sidebar").style.display = "block";
-    document.querySelector(".sidebar").style.height = "100%";
-    document.querySelector(".sidebar").style.width = "250px";
-    document.querySelector(".sidebar").style.position = "fixed";
-    document.querySelector(".sidebar").style.left = 0;
-    document.querySelector(".sidebar").style.top = 0;
-    document.querySelector(".sidebar").style.zIndex = 999;
+    document.getElementById("sidebar").classList.add("menuOpen");
+    document
+        .getElementById("sidebar-container")
+        .classList.add("menuContainerOpen");
+
+    document
+        .getElementById("sidebar-container")
+        .addEventListener("click", function (event) {
+            const sidebar = document.getElementById("sidebar");
+
+            if (event.target != sidebar) {
+                // console.log(event.target)
+
+                document.getElementById("sidebar").classList.remove("menuOpen");
+                document
+                    .getElementById("sidebar-container")
+                    .classList.remove("menuContainerOpen");
+            }
+        });
 });
 
 function add_click() {

@@ -172,6 +172,6 @@
 </body>
 
 <script src="{{ env('APP_URL') }}/frontend/js/main.js"></script>
-
+<script src="{{ env('APP_URL') }}/frontend/js/Script.js"></script>
 
 </html>
