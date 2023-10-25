@@ -254,7 +254,7 @@
 
 
                         <ul class="product-btns">
-                            <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                            <li><a href="{{env('APP_URL')}}/products/wishlist/add/{{$id}}"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 
                         </ul>
 

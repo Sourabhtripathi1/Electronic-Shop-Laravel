@@ -179,26 +179,38 @@
             <div class="sidebar" id="sidebar">
 
                 <ul>
-                    <li class="active">
-                        <a href="{{ env('APP_URL') }}/user/dashboard">
+                    <li>
+                        <a href="{{env('APP_URL')}}/user/dashboard">
                             <i class="fa-solid fa-chart-column"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ env('APP_URL') }}/user/profile">
+                        <a href="{{env('APP_URL')}}/user/profile">
                             <i class="fa-regular fa-file-lines"></i>
                             <span>Profile</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ env('APP_URL') }}/user/active-orders">
+                        <a href="{{ env('APP_URL') }}/user/cart">
+                            <i class="fa-regular fa-file-lines"></i>
+                            <span>Cart</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ env('APP_URL') }}/user/wishlist">
+                            <i class="fa-regular fa-file-lines"></i>
+                            <span>Wishlist</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{env('APP_URL')}}/user/active-orders">
                             <i class="fa-solid fa-building-user"></i>
                             <span>Active Orders</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ env('APP_URL') }}/user/all-orders">
+                        <a href="{{env('APP_URL')}}/user/all-orders">
                             <i class="fa-regular fa-file-lines"></i>
                             <span>All Orders</span>
                         </a>

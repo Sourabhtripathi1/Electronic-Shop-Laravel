@@ -59,7 +59,6 @@ Route::get('/product', function () {
     return view('frontend.ProductPage');
 });
 
-Route::post('/products/{id}/add-review', [ProductController::class, 'add_review'])->middleware('isValidUser');
 
 Route::get('/user/login', [NavigationController::class, 'userLogin']);
 
@@ -72,8 +71,14 @@ Route::group(["prefix" => "/user", "middleware" => "isValidUser"], function () {
     Route::get('all-orders', [NavigationController::class, 'userAllOrders']);
     Route::get('active-orders', [NavigationController::class, 'userActiveOrders']);
     Route::get('profile', [NavigationController::class, 'userProfile']);
+    Route::get('wishlist', [NavigationController::class, 'userWishlist']);
+    Route::get('cart', [NavigationController::class, 'userCart']);
+
 });
 
+Route::post('/products/{id}/add-review', [ProductController::class, 'add_review'])->middleware('isValidUser');
+
+Route::get('/products/wishlist/add/{id}', [ProductController::class, 'add_wishlist'])->middleware('isValidUser');
 
 
 

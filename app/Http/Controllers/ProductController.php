@@ -222,4 +222,13 @@ class ProductController extends Controller
         print_r($request->all());
 
     }
+
+    public function add_wishlist(string $id){
+        $prod = Product::where("Product_id",  $id)->first()->toArray();
+
+        echo "<pre>";
+
+        print_r($prod);
+
+    }
 }

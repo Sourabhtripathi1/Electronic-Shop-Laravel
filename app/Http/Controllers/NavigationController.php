@@ -65,4 +65,16 @@ class NavigationController extends Controller
 
         return redirect("/");
     }
+
+    public function userCart()
+    {
+
+        return view('frontend.UserCart');
+    }
+
+    public function userWishlist()
+    {
+
+        return view('frontend.UserWishlist');
+    }
 }
