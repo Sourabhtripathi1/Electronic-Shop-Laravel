@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Variants;
 use Illuminate\Http\Request;
 use App\Models\Customer;
-
+use App\Models\Product;
+use App\Models\Wishlist;
 
 function getID($length)
 {
@@ -137,6 +140,56 @@ class CustomerController extends Controller
         } else {
             return redirect('/user/login')->with('msg', 'Invalid Username or Email !');
         }
+
+    }
+
+    public function add_wishlist(string $id)
+    {
+        $prod = Product::where("Product_id", $id)->first()->toArray();
+        $wishlist = Wishlist::where("Product_id", $id)->where('User_id', session("user_id"))->get()->toArray();
+
+        if (count($wishlist) == 0) {
+            $wish = new Wishlist;
+
+            $wish->Product_id = $id;
+            $wish->User_id = session("user_id");
+            $wish->Product_name = $prod['Product_name'];
+
+            $wish->save();
+
+            return redirect('/user/wishlist');
+        } else {
+            return redirect()->back()->with('error', 'Already exist');
+        }
+
+    }
+
+    public function add_to_cart(Request $req)
+    {
+        echo "<pre>";
+
+        $carts = Cart::where('User_id', session("user_id"))->where("variant_id", $req->var_id)->get()->toArray();
+
+        if (count($carts) > 0) {
+            return redirect()->back()->with('error', "already exists on cart");
+        } else {
+            $var = Variants::where("variant_id", $req->var_id)->first()->toArray();
+
+
+            $cart = new Cart;
+
+            $cart->User_id = session('user_id');
+            $cart->Product_id = $req->prod_id;
+            $cart->Variant_id = $req->var_id;
+            $cart->Quantity = $req->qty;
+            $cart->Price = $var['Price'] * $req->qty;
+
+            $cart->save();
+
+            return redirect()->back()->with('success', "added to cart");
+        }
+
+
 
     }
 }

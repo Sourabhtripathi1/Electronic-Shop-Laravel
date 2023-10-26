@@ -224,26 +224,5 @@ class ProductController extends Controller
 
     }
 
-    public function add_wishlist(string $id){
-        $prod = Product::where("Product_id",  $id)->first()->toArray();
-        $wishlist=Wishlist::where("Product_id",  $id)->where('User_id',session("user_id"))->get()->toArray();
 
-       if(count($wishlist)==0){
-        $wish=new Wishlist;
-
-        $wish->Product_id = $id;
-        $wish->User_id = session("user_id");
-        $wish->Product_name=$prod['Product_name'];
-
-        $wish->save();
-
-        return redirect('/user/wishlist');
-       }else{
-        return redirect()->back()->with('error', 'Already exist');
-       }
-
-
-//  echo "<pre>";
-//  print_r($wishlist);
-    }
 }

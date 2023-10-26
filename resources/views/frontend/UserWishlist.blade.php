@@ -1,7 +1,7 @@
 @extends('frontend.layout.main')
 
 @push('title')
-    User Dashboard Page
+    User Wishlist Page
 @endpush
 
 @push('custom')
@@ -109,7 +109,7 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#">View Cart</a>
+                                    <a href="{{env('APP_URL')}}/user/cart">View Cart</a>
                                     <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>

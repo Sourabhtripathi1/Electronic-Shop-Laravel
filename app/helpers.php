@@ -43,3 +43,31 @@ function getImage($id, $variants, $picture)
 
     return $img;
 }
+
+function getProductName($id,$products){
+
+}
+
+function getVariantColor($id,$variants){
+    $vars  = collect($variants)->first(function ($item) use ($id) {
+        return $item['variant_id'] == $id;
+    });
+
+    return $vars['Color'];
+}
+
+function getVariantPrice($id,$variants){
+    $vars  = collect($variants)->first(function ($item) use ($id) {
+        return $item['variant_id'] == $id;
+    });
+
+    return $vars['Price'];
+}
+
+function getVariantStock($id,$variants){
+    $vars  = collect($variants)->first(function ($item) use ($id) {
+        return $item['variant_id'] == $id;
+    });
+
+    return $vars['Stock'];
+}

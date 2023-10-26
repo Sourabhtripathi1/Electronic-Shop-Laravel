@@ -5,7 +5,6 @@
 @endpush
 
 @section('main-section')
-    <pre>
 @php
 
     $v = [];
@@ -15,7 +14,23 @@
     }
 
 @endphp
-</pre>
+
+@if (session('error'))
+<script>
+    alert("{{ session('error') }}")
+</script>
+@endif
+
+@if (session('success'))
+<script>
+    alert("{{ session('success') }}")
+</script>
+@endif
+    {{-- <pre>
+        @php
+
+        @endphp
+    </pre> --}}
     <!-- MAIN HEADER -->
     <div id="header">
         <!-- container -->
@@ -97,7 +112,7 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#">View Cart</a>
+                                    <a href="{{env('APP_URL')}}/user/cart">View Cart</a>
                                     <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -211,7 +226,7 @@
                                 <select class="input-select" id="varCol" onChange="changePr()">
 
                                     @foreach ($var as $v)
-                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}">
+                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}" data-id="{{$v['variant_id']}}">
                                             {{ $v['Color'] }}
                                         </option>
                                     @endforeach
@@ -219,16 +234,7 @@
 
                                 </select>
 
-                                <script>
-                                    function changePr() {
-                                        var selectBox = document.getElementById('varCol');
 
-                                        const selectedOption = selectBox.options[selectBox.selectedIndex];
-                                        const selectedAction = selectedOption.getAttribute('data-price');
-
-                                        document.getElementById('product-price').innerText = "₹" + selectedAction;
-                                    }
-                                </script>
                             </label>
                         </div>
 
@@ -236,17 +242,40 @@
                             <div class="qty-label">
                                 Qty
                                 <div class="input-number">
-                                    <input type="number" value=1>
+                                    <input type="number" disabled value=1 id="qty">
                                     <span class="qty-up">+</span>
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
 
-                            <button class="add-to-cart-btn" onClick=""><i class="fa fa-shopping-cart"></i> add
+                            <form action="{{env('APP_URL')}}/user/cart/add" method="POST" id="cart_form" style="display: none">
+                                @csrf
+                                <input type="text" name="prod_id" id="prod_id" value="{{$id}}">
+                                <input type="text" name="var_id" id="var_id" value="{{$var[0]['variant_id']}}">
+                                <input type="text" name="qty" id="qtny" value="">
+
+
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </form>
+
+                            <button class="add-to-cart-btn" onClick="cart_form_submit()"><i class="fa fa-shopping-cart"></i> add
                                 to
                                 cart</button>
 
+                                <script>
+                                    function changePr() {
+                                        var selectBox = document.getElementById('varCol');
 
+                                        const selectedOption = selectBox.options[selectBox.selectedIndex];
+                                        const selectedAction = selectedOption.getAttribute('data-price');
+                                        const selectedAction2 = selectedOption.getAttribute('data-id');
+
+                                        document.getElementById('product-price').innerText = "₹" + selectedAction;
+
+                                        document.getElementById('var_id').value=selectedAction2;
+                                        console.log( document.getElementById('var_id').value);
+                                    }
+                                </script>
 
                         </div>
                         <span class="product-available">In Stock</span>
@@ -254,15 +283,12 @@
 
 
                         <ul class="product-btns">
-                            <li><a href="{{env('APP_URL')}}/products/wishlist/add/{{$id}}"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}"><i
+                                        class="fa fa-heart-o"></i> add to wishlist</a></li>
 
                         </ul>
 
-                        @if (session('error'))
-                            <script>
-                                alert("{{session('error')}}")
-                            </script>
-                        @endif
+
 
 
 

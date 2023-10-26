@@ -121,6 +121,7 @@
 
         up.on("click", function () {
             var value = parseInt($input.val()) + 1;
+            value = value > 100 ? 100 : value;
             $input.val(value);
             $input.change();
             updatePriceSlider($this, value);

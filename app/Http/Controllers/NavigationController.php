@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Picture;
 use App\Models\Product;
@@ -69,8 +70,11 @@ class NavigationController extends Controller
 
     public function userCart()
     {
+$cart=Cart::where("User_id",  session('user_id'))->get()->toArray();
+$variants = Variants::all()->toArray();
 
-        return view('frontend.UserCart');
+$data=compact('cart','variants');
+        return view('frontend.UserCart')->with($data);
     }
 
     public function userWishlist()

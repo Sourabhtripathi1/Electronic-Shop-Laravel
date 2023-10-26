@@ -35,3 +35,13 @@ function add_click() {
     document.getElementById("detail").style.display = "none";
     document.getElementById("pswd_section").style.display = "block";
 }
+
+function cart_form_submit(){
+
+    var qty=document.getElementById("qty").value;
+
+    document.getElementById("qtny").value=qty;
+    var form=document.getElementById("cart_form");
+
+    form.submit();
+}
