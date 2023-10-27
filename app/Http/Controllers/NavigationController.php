@@ -85,8 +85,9 @@ class NavigationController extends Controller
         $wishlist = Wishlist::where("User_id",  session('user_id'))->get()->toArray();
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
+        $products = Product::all()->toArray();
 
-        $data = compact('wishlist', 'variants', 'pictures');
+        $data = compact('wishlist', 'variants', 'pictures','products');
         return view('frontend.UserWishlist')->with($data);
     }
 }

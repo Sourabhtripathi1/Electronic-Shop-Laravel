@@ -262,20 +262,7 @@
                                 to
                                 cart</button>
 
-                                <script>
-                                    function changePr() {
-                                        var selectBox = document.getElementById('varCol');
 
-                                        const selectedOption = selectBox.options[selectBox.selectedIndex];
-                                        const selectedAction = selectedOption.getAttribute('data-price');
-                                        const selectedAction2 = selectedOption.getAttribute('data-id');
-
-                                        document.getElementById('product-price').innerText = "₹" + selectedAction;
-
-                                        document.getElementById('var_id').value=selectedAction2;
-                                        console.log( document.getElementById('var_id').value);
-                                    }
-                                </script>
 
                         </div>
                         <span class="product-available">In Stock</span>
@@ -283,11 +270,29 @@
 
 
                         <ul class="product-btns">
-                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}"><i
+                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}" id="add_wishlist_button"><i
                                         class="fa fa-heart-o"></i> add to wishlist</a></li>
 
                         </ul>
+                        <script>
+                            function changePr() {
+                                var selectBox = document.getElementById('varCol');
 
+                                const selectedOption = selectBox.options[selectBox.selectedIndex];
+                                const selectedAction = selectedOption.getAttribute('data-price');
+                                const selectedAction2 = selectedOption.getAttribute('data-id');
+                                const wishlist_url="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}"
+
+                                document.getElementById('product-price').innerText = "₹" + selectedAction;
+
+                                document.getElementById('var_id').value=selectedAction2;
+                                console.log( document.getElementById('var_id').value);
+
+                                console.log(wishlist_url+"/"+selectedAction2);
+
+                                document.getElementById('add_wishlist_button').href=wishlist_url+"/"+selectedAction2;
+                            }
+                        </script>
 
 
 

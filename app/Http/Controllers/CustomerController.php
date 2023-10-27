@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Wishlist;
+use Illuminate\Support\Facades\DB;
 
 function getID($length)
 {
@@ -143,24 +144,26 @@ class CustomerController extends Controller
 
     }
 
-    public function add_wishlist(string $id)
+    public function add_wishlist(string $id,string $var_id)
     {
-        $prod = Product::where("Product_id", $id)->first()->toArray();
-        $wishlist = Wishlist::where("Product_id", $id)->where('User_id', session("user_id"))->get()->toArray();
 
-        if (count($wishlist) == 0) {
-            $wish = new Wishlist;
+        echo $id."<br>".$var_id;
+        // $prod = Product::where("Product_id", $id)->first()->toArray();
+        // $wishlist = Wishlist::where("Product_id", $id)->where('User_id', session("user_id"))->get()->toArray();
 
-            $wish->Product_id = $id;
-            $wish->User_id = session("user_id");
-            $wish->Product_name = $prod['Product_name'];
+        // if (count($wishlist) == 0) {
+        //     $wish = new Wishlist;
 
-            $wish->save();
+        //     $wish->Product_id = $id;
+        //     $wish->User_id = session("user_id");
+        //     $wish->Product_name = $prod['Product_name'];
 
-            return redirect('/user/wishlist');
-        } else {
-            return redirect()->back()->with('error', 'Already exist');
-        }
+        //     $wish->save();
+
+        //     return redirect('/user/wishlist');
+        // } else {
+        //     return redirect()->back()->with('error', 'Already exist');
+        // }
 
     }
 
@@ -188,8 +191,10 @@ class CustomerController extends Controller
 
             return redirect()->back()->with('success', "added to cart");
         }
+    }
 
-
-
+    public function remove_to_cart(string $id){
+        DB::table('carts')->where('Sno',$id)->delete();
+        return redirect()->back()->with('success', "Item Removed From Cart !");
     }
 }

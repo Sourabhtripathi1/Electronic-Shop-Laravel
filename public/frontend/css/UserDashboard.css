@@ -55,11 +55,11 @@ a {
 }
 
 .main-container {
-    margin: 3rem;
+    margin: 1rem;
     position: relative;
     right: 0;
-    width: calc(100% - 230px);
-    overflow: hidden auto;
+    width: 100%;
+    /* overflow: hidden auto; */
 }
 
 .menu {
@@ -69,6 +69,48 @@ a {
 .sidebar-container {
     background-color: #d10024;
 }
+
+.cart-table table tbody tr td{
+    text-align: center;
+}
+.cart-table table thead tr th{
+    text-align: center;
+}
+
+.cart-table{
+    margin-top: 2rem;
+
+}
+
+.btn-checkout{
+    border: 3px solid #d10024 !important;
+    position:relative;
+    bottom: 0 ;
+    right: 0 !important;
+    margin: 2rem;
+    margin-left: 3rem;
+    background-color: #d10024;
+    color: #fff;
+    border-radius: 25px !important;
+    transition: all 0.4s ease-in-out;
+}
+
+.btn-checkout:hover{
+    border: 3px solid #d10024 !important;
+    background-color: #fff;
+    font-weight: 900 !important;
+    color: #d10024 !important;
+    border-radius: 25px !important;
+    padding-right:  30px;
+    padding-left:  30px;
+
+}
+
+.btn-checkout-container{
+    display: flex;
+    justify-content: end;
+}
+
 
 @media screen and (max-width: 992px) {
     nav {
@@ -101,7 +143,7 @@ a {
 
         top: 0 !important;
         left: 0 !important;
-    
+
         width: 250px !important;
         height: 100% !important;
         z-index: 1000 !important;
@@ -119,3 +161,5 @@ a {
         background-color: #b56c7947 !important;
     }
 }
+
+

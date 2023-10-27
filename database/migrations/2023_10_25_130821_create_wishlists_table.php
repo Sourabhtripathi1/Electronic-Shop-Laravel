@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('Sno');
             $table->string('User_id', 15);
             $table->string('Product_id', 15);
-            $table->string('Product_name', 45);
+            $table->string('Variant_id', 45);
+
             $table->foreign('User_id')->references('User_id')->on('customers');
             $table->foreign('Product_id')->references('Product_id')->on('products');
             $table->timestamps();
