@@ -44,11 +44,28 @@ function getImage($id, $variants, $picture)
     return $img;
 }
 
-function getProductName($id,$products){
+function getProductNameFromVariant($id, $variants, $products)
+{
+    $vars  = collect($variants)->first(function ($item) use ($id) {
+        return $item['variant_id'] == $id;
+    });
 
+    $na = getProductName($vars['Product_id'], $products);
+    return $na;
 }
 
-function getVariantColor($id,$variants){
+function getProductName($id, $products)
+{
+    $prod = collect($products)->first(function ($item) use ($id) {
+        return $item['Product_id'] == $id;
+    });
+
+    return $prod['Product_name'];
+}
+
+
+function getVariantColor($id, $variants)
+{
     $vars  = collect($variants)->first(function ($item) use ($id) {
         return $item['variant_id'] == $id;
     });
@@ -56,7 +73,8 @@ function getVariantColor($id,$variants){
     return $vars['Color'];
 }
 
-function getVariantPrice($id,$variants){
+function getVariantPrice($id, $variants)
+{
     $vars  = collect($variants)->first(function ($item) use ($id) {
         return $item['variant_id'] == $id;
     });
@@ -64,10 +82,30 @@ function getVariantPrice($id,$variants){
     return $vars['Price'];
 }
 
-function getVariantStock($id,$variants){
+function getVariantStock($id, $variants)
+{
     $vars  = collect($variants)->first(function ($item) use ($id) {
         return $item['variant_id'] == $id;
     });
 
     return $vars['Stock'];
+}
+
+
+function getVariantImage($id, $variants, $picture)
+{
+
+    $vars = collect($variants)->first(function ($item) use ($id) {
+        return $item['variant_id'] == $id;
+    });
+
+    $pics = json_decode($vars['Picture'], true);
+
+    $img = array_values(array_filter($picture, function ($item) use ($pics) {
+        if (array_search($item['Picture_id'], $pics) !== false) {
+            return $item;
+        }
+    }));
+
+    return $img[0]['Source'];
 }

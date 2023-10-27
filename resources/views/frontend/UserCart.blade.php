@@ -109,7 +109,7 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="{{env('APP_URL')}}/user/cart">View Cart</a>
+                                    <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
                                     <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -167,13 +167,13 @@
 
                 <ul>
                     <li>
-                        <a href="{{env('APP_URL')}}/user/dashboard">
+                        <a href="{{ env('APP_URL') }}/user/dashboard">
                             <i class="fa-solid fa-chart-column"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{env('APP_URL')}}/user/profile">
+                        <a href="{{ env('APP_URL') }}/user/profile">
                             <i class="fa-regular fa-file-lines"></i>
                             <span>Profile</span>
                         </a>
@@ -191,13 +191,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{env('APP_URL')}}/user/active-orders">
+                        <a href="{{ env('APP_URL') }}/user/active-orders">
                             <i class="fa-solid fa-building-user"></i>
                             <span>Active Orders</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{env('APP_URL')}}/user/all-orders">
+                        <a href="{{ env('APP_URL') }}/user/all-orders">
                             <i class="fa-regular fa-file-lines"></i>
                             <span>All Orders</span>
                         </a>
@@ -219,10 +219,42 @@
             <h1>Cart</h1>
 
             <pre>
-                {{print_r($cart)}}
-              {{ getVariantStock($cart[1]['Variant_id'],$variants)}}
-            </pre>
+        {{-- {{ print_r($cart[0]) }} --}}
+        {{-- {{ print_r(getVariantImage($cart[0]['Variant_id'], $variants, $pictures)) }} --}}
+        {{-- {{ getProductNameFromVariant($cart[0]['Variant_id'], $variants, $products) }}
+        {{ getProductName('ECFaWoE9XdKh3dV', $products) }} --}}
 
+        </pre>
+
+
+            <div>
+                <table class="table table-striped">
+
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Color</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Picture</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ getProductNameFromVariant($cart[0]['Variant_id'], $variants, $products) }}</td>
+                            <td>{{ getVariantColor($cart[0]['Variant_id'], $variants) }}</td>
+                            <td>{{ $cart[0]['Quantity'] }}</td>
+                            <td>{{ getVariantPrice($cart[0]['Variant_id'], $variants) }}</td>
+                            <td><img src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($cart[0]['Variant_id'], $variants, $pictures) }}"
+                                    alt="" height="150px" width="200px"></td>
+                            <td><button class="btn btn-danger">remove</button></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
 
         </div>
     </div>
