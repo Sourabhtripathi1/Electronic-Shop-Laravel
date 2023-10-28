@@ -54,6 +54,14 @@ function getProductNameFromVariant($id, $variants, $products)
     return $na;
 }
 
+function getFirstVariant($id,$products,$variants){
+    $var=collect($variants)->first(function ($item) use ($id) {
+        return $item["Product_id"]==$id;
+        });
+
+        return $var['variant_id'];
+}
+
 function getProductName($id, $products)
 {
     $prod = collect($products)->first(function ($item) use ($id) {
@@ -62,6 +70,7 @@ function getProductName($id, $products)
 
     return $prod['Product_name'];
 }
+
 
 
 function getVariantColor($id, $variants)

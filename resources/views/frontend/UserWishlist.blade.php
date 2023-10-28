@@ -9,6 +9,20 @@
 @endpush
 
 @section('main-section')
+
+
+@if (session('error'))
+<script>
+    alert("{{ session('error') }}")
+</script>
+@endif
+
+@if (session('success'))
+<script>
+    alert("{{ session('success') }}")
+</script>
+@endif
+
     <div id="header">
         <!-- container -->
         <div class="container">
@@ -17,7 +31,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="{{env('APP_URL')}}" class="logo">
                             <img src="{{ env('APP_URL') }}/frontend/img/logo.png" alt="">
                         </a>
                     </div>
@@ -216,12 +230,9 @@
 
 
         <div class="main-container">
-            <h1>Wishlist</h1>
-
-
-            <div class="cart-table">
+         <div class="wishlist-table">
                 @if (count($wishlist) > 0)
-                    <h3 style="color: #d10024;"> Your Cart :</h3><br>
+                    <h3 style="color: #d10024;"> Your Wishlist :</h3><br>
                     <table class="table table-striped">
 
                         <thead>
@@ -237,14 +248,13 @@
                                 <tr>
                                     <td><img src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($item['Variant_id'], $variants, $pictures) }}"
                                             alt="" height="40px" width="80px"></td>
-                                    <td> {{ getProductNameFromVariant($item['Variant_id'], $variants, $products) }} x
-                                        <b>{{ $item['Quantity'] }}</b>
+                                    <td> {{ getProductNameFromVariant($item['Variant_id'], $variants, $products) }}
                                     </td>
 
                                     <td>{{ getVariantPrice($item['Variant_id'], $variants) }}
                                     </td>
                                     <td>
-                                        <a href="{{ env('APP_URL') }}/user/wishlist/remove/{{ $item['Sno'] }}">
+                                        <a href="{{ env('APP_URL') }}/products/wishlist/remove/{{ $item['Sno'] }}">
                                             <button class="btn btn-sm btn-danger">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
                                                     viewBox="0 0 448 512">
@@ -264,23 +274,11 @@
                         </tbody>
 
                     </table>
-
-
-                    <div class="btn-checkout-container">
-                        <a href=""><button class="btn btn-checkout btn-lg">Checkout</button></a>
-                    </div>
                 @else
-                    <h1 style="color: #d10024;">Cart Is Empty</h1>
+                    <h1 style="color: #d10024;">Wishlist Is Empty</h1>
                 @endif
 
             </div>
-
-
-<pre>
-   @php
-       print_r($wishlist)
-   @endphp
-</pre>
 
         </div>
     </div>

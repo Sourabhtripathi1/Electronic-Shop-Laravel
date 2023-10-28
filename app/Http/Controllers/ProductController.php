@@ -119,6 +119,11 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
+
+        $variants = Variants::all()->toArray();
+        $products = Product::all()->toArray();
+
+
         $prod = Product::where("Product_id", $id)->first()->toArray();
         $pna=$prod['Product_name'];
 
@@ -130,7 +135,7 @@ class ProductController extends Controller
         $cat_na=$cat->Category_Name;
         $br_na=$br->Brand_Name;
 
-        $data=compact('id','prod','pna','var','cat_na','br_na','pics');
+        $data=compact('id','prod','pna','var','cat_na','br_na','pics','variants','products');
 
         return view('frontend.ProductPage')->with($data);
     }
@@ -184,8 +189,6 @@ class ProductController extends Controller
 
         $var = Variants::where("Product_id", "=", $id)->get()->toArray();
 
-
-
         $x = [];
 
         foreach ($var as $v) {
@@ -221,6 +224,14 @@ class ProductController extends Controller
 
         echo "<pre>";
         print_r($request->all());
+
+        $review=new Review;
+
+        // $review->User_id=session('user_id');
+        // $review->Product_id=
+        // $review->Variant_id=
+        // $review->content=
+        //  $review->Review_Date=
 
     }
 

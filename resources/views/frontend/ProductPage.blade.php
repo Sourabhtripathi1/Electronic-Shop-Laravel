@@ -40,7 +40,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="{{env('APP_URL')}}" class="logo">
                             <img src="{{ env('APP_URL') }}/frontend/img/logo.png" alt="">
                         </a>
                     </div>
@@ -270,10 +270,12 @@
 
 
                         <ul class="product-btns">
-                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}" id="add_wishlist_button"><i
+                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}/{{ getFirstVariant($id,$products,$variants)}}" id="add_wishlist_button"><i
                                         class="fa fa-heart-o"></i> add to wishlist</a></li>
 
                         </ul>
+
+
                         <script>
                             function changePr() {
                                 var selectBox = document.getElementById('varCol');

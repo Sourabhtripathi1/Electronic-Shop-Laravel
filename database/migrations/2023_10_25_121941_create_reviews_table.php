@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('User_id', 15);
             $table->string('Product_id', 15);
             $table->string('Variant_id', 15);
+            $table->string('name', 40);
+            $table->string('email', 50);
             $table->string('content', 60);
             $table->date('Review_Date');
 

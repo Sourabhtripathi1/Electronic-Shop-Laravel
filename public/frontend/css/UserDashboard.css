@@ -70,17 +70,22 @@ a {
     background-color: #d10024;
 }
 
-.cart-table table tbody tr td{
-    text-align: center;
-}
-.cart-table table thead tr th{
+.cart-table table tbody tr td,.cart-table table thead tr th{
     text-align: center;
 }
 
-.cart-table{
+.cart-table,.wishlist-table{
     margin-top: 2rem;
 
 }
+
+
+
+.wishlist-table table tbody tr td,.wishlist-table table thead tr th{
+    text-align: center;
+}
+
+
 
 .btn-checkout{
     border: 3px solid #d10024 !important;

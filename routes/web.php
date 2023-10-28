@@ -78,7 +78,9 @@ Route::group(["prefix" => "/user", "middleware" => "isValidUser"], function () {
 
 Route::post('/products/{id}/add-review', [ProductController::class, 'add_review'])->middleware('isValidUser');
 
-Route::get('/products/wishlist/add/{id}/{$var_id}', [CustomerController::class, 'add_wishlist'])->middleware('isValidUser');
+Route::get('/products/wishlist/add/{id}/{var}', [CustomerController::class, 'add_wishlist'])->middleware('isValidUser');
+
+Route::get('/products/wishlist/remove/{id}', [CustomerController::class, 'remove_wishlist'])->middleware('isValidUser');
 
 Route::post('/user/cart/add', [CustomerController::class, 'add_to_cart'])->middleware('isValidUser');
 

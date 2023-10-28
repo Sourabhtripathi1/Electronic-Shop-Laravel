@@ -144,27 +144,31 @@ class CustomerController extends Controller
 
     }
 
-    public function add_wishlist(string $id,string $var_id)
+    public function add_wishlist(string $id,$var)
     {
 
-        echo $id."<br>".$var_id;
-        // $prod = Product::where("Product_id", $id)->first()->toArray();
-        // $wishlist = Wishlist::where("Product_id", $id)->where('User_id', session("user_id"))->get()->toArray();
+        $wishlist = Wishlist::where("Product_id", $id)->where('User_id', session("user_id"))->get()->toArray();
 
-        // if (count($wishlist) == 0) {
-        //     $wish = new Wishlist;
+        if (count($wishlist) == 0) {
+            $wish = new Wishlist;
 
-        //     $wish->Product_id = $id;
-        //     $wish->User_id = session("user_id");
-        //     $wish->Product_name = $prod['Product_name'];
+            $wish->Product_id = $id;
+            $wish->Variant_id=$var;
+            $wish->User_id = session("user_id");
 
-        //     $wish->save();
 
-        //     return redirect('/user/wishlist');
-        // } else {
-        //     return redirect()->back()->with('error', 'Already exist');
-        // }
+            $wish->save();
 
+            return redirect('/user/wishlist');
+        } else {
+            return redirect()->back()->with('error', 'Already exist');
+        }
+
+    }
+
+    public function remove_wishlist(string $id){
+        DB::table('wishlists')->where('Sno',$id)->delete();
+        return redirect()->back()->with('success', "Item Removed From Wishlist !");
     }
 
     public function add_to_cart(Request $req)
