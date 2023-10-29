@@ -159,7 +159,7 @@ class CustomerController extends Controller
 
             $wish->save();
 
-            return redirect('/user/wishlist');
+            return redirect()->back()->with('success', "Item Added In Wishlist !");
         } else {
             return redirect()->back()->with('error', 'Already exist');
         }
