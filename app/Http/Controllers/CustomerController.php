@@ -113,9 +113,6 @@ class CustomerController extends Controller
         } else {
             return redirect('/user/login')->with('msg', 'Username or Email Already Exists !');
         }
-
-
-
     }
 
     public function Customer_login(Request $req)
@@ -134,17 +131,15 @@ class CustomerController extends Controller
                 } else {
                     return redirect('/user/login')->with('msg', 'Invalid Password !');
                 }
-
             } else {
                 return redirect('/user/login')->with('msg', 'Invalid Username or Email !');
             }
         } else {
             return redirect('/user/login')->with('msg', 'Invalid Username or Email !');
         }
-
     }
 
-    public function add_wishlist(string $id,$var)
+    public function add_wishlist(string $id, $var)
     {
 
         $wishlist = Wishlist::where("Product_id", $id)->where('User_id', session("user_id"))->get()->toArray();
@@ -153,7 +148,7 @@ class CustomerController extends Controller
             $wish = new Wishlist;
 
             $wish->Product_id = $id;
-            $wish->Variant_id=$var;
+            $wish->Variant_id = $var;
             $wish->User_id = session("user_id");
 
 
@@ -163,11 +158,11 @@ class CustomerController extends Controller
         } else {
             return redirect()->back()->with('error', 'Already exist');
         }
-
     }
 
-    public function remove_wishlist(string $id){
-        DB::table('wishlists')->where('Sno',$id)->delete();
+    public function remove_wishlist(string $id)
+    {
+        DB::table('wishlists')->where('Sno', $id)->delete();
         return redirect()->back()->with('success', "Item Removed From Wishlist !");
     }
 
@@ -189,7 +184,7 @@ class CustomerController extends Controller
             $cart->Product_id = $req->prod_id;
             $cart->Variant_id = $req->var_id;
             $cart->Quantity = $req->qty;
-            $cart->Price = $var['Price'] * $req->qty;
+            $cart->Price = $var['Price'];
 
             $cart->save();
 
@@ -197,8 +192,32 @@ class CustomerController extends Controller
         }
     }
 
-    public function remove_to_cart(string $id){
-        DB::table('carts')->where('Sno',$id)->delete();
+    public function remove_to_cart(string $id)
+    {
+        DB::table('carts')->where('Sno', $id)->delete();
         return redirect()->back()->with('success', "Item Removed From Cart !");
+    }
+
+    public function inc_to_cart(string $id)
+    {
+        $qty = Cart::where('Sno', $id)->first()->toArray()['Quantity'];
+        DB::table('carts')->where('Sno', $id)->update(['Quantity' => ++$qty]);
+
+        return ["result" => "success", "msg" => "added"];
+    }
+
+    public function dec_to_cart(string $id)
+    {
+        $qty = Cart::where('Sno', $id)->first()->toArray()['Quantity'];
+        DB::table('carts')->where('Sno', $id)->update(['Quantity' => --$qty]);
+
+        return ["result" => "success", "msg" => "removed"];
+    }
+
+    public function userCheckout(Request $req)
+    {
+        echo "<pre>";
+
+        print_r($req->all());
     }
 }

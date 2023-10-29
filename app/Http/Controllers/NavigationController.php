@@ -87,7 +87,18 @@ class NavigationController extends Controller
         $pictures = Picture::all()->toArray();
         $products = Product::all()->toArray();
 
-        $data = compact('wishlist', 'variants', 'pictures','products');
+        $data = compact('wishlist', 'variants', 'pictures', 'products');
         return view('frontend.UserWishlist')->with($data);
+    }
+
+    public function userCheckout()
+    {
+        $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
+        $variants = Variants::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $products = Product::all()->toArray();
+
+        $data = compact('variants', 'pictures', 'products', 'cart');
+        return view('frontend.checkout')->with($data);
     }
 }

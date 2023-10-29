@@ -36,12 +36,21 @@ function add_click() {
     document.getElementById("pswd_section").style.display = "block";
 }
 
-function cart_form_submit(){
+function cart_form_submit() {
+    var qty = document.getElementById("qty").value;
 
-    var qty=document.getElementById("qty").value;
-
-    document.getElementById("qtny").value=qty;
-    var form=document.getElementById("cart_form");
+    document.getElementById("qtny").value = qty;
+    var form = document.getElementById("cart_form");
 
     form.submit();
 }
+$("#terms").change(function () {
+    if ($(this).is(":checked")) {
+        console.log("x");
+        $("#place-order-button").prop("disabled", false);
+    } else {
+        console.log("y");
+        $("#place-order-button").style.display = "none";
+        $("#place-order-button").prop("disabled", true);
+    }
+});

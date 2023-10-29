@@ -23,7 +23,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="{{env('APP_URL')}}" class="logo">
+                        <a href="{{ env('APP_URL') }}" class="logo">
                             <img src="{{ env('APP_URL') }}/frontend/img/logo.png" alt="">
                         </a>
                     </div>
@@ -115,7 +115,7 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="{{env('APP_URL')}}/user/cart">View Cart</a>
+                                    <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
                                     <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -282,10 +282,11 @@
                                                             wishlist</span>
                                                     </button>
 
-                                                    <button class="quick-view"
-                                                        onclick="window.location.href='{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}' ">
-                                                        <i class="fa fa-eye"></i><span class="tooltipp">quick
-                                                            view</span>
+                                                    <button class="quick-view">
+                                                        <i class="fa fa-eye"></i><span class="tooltipp"><a
+                                                                href="{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}">
+                                                                quick
+                                                                view</a></span>
                                                     </button>
                                                 </div>
                                             </div>

@@ -5,27 +5,27 @@
 @endpush
 
 @section('main-section')
-@php
+    @php
 
-    $v = [];
+        $v = [];
 
-    foreach ($var as $a) {
-        $v = array_merge($v, json_decode($a['Picture'], true));
-    }
+        foreach ($var as $a) {
+            $v = array_merge($v, json_decode($a['Picture'], true));
+        }
 
-@endphp
+    @endphp
 
-@if (session('error'))
-<script>
-    alert("{{ session('error') }}")
-</script>
-@endif
+    @if (session('error'))
+        <script>
+            alert("{{ session('error') }}")
+        </script>
+    @endif
 
-@if (session('success'))
-<script>
-    alert("{{ session('success') }}")
-</script>
-@endif
+    @if (session('success'))
+        <script>
+            alert("{{ session('success') }}")
+        </script>
+    @endif
     {{-- <pre>
         @php
 
@@ -40,7 +40,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="{{env('APP_URL')}}" class="logo">
+                        <a href="{{ env('APP_URL') }}" class="logo">
                             <img src="{{ env('APP_URL') }}/frontend/img/logo.png" alt="">
                         </a>
                     </div>
@@ -112,7 +112,7 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="{{env('APP_URL')}}/user/cart">View Cart</a>
+                                    <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
                                     <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -226,7 +226,8 @@
                                 <select class="input-select" id="varCol" onChange="changePr()">
 
                                     @foreach ($var as $v)
-                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}" data-id="{{$v['variant_id']}}">
+                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}"
+                                            data-id="{{ $v['variant_id'] }}">
                                             {{ $v['Color'] }}
                                         </option>
                                     @endforeach
@@ -248,17 +249,20 @@
                                 </div>
                             </div>
 
-                            <form action="{{env('APP_URL')}}/user/cart/add" method="POST" id="cart_form" style="display: none">
+                            <form action="{{ env('APP_URL') }}/user/cart/add" method="POST" id="cart_form"
+                                style="display: none">
                                 @csrf
-                                <input type="text" name="prod_id" id="prod_id" value="{{$id}}">
-                                <input type="text" name="var_id" id="var_id" value="{{$var[0]['variant_id']}}">
+                                <input type="text" name="prod_id" id="prod_id" value="{{ $id }}">
+                                <input type="text" name="var_id" id="var_id"
+                                    value="{{ $var[0]['variant_id'] }}">
                                 <input type="text" name="qty" id="qtny" value="">
 
 
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </form>
 
-                            <button class="add-to-cart-btn" onClick="cart_form_submit()"><i class="fa fa-shopping-cart"></i> add
+                            <button class="add-to-cart-btn" onClick="cart_form_submit()"><i
+                                    class="fa fa-shopping-cart"></i> add
                                 to
                                 cart</button>
 
@@ -270,8 +274,8 @@
 
 
                         <ul class="product-btns">
-                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}/{{ getFirstVariant($id,$products,$variants)}}" id="add_wishlist_button"><i
-                                        class="fa fa-heart-o"></i> add to wishlist</a></li>
+                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}/{{ getFirstVariant($id, $products, $variants) }}"
+                                    id="add_wishlist_button"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 
                         </ul>
 
@@ -283,16 +287,16 @@
                                 const selectedOption = selectBox.options[selectBox.selectedIndex];
                                 const selectedAction = selectedOption.getAttribute('data-price');
                                 const selectedAction2 = selectedOption.getAttribute('data-id');
-                                const wishlist_url="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}"
+                                const wishlist_url = "{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}"
 
                                 document.getElementById('product-price').innerText = "₹" + selectedAction;
 
-                                document.getElementById('var_id').value=selectedAction2;
-                                console.log( document.getElementById('var_id').value);
+                                document.getElementById('var_id').value = selectedAction2;
+                                console.log(document.getElementById('var_id').value);
 
-                                console.log(wishlist_url+"/"+selectedAction2);
+                                console.log(wishlist_url + "/" + selectedAction2);
 
-                                document.getElementById('add_wishlist_button').href=wishlist_url+"/"+selectedAction2;
+                                document.getElementById('add_wishlist_button').href = wishlist_url + "/" + selectedAction2;
                             }
                         </script>
 

@@ -73,7 +73,8 @@ Route::group(["prefix" => "/user", "middleware" => "isValidUser"], function () {
     Route::get('profile', [NavigationController::class, 'userProfile']);
     Route::get('wishlist', [NavigationController::class, 'userWishlist']);
     Route::get('cart', [NavigationController::class, 'userCart']);
-
+    Route::get('checkout', [NavigationController::class, 'userCheckout']);
+    Route::post('checkout', [CustomerController::class, 'userCheckout']);
 });
 
 Route::post('/products/{id}/add-review', [ProductController::class, 'add_review'])->middleware('isValidUser');
@@ -86,7 +87,9 @@ Route::post('/user/cart/add', [CustomerController::class, 'add_to_cart'])->middl
 
 Route::get('/user/cart/remove/{id}', [CustomerController::class, 'remove_to_cart'])->middleware('isValidUser');
 
+Route::get('/user/cart/inc/{id}', [CustomerController::class, 'inc_to_cart'])->middleware('isValidUser');
 
+Route::get('/user/cart/dec/{id}', [CustomerController::class, 'dec_to_cart'])->middleware('isValidUser');
 
 
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('Hno', 10);
             $table->string('Address', 70);
             $table->string('Payment_Method', 15);
+            $table->string('contact', 15);
             $table->float('PINCODE', 10);
 
             $table->foreign('User_id')->references('User_id')->on('customers');
