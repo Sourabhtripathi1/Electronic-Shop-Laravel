@@ -16,11 +16,14 @@ return new class extends Migration
             $table->date('Order_Date');
             $table->string('User_id', 15);
             $table->string('Username', 30);
+            $table->string('name', 40);
+            $table->string('email', 50);
             $table->string('Hno', 10);
             $table->string('Address', 70);
             $table->string('Payment_Method', 15);
             $table->string('contact', 15);
             $table->float('PINCODE', 10);
+            $table->string('Status', 20);
 
             $table->foreign('User_id')->references('User_id')->on('customers');
             $table->timestamps();

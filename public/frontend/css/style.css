@@ -2205,6 +2205,10 @@ textarea.input {
     justify-content: center;
 }
 
+.cart_login button{
+    background-color: #D10024;
+}
+
 /*=========================================================
 	13 -> RESPONSIVE
 ===========================================================*/

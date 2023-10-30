@@ -240,7 +240,7 @@
                                 <th></th>
                                 <th>Product</th>
                                 <th>Price</th>
-
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -250,22 +250,31 @@
                                         <img src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($cart_item['Variant_id'], $variants, $pictures) }}"
                                             alt="" height="40px" width="80px">
                                     </td>
-                                    <td>
-                                        @if ($cart_item['Quantity'] > 1)
-                                            <button class="dec_cart" id="{{ $cart_item['Sno'] }}">
-                                                dec
-                                            </button>
-                                        @endif
+                                    <td style="display: flex; justify-content: space-between; ">
 
-                                        {{ getProductNameFromVariant($cart_item['Variant_id'], $variants, $products) }} x
-                                        <b>{{ $cart_item['Quantity'] }}</b>
 
-                                        @if ($cart_item['Quantity'] < 100)
-                                            <button class="inc_cart" id="{{ $cart_item['Sno'] }}">
-                                                add
-                                            </button>
-                                        @endif
-
+                                        <div
+                                            style="overflow-wrap: anywhere;                                  padding: 0px 6px;">
+                                            {{ getProductNameFromVariant($cart_item['Variant_id'], $variants, $products) }}
+                                            x
+                                            <b>{{ $cart_item['Quantity'] }}</b>
+                                        </div>
+                                        <div class="btn-pm">
+                                            <div>
+                                                @if ($cart_item['Quantity'] > 1)
+                                                    <button class="dec_cart" id="{{ $cart_item['Sno'] }}">
+                                                        -
+                                                    </button>
+                                                @endif
+                                            </div>
+                                            <div>
+                                                @if ($cart_item['Quantity'] < 100)
+                                                    <button class="inc_cart" id="{{ $cart_item['Sno'] }}">
+                                                        +
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </td>
 
                                     <td>{{ getVariantPrice($cart_item['Variant_id'], $variants) * $cart_item['Quantity'] }}

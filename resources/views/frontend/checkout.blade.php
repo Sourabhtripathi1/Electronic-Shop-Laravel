@@ -141,7 +141,7 @@
             <div id="responsive-nav">
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/shop">Shop </a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="#">Laptops</a></li>
@@ -157,6 +157,26 @@
     </nav>
     <!-- /NAVIGATION -->
 
+    @if (count($cart)==0)
+    <div id="breadcrumb" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="breadcrumb-header">Cart Is Empty ! </h3>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+    <div style="display: flex; justify-content:center;">
+        <img src="{{env('APP_URL')}}/frontend/img/3385483.webp" alt="">
+    </div>
+
+    @else
     <div id="breadcrumb" class="section">
         <!-- container -->
         <div class="container">
@@ -187,23 +207,29 @@
                                 <h3 class="title">Billing address</h3>
                             </div>
                             <div class="form-group">
-                                <input class="input" type="text" name="name" placeholder="Name">
+                                <input class="input" type="text" name="name" placeholder="Name" value="{{$user['Name']}}">
                             </div>
 
                             <div class="form-group">
-                                <input class="input" type="email" name="email" placeholder="Email">
+                                <input class="input" type="email" name="email" placeholder="Email" value="{{$user['Email']}}" >
                             </div>
                             <div class="form-group">
-                                <textarea class="input" placeholder="Address"></textarea>
+                                <input class="input" type="text" name="Hno" placeholder="Hno">
+                            </div>
+                            <div class="form-group">
+                                <input class="input" type="text" name="area" placeholder="area">
                             </div>
                             <div class="form-group">
                                 <input class="input" type="text" name="city" placeholder="City">
                             </div>
                             <div class="form-group">
+                                <input class="input" type="text" name="state" placeholder="State">
+                            </div>
+                            <div class="form-group">
                                 <input class="input" type="text" name="country" placeholder="Country">
                             </div>
                             <div class="form-group">
-                                <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+                                <input class="input" type="text" name="zip" placeholder="ZIP Code">
                             </div>
                             <div class="form-group">
                                 <input class="input" type="tel" name="tel" placeholder="Telephone">
@@ -211,14 +237,6 @@
 
 
                             <!-- /Billing Details -->
-
-
-
-                            <!-- Order notes -->
-                            <div class="order-notes">
-                                <textarea class="input" placeholder="Order Notes"></textarea>
-                            </div>
-                            <!-- /Order notes -->
                         </div>
                     </div>
 
@@ -311,4 +329,7 @@
         </div>
         <!-- /container -->
     </div>
+
+    @endif
+
 @endsection

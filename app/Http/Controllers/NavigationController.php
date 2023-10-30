@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Picture;
 use App\Models\Product;
 use App\Models\Variants;
@@ -16,13 +17,15 @@ class NavigationController extends Controller
 {
     public function indexPage()
     {
+
+        $cart=session('user_id')?Cart::where('User_id',session('user_id'))->get()->toArray():Cart::all()->toArray();
         $products = Product::all()->toArray();
         $variants = Variants::all()->toArray();
         $images = Picture::all()->toArray();
         $category = Category::all()->toArray();
         $brands = Brand::all()->toArray();
 
-        $data = compact('products', 'variants', 'images', 'brands', 'category');
+        $data = compact('products', 'variants', 'images', 'brands', 'category','cart');
 
         return view('frontend.index')->with($data);
     }
@@ -93,12 +96,13 @@ class NavigationController extends Controller
 
     public function userCheckout()
     {
+        $user=Customer::where('User_id',session('user_id'))->first()->toArray();
         $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
         $products = Product::all()->toArray();
 
-        $data = compact('variants', 'pictures', 'products', 'cart');
+        $data = compact('variants', 'pictures', 'products', 'cart','user');
         return view('frontend.checkout')->with($data);
     }
 }
