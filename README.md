@@ -1,3 +1,5 @@
+# Command to run code
+
 git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
 cd Electronic-Shop-Laravel
