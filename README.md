@@ -1,4 +1,20 @@
+git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
+cd Electronic-Shop-Laravel
+
+composer install
+
+php artisan key:generate
+
+php artisan Storage:link
+
+php artisan lang:publish
+
+php artisan migrate
+
+php artisan migrate:refresh
+
+code .
 
 
 
