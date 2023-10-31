@@ -179,7 +179,6 @@
     <div class="content-container">
         <div class="sidebar-container" id="sidebar-container">
             <div class="sidebar" id="sidebar">
-
                 <ul>
                     <li>
                         <a href="{{env('APP_URL')}}/user/dashboard">
@@ -228,11 +227,46 @@
             </div>
         </div>
 
-
-
         <div class="main-container">
-            <h1>All Orders</h1>
 
+            @if (count($orders) > 0)
+            <h1 style="color: #d10024;">All Orders</h1>
+
+            <br>
+            <table class="table table-striped allOrders-table">
+
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($orders as $item)
+                        <tr>
+                            <td>
+                                {{-- <img  src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($cart_item['Variant_id'], $variants, $pictures) }}"> --}}
+                            </td>
+                            <td>
+
+                            </td>
+
+                            <td>
+                                {{-- {{ getVariantPrice($cart_item['Variant_id'], $variants) * $cart_item['Quantity'] }} --}}
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+
+            </table>
+        @else
+        <h1 style="color: #d10024;">Old Orders</h1>
+        @endif
 
 
         </div>

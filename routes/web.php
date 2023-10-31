@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminNavigationController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -41,9 +42,8 @@ Route::get('/customers-list', function () {
     return view('admin.ViewCustomers');
 });
 
-Route::get('/orders-list', function () {
-    return view('admin.ViewOrders');
-});
+
+Route::get('/orders-list',[AdminNavigationController::class,'OrderList']);
 
 Route::get('/', [NavigationController::class, 'indexPage']);
 

@@ -246,9 +246,11 @@
                         <tbody>
                             @foreach ($wishlist as $item)
                                 <tr>
-                                    <td><img src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($item['Variant_id'], $variants, $pictures) }}"
-                                            alt="" height="40px" width="80px"></td>
-                                    <td> {{ getProductNameFromVariant($item['Variant_id'], $variants, $products) }}
+                                    <td class="wishlist_image">
+                                        <img src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($item['Variant_id'], $variants, $pictures) }}" >
+                                    </td>
+                                    <td>
+                                        {{ getProductNameFromVariant($item['Variant_id'], $variants, $products) }}
                                     </td>
 
                                     <td>{{ getVariantPrice($item['Variant_id'], $variants) }}

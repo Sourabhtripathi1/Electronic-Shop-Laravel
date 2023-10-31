@@ -130,6 +130,24 @@ a {
     border-radius: 5px;
 }
 
+.cart_image{
+    width: 15%;
+}
+
+.cart_image img{
+    max-height: 50px;
+}
+
+.wishlist_image{
+    width: 15%;
+}
+
+.wishlist_image img{
+    max-height: 50px;
+}
+
+
+
 @media screen and (max-width: 992px) {
     nav {
         height: 0px;

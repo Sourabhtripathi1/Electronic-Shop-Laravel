@@ -66,3 +66,28 @@
     border: rgb(191, 182, 182) 5px solid;
     border-radius: 10px;
 }
+
+
+#admin-orders{
+    margin-top: 3rem !important;
+}
+
+#admin-orders thead tr th, #admin-orders tbody tr td{
+    margin-right: 5px;
+}
+
+#order-search{
+    display: flex;
+}
+
+/*
+.order-status .status-form{
+    width: 10px;
+} */
+
+.order-status{
+    display: flex;
+    justify-content: space-between !important;
+}
+
+

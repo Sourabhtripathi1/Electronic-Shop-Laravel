@@ -246,9 +246,8 @@
                         <tbody>
                             @foreach ($cart as $cart_item)
                                 <tr>
-                                    <td>
-                                        <img src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($cart_item['Variant_id'], $variants, $pictures) }}"
-                                            alt="" height="40px" width="80px">
+                                    <td class="cart_image">
+                                        <img  src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($cart_item['Variant_id'], $variants, $pictures) }}">
                                     </td>
                                     <td style="display: flex; justify-content: space-between; ">
 

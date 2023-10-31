@@ -17,7 +17,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="{{env('APP_URL')}}" class="logo">
+                        <a href="{{ env('APP_URL') }}" class="logo">
                             <img src="{{ env('APP_URL') }}/frontend/img/logo.png" alt="">
                         </a>
                     </div>
@@ -109,7 +109,7 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="{{env('APP_URL')}}/user/cart">View Cart</a>
+                                    <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
                                     <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -182,13 +182,13 @@
 
                 <ul>
                     <li>
-                        <a href="{{env('APP_URL')}}/user/dashboard">
+                        <a href="{{ env('APP_URL') }}/user/dashboard">
                             <i class="fa-solid fa-chart-column"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{env('APP_URL')}}/user/profile">
+                        <a href="{{ env('APP_URL') }}/user/profile">
                             <i class="fa-regular fa-file-lines"></i>
                             <span>Profile</span>
                         </a>
@@ -206,13 +206,13 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="{{env('APP_URL')}}/user/active-orders">
+                        <a href="{{ env('APP_URL') }}/user/active-orders">
                             <i class="fa-solid fa-building-user"></i>
                             <span>Active Orders</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{env('APP_URL')}}/user/all-orders">
+                        <a href="{{ env('APP_URL') }}/user/all-orders">
                             <i class="fa-regular fa-file-lines"></i>
                             <span>All Orders</span>
                         </a>
@@ -231,9 +231,44 @@
 
 
         <div class="main-container">
-            <h1>Active orders</h1>
+            @if (count($orders) > 0)
+                <h1 style="color: #d10024;">Active orders</h1>
 
+                <br>
+                <table class="table table-striped activeOrders-table">
 
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($orders as $item)
+                            <tr>
+                                <td>
+                                    {{-- <img  src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($cart_item['Variant_id'], $variants, $pictures) }}"> --}}
+                                </td>
+                                <td>
+
+                                </td>
+
+                                <td>
+                                    {{-- {{ getVariantPrice($cart_item['Variant_id'], $variants) * $cart_item['Quantity'] }} --}}
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+            @else
+                <h1 style="color: #d10024;">No Active orders</h1>
+            @endif
 
         </div>
     </div>

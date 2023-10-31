@@ -7,6 +7,8 @@ use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Order_details;
+use App\Models\Orders;
 use App\Models\Picture;
 use App\Models\Product;
 use App\Models\Variants;
@@ -39,16 +41,21 @@ class NavigationController extends Controller
 
     public function userAllOrders()
     {
+        $orders=Orders::where('User_id',session('user_id'))->where('Status','Dilevered')->get()->toArray();
+        $order_details=Order_details::all()->toArray();
 
+          $data=compact('orders','order_details');
 
-        return view('frontend.UserAllOrders');
+        return view('frontend.UserAllOrders')->with($data);
     }
 
     public function userActiveOrders()
     {
+        $orders=Orders::where('User_id',session('user_id'))->where('Status','!=','Dilevered')->get()->toArray();
+        $order_details=Order_details::all()->toArray();
 
-
-        return view('frontend.UserActiveOrders');
+        $data=compact('orders','order_details');
+        return view('frontend.UserActiveOrders')->with($data);
     }
 
     public function userProfile()
