@@ -26,38 +26,59 @@
     </div>
 
     <!-- Content Row -->
-    <div class="row">
+    <div class="row" id="admin-orders">
 
-        <table class="table m-1 w-0" id="admin-orders">
+        <table class="table m-1 w-0">
             <thead>
-                <th>User</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Date</th>
-                <th style="width: 10rem;">
-                    Status
-                </th>
+                <tr>
+                    <th class="order-product">Product</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th class="order-address">Address</th>
+                    <th style="width: 10rem;">
+                        Status
+                    </th>
+                </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="">a</td>
-                    <td>b</td>
-                    <td>c</td>
-                    <td>d</td>
-                    <td class="order-status">
-                        <div>
-                            Placed
-                        </div>
-                        <div class="status-form">
-                            <select name="status" class="form-control" style="width: 10px;">
-                                <option value="0" disabled selected>Status:</option>
-                                <option value="Placed">Placed</option>
-                                <option value="Dispatched">Dispatched</option>
-                                <option value="Dilevered">Dilevered</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
+                @foreach ($orders as $item)
+                    <pre>
+                    @php
+                        print_r(getOrders($item['Order_id'], $order_details));
+                    @endphp
+                </pre>
+                    <tr>
+                        <td class="order-product">
+                            <div class="pro-img">
+
+                            </div>
+                            <div class="pro-title">
+
+                            </div>
+                            <div class="pro-qnty">
+
+                            </div>
+                        </td>
+                        <td>c</td>
+                        <td>{{ $item['Order_Date'] }}</td>
+                        <td>{{ $item['Username'] }}</td>
+                        <td>{{ $item['Hno'] }}, {{ $item['Address'] }},<br>{{ $item['PINCODE'] }}</td>
+                        <td class="order-status">
+                            <div>
+                                Placed
+                            </div>
+                            <div class="status-form">
+                                <select name="status" class="form-control" style="width: 10px;">
+                                    <option value="0" disabled selected>Status:</option>
+                                    <option value="Placed">Placed</option>
+                                    <option value="Dispatched">Dispatched</option>
+                                    <option value="Dilevered">Dilevered</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 

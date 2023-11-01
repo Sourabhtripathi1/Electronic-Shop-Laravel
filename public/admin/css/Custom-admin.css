@@ -68,15 +68,12 @@
 }
 
 
-#admin-orders{
+#admin-orders {
     margin-top: 3rem !important;
+    overflow: auto;
 }
 
-#admin-orders thead tr th, #admin-orders tbody tr td{
-    margin-right: 5px;
-}
-
-#order-search{
+#order-search {
     display: flex;
 }
 
@@ -85,9 +82,15 @@
     width: 10px;
 } */
 
-.order-status{
+.order-status {
     display: flex;
     justify-content: space-between !important;
 }
 
+.order-status div {
+    margin-right: 5px;
+}
 
+/* .order-product {
+
+} */

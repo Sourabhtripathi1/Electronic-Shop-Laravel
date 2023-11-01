@@ -54,12 +54,13 @@ function getProductNameFromVariant($id, $variants, $products)
     return $na;
 }
 
-function getFirstVariant($id,$products,$variants){
-    $var=collect($variants)->first(function ($item) use ($id) {
-        return $item["Product_id"]==$id;
-        });
+function getFirstVariant($id, $products, $variants)
+{
+    $var = collect($variants)->first(function ($item) use ($id) {
+        return $item["Product_id"] == $id;
+    });
 
-        return $var['variant_id'];
+    return $var['variant_id'];
 }
 
 function getProductName($id, $products)
@@ -117,4 +118,13 @@ function getVariantImage($id, $variants, $picture)
     }));
 
     return $img[0]['Source'];
+}
+
+function getOrders($id, $order_details)
+{
+    $ord =  array_values(array_filter($order_details, function ($item) use ($id) {
+        return $item['Order_id'] == $id;
+    }));
+
+    return $ord;
 }
