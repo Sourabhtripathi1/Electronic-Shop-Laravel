@@ -45,7 +45,7 @@
                             <tr>
                                 <td>{{ $c['Category_Name'] }}</td>
                                 <td>
-                                    <img class="" height="120px" width="200px" alt=""
+                                    <img class="" style="max-height: 120px;" alt=""
                                         src="{{ asset('/storage/site-assets/') }}/@php
 array_filter($pictures, function ($val) use ($c) {
                                     if ($val['Picture_id'] == $c['Category_Pic']) {

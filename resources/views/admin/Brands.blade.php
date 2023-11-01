@@ -46,7 +46,7 @@
                             <tr>
                                 <td>{{ $b['Brand_Name'] }}</td>
                                 <td>
-                                    <img class="" height="120px" width="200px" alt=""
+                                    <img class="" style="max-height: 120px;" alt=""
                                         src="{{ asset('/storage/site-assets/') }}/@php
 array_filter($pictures, function ($val) use ($b) {
                             if ($val['Picture_id'] == $b['Brand_Pic']) {

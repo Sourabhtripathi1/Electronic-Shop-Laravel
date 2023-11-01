@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminFunctions;
 use App\Http\Controllers\AdminNavigationController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
@@ -34,14 +35,11 @@ Route::post('/user/sign-in', [CustomerController::class, 'Customer_login']);
 
 Route::resource('/admins-product/variant', VariantController::class);
 
-Route::get('/admins-index', function () {
-    return view('admin.admin-index');
-});
+Route::get('/admins-index',  [AdminNavigationController::class,'adminIndex']);
 
-Route::get('/customers-list', function () {
-    return view('admin.ViewCustomers');
-});
+Route::get('/customers-list', [AdminNavigationController::class,'CustomerList']);
 
+Route::get('/order/status/update', [AdminFunctions::class,'updateCart']);
 
 Route::get('/orders-list',[AdminNavigationController::class,'OrderList']);
 

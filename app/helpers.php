@@ -128,3 +128,11 @@ function getOrders($id, $order_details)
 
     return $ord;
 }
+
+function getOrderCount($id,$orders){
+    $ord =  array_values(array_filter($orders, function ($item) use ($id) {
+        return $item['User_id'] == $id;
+    }));
+
+    return count($ord);
+}

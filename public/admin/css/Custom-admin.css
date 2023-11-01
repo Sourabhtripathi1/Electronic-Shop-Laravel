@@ -82,6 +82,11 @@
     width: 10px;
 } */
 
+
+#admin-orders table{
+    width: 1600px !important;
+}
+
 .order-status {
     display: flex;
     justify-content: space-between !important;
@@ -91,6 +96,16 @@
     margin-right: 5px;
 }
 
-/* .order-product {
 
-} */
+
+.prod-set{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.prod-img img{
+    max-height: 40px;
+}
+
+

@@ -230,7 +230,7 @@ class CustomerController extends Controller
             $order = new Orders;
 
             $order->Order_id = $order_id;
-            $order->Order_Date = date("d-m-y");
+            $order->Order_Date = date("y-m-d");
             $order->User_id = $user['User_id'];
             $order->Username = $user['Username'];
             $order->name=$req['name'];
