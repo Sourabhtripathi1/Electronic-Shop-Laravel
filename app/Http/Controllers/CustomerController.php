@@ -156,21 +156,20 @@ class CustomerController extends Controller
 
             $wish->save();
 
-            return redirect()->back()->with('success', "Item Added In Wishlist !");
+            return ["result" => "success", "msg" => "Item added in wishlist"];
         } else {
-            return redirect()->back()->with('error', 'Already exist');
+            return ["result" => "error", "msg" => "Item Already exists"];
         }
     }
 
     public function remove_wishlist(string $id)
     {
         DB::table('wishlists')->where('Sno', $id)->delete();
-        return redirect()->back()->with('success', "Item Removed From Wishlist !");
+        return ["result" => "success", "msg" => "Item Removed From wishlist"];
     }
 
     public function add_to_cart(Request $req)
     {
-        echo "<pre>";
 
         $carts = Cart::where('User_id', session("user_id"))->where("variant_id", $req->var_id)->get()->toArray();
 
@@ -193,6 +192,36 @@ class CustomerController extends Controller
             return redirect()->back()->with('success', "added to cart");
         }
     }
+
+    public function add_to_cart2(string $id, $var)
+    {
+        $variants = Variants::all()->toArray();
+        echo $var . "<br>";
+        $a = getVariantPrice($var, $variants);
+
+
+        $carts = Cart::where('User_id', session("user_id"))->where("variant_id", $var)->get()->toArray();
+
+        if (count($carts) > 0) {
+            return redirect()->back()->with('error', "already exists on cart");
+        } else {
+            $vars = Variants::where("variant_id", $var)->first()->toArray();
+
+            $cart = new Cart;
+
+            $cart->User_id = session('user_id');
+            $cart->Product_id = $id;
+            $cart->Variant_id = $var;
+            $cart->Quantity = 1;
+            $cart->Price = getVariantPrice($var, $variants);
+
+            $cart->save();
+
+
+            return redirect()->back()->with('success', "added to cart");
+        }
+    }
+
 
     public function remove_to_cart(string $id)
     {
@@ -233,14 +262,14 @@ class CustomerController extends Controller
             $order->Order_Date = date("y-m-d");
             $order->User_id = $user['User_id'];
             $order->Username = $user['Username'];
-            $order->name=$req['name'];
-            $order->email=$req['email'];
+            $order->name = $req['name'];
+            $order->email = $req['email'];
             $order->Hno = $req['Hno'];
             $order->Address = $req['area'] . ", " . $req['city'] . ", " . $req['state'] . ", " . $req['country'];
             $order->Payment_Method = $req['payment'];
             $order->contact = $req['tel'];
             $order->PINCODE = $req['zip'];
-            $order->Status="Placed";
+            $order->Status = "Placed";
 
             $order->save();
 

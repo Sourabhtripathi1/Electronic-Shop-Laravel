@@ -17,7 +17,7 @@ return new class extends Migration
             $table->float('Stock', 10);
             $table->string('Color', 10);
             $table->string('Picture', 150);
-            $table->float('Price', 7);
+            $table->float('Price', 10);
 
             $table->foreign('Product_id')->references('Product_id')->on('products');
             $table->timestamps();

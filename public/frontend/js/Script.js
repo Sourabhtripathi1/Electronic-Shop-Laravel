@@ -54,3 +54,28 @@ $("#terms").change(function () {
         $("#place-order-button").prop("disabled", true);
     }
 });
+
+function add_to_wishlist(url) {
+    $.ajax({
+        type: "get",
+        url: url,
+        success: function (response) {
+            alert(response.msg);
+        },
+    });
+}
+
+function remove_from_wishlist(url) {
+    $.ajax({
+        type: "get",
+        url: url,
+        success: function (response) {
+            location.reload();
+        },
+    });
+}
+
+function add_to_cart(url){
+
+ window.location.href=url;
+}

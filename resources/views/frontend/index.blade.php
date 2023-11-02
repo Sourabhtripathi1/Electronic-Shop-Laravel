@@ -7,14 +7,6 @@
 @section('main-section')
     <!-- MAIN HEADER -->
 
-
-    <pre>
-        @php
-
-        @endphp
-    </pre>
-
-
     <div id="header">
         <!-- container -->
         <div class="container">
@@ -67,69 +59,79 @@
 
                             </a>
                             <div class="cart-dropdown">
-                            @if (session('user_id')!==null)
-                              @if (count($cart)>0)
-                              <div class="cart-list">
-                                <div class="product-widget">
-                                    <div class="product-img">
-                                        <img src="{{ env('APP_URL') }}/frontend/img/product01.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                    </div>
-                                    <button class="delete"><i class="fa fa-close"></i></button>
-                                </div>
+                                @if (session('user_id') !== null)
+                                    @if (count($cart) > 0)
+                                        <div class="cart-list">
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src="{{ env('APP_URL') }}/frontend/img/product01.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="product-body">
+                                                    <h3 class="product-name"><a href="#">product name goes here</a>
+                                                    </h3>
+                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                                </div>
+                                                <button class="delete"><i class="fa fa-close"></i></button>
+                                            </div>
 
-                                <div class="product-widget">
-                                    <div class="product-img">
-                                        <img src="{{ env('APP_URL') }}/frontend/img/product02.png" alt="">
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src="{{ env('APP_URL') }}/frontend/img/product02.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="product-body">
+                                                    <h3 class="product-name"><a href="#">product name goes here</a>
+                                                    </h3>
+                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                                </div>
+                                                <button class="delete"><i class="fa fa-close"></i></button>
+                                            </div>
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src="{{ env('APP_URL') }}/frontend/img/product02.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="product-body">
+                                                    <h3 class="product-name"><a href="#">product name goes here</a>
+                                                    </h3>
+                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                                </div>
+                                                <button class="delete"><i class="fa fa-close"></i></button>
+                                            </div>
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src="{{ env('APP_URL') }}/frontend/img/product01.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="product-body">
+                                                    <h3 class="product-name"><a href="#">product name goes here</a>
+                                                    </h3>
+                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                                </div>
+                                                <button class="delete"><i class="fa fa-close"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="cart-summary">
+                                            <small>4 Item(s) selected</small>
+                                            <h5>SUBTOTAL: $2940.00</h5>
+                                        </div>
+                                    @else
+                                        cart is empty
+                                    @endif
+                                    <div class="cart-btns">
+                                        <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
+                                        <a href="{{ env('APP_URL') }}/user/checkout">Checkout <i
+                                                class="fa fa-arrow-circle-right"></i></a>
                                     </div>
-                                    <div class="product-body">
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                    </div>
-                                    <button class="delete"><i class="fa fa-close"></i></button>
-                                </div>
-                                <div class="product-widget">
-                                    <div class="product-img">
-                                        <img src="{{ env('APP_URL') }}/frontend/img/product02.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                    </div>
-                                    <button class="delete"><i class="fa fa-close"></i></button>
-                                </div>
-                                <div class="product-widget">
-                                    <div class="product-img">
-                                        <img src="{{ env('APP_URL') }}/frontend/img/product01.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                    </div>
-                                    <button class="delete"><i class="fa fa-close"></i></button>
-                                </div>
-                            </div>
-                            <div class="cart-summary">
-                                <small>4 Item(s) selected</small>
-                                <h5>SUBTOTAL: $2940.00</h5>
-                            </div>
-@else
-cart is empty
-                              @endif
-                              <div class="cart-btns">
-                                <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
-                                <a href="{{ env('APP_URL') }}/user/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                               @else
-                                  Please Login !
+                                @else
+                                    Please Login !
 
-                                  <br>
+                                    <br>
 
-                                  <a href="{{env('APP_URL')}}/user/dashboard"  class="cart_login"><button>Login</button></a>
-                               @endif
+                                    <a href="{{ env('APP_URL') }}/user/dashboard"
+                                        class="cart_login"><button>Login</button></a>
+                                @endif
                             </div>
                         </div>
                         <!-- /Cart -->
@@ -266,7 +268,7 @@ cart is empty
                                     @foreach ($products as $item)
                                         <div class="product">
                                             <div class="product-img">
-                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getImage($item['Product_id'], $variants, $images) }}"
+                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
                                                     alt="">
                                                 <div class="product-label">
                                                     {{-- <span class="sale">-30%</span>
@@ -278,7 +280,7 @@ cart is empty
                                                     {{ getCategory($item['Category'], $category) }}
                                                 </p>
                                                 <h3 class="product-name"><a
-                                                        href="{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}">
+                                                        href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
                                                         {{ $item['Product_name'] }}
                                                     </a></h3>
                                                 <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
@@ -289,22 +291,26 @@ cart is empty
 
                                                 </div>
                                                 <div class="product-btns">
-                                                    <button class="add-to-wishlist">
-                                                        <i class="fa fa-heart-o"></i><span class="tooltipp">add to
-                                                            wishlist</span>
+                                                    <button class="add-to-wishlist" onclick="add_to_wishlist(`{{env('APP_URL')}}/products/wishlist/add/{{$item['Product_id']}}/{{getFirstVariant($item['Product_id'], $products, $variants)}}`)">
+                                                        <i class="fa fa-heart-o"></i>
+                                                        <span class="tooltipp">
+                                                            add to wishlist
+                                                        </span>
                                                     </button>
 
-                                                    <button class="quick-view">
-                                                        <i class="fa fa-eye"></i><span class="tooltipp"><a
-                                                                href="{{ env('APP_URL') }}/admins-product/{{ $item['Product_id'] }}">
-                                                                quick
-                                                                view</a></span>
+                                                     <button class="quick-view"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                                        <i class="fa fa-eye"></i>
+                                                        <span class="tooltipp">
+                                                                quick view
+                                                        </span> </a>
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to
-                                                    cart</button>
+                                                <button class="add-to-cart-btn" onclick="add_to_cart(`{{env('APP_URL')}}/user/cart/add/{{$item['Product_id']}}/{{getFirstVariant($item['Product_id'], $products, $variants)}}`)">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    add to cart
+                                                </button>
                                             </div>
                                         </div>
                                     @endforeach

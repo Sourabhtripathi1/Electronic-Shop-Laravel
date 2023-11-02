@@ -35,7 +35,7 @@ class AdminNavigationController extends Controller
         return view('admin.ViewCustomers')->with($data);
     }
 
-    public function    adminIndex(){
+    public function adminIndex(){
 
 
         return view('admin.admin-index');

@@ -45,17 +45,13 @@ Route::get('/orders-list',[AdminNavigationController::class,'OrderList']);
 
 Route::get('/', [NavigationController::class, 'indexPage']);
 
-Route::get('/shop', function () {
-    return view('frontend.Shop');
-});
+Route::get('/shop', [NavigationController::class, 'shopPage']);
 
 Route::get('/about', function () {
     return view('frontend.about');
 });
 
-Route::get('/product', function () {
-    return view('frontend.ProductPage');
-});
+Route::get('/product/{id}', [ProductController::class,'show']);
 
 
 Route::get('/user/login', [NavigationController::class, 'userLogin']);
@@ -82,6 +78,7 @@ Route::get('/products/wishlist/add/{id}/{var}', [CustomerController::class, 'add
 Route::get('/products/wishlist/remove/{id}', [CustomerController::class, 'remove_wishlist'])->middleware('isValidUser');
 
 Route::post('/user/cart/add', [CustomerController::class, 'add_to_cart'])->middleware('isValidUser');
+Route::get('/user/cart/add/{id}/{var}', [CustomerController::class, 'add_to_cart2'])->middleware('isValidUser');
 
 Route::get('/user/cart/remove/{id}', [CustomerController::class, 'remove_to_cart'])->middleware('isValidUser');
 
