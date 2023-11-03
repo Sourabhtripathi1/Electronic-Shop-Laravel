@@ -36,10 +36,29 @@ class NavigationController extends Controller
     {
 
         if ($req->input('query')) {
-            echo "<pre>";
-            // print_r(json_encode($req->input('query')));
 
-            print_r(json_decode(`{"a":1,"b":2,"c":3,"d":4,"e":5}`));
+            echo "<pre>";
+
+            $arr = $req->input('query');
+            $data = json_decode(base64_decode($arr));
+
+            $category = $data->category;
+            $brand = $data->brand;
+            $price = $data->price;
+
+        print_r($data);
+
+            // $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+            // $products = Product::all()->toArray();
+            // $variants = Variants::all()->toArray();
+            // $images = Picture::all()->toArray();
+            // $category = Category::all()->toArray();
+            // $brands = Brand::all()->toArray();
+
+            // $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart');
+
+            // return view('frontend.Shop')->with($data);
+
         } else {
 
             $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
@@ -54,26 +73,6 @@ class NavigationController extends Controller
             return view('frontend.Shop')->with($data);
         }
     }
-
-
-    // public function filteredshopPage(String $id)
-    // {
-    //     echo "<pre>";
-
-    //     echo "123";
-
-    //     // $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
-    //     // $products = Product::all()->toArray();
-    //     // $variants = Variants::all()->toArray();
-    //     // $images = Picture::all()->toArray();
-    //     // $category = Category::all()->toArray();
-    //     // $brands = Brand::all()->toArray();
-
-    //     // $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart');
-
-
-    //     // return view('frontend.Shop')->with($data);
-    // }
 
     public function about()
     {

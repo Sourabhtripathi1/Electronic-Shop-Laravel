@@ -291,23 +291,29 @@
 
                                                 </div>
                                                 <div class="product-btns">
-                                                    <button class="add-to-wishlist" onclick="add_to_wishlist(`{{env('APP_URL')}}/products/wishlist/add/{{$item['Product_id']}}/{{getFirstVariant($item['Product_id'], $products, $variants)}}`)">
+                                                    <button class="add-to-wishlist"
+                                                        @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)"
+    
+                                        @else
+                                        onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
                                                         <i class="fa fa-heart-o"></i>
                                                         <span class="tooltipp">
                                                             add to wishlist
                                                         </span>
                                                     </button>
 
-                                                     <button class="quick-view"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                                        <i class="fa fa-eye"></i>
-                                                        <span class="tooltipp">
+                                                    <button class="quick-view"><a
+                                                            href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                                            <i class="fa fa-eye"></i>
+                                                            <span class="tooltipp">
                                                                 quick view
-                                                        </span> </a>
+                                                            </span> </a>
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="add-to-cart">
-                                                <button class="add-to-cart-btn" onclick="add_to_cart(`{{env('APP_URL')}}/user/cart/add/{{$item['Product_id']}}/{{getFirstVariant($item['Product_id'], $products, $variants)}}`)">
+                                                <button class="add-to-cart-btn"
+                                                    onclick="add_to_cart(`{{ env('APP_URL') }}/user/cart/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)">
                                                     <i class="fa fa-shopping-cart"></i>
                                                     add to cart
                                                 </button>

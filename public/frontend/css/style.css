@@ -2209,6 +2209,24 @@ textarea.input {
     background-color: #D10024;
 }
 
+
+#apply_filters{
+    background-color: #d10024;
+    color: #fff;
+    font-weight: 600;
+    margin: 45px;
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
 /*=========================================================
 	13 -> RESPONSIVE
 ===========================================================*/
@@ -2274,4 +2292,9 @@ textarea.input {
         float: none;
         margin-top: 10px;
     }
+
+    .product_tab{
+        width: 50% !important;
+    }
+
 }
