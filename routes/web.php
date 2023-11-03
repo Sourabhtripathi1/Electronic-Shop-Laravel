@@ -35,23 +35,25 @@ Route::post('/user/sign-in', [CustomerController::class, 'Customer_login']);
 
 Route::resource('/admins-product/variant', VariantController::class);
 
-Route::get('/admins-index',  [AdminNavigationController::class,'adminIndex']);
+Route::get('/admins-index',  [AdminNavigationController::class, 'adminIndex']);
 
-Route::get('/customers-list', [AdminNavigationController::class,'CustomerList']);
+Route::get('/customers-list', [AdminNavigationController::class, 'CustomerList']);
 
-Route::get('/order/status/update', [AdminFunctions::class,'updateCart']);
+Route::get('/order/status/update', [AdminFunctions::class, 'updateCart']);
 
-Route::get('/orders-list',[AdminNavigationController::class,'OrderList']);
+Route::get('/orders-list', [AdminNavigationController::class, 'OrderList']);
 
 Route::get('/', [NavigationController::class, 'indexPage']);
 
 Route::get('/shop', [NavigationController::class, 'shopPage']);
 
+// Route::get('/shop/{$id}', [NavigationController::class, 'filteredshopPage']);
+
 Route::get('/about', function () {
     return view('frontend.about');
 });
 
-Route::get('/product/{id}', [ProductController::class,'show']);
+Route::get('/product/{id}', [ProductController::class, 'show']);
 
 
 Route::get('/user/login', [NavigationController::class, 'userLogin']);

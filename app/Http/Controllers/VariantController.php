@@ -46,7 +46,7 @@ class VariantController extends Controller
 
         $var = new Variants;
 
-        $var->variant_id =getID(10);
+        $var->variant_id = getID(10);
         $var->Product_id = $request->product;
         $var->Color = $request->color;
         $var->Stock = $request->stock;
@@ -74,14 +74,13 @@ class VariantController extends Controller
         }
 
 
-        $var->Picture =json_encode($pcs);
+        $var->Picture = json_encode($pcs);
         print_r($pcs);
         print_r($var->toArray());
 
         $var->save();
 
         return redirect()->back();
-
     }
 
     /**
@@ -105,21 +104,21 @@ class VariantController extends Controller
      */
     public function update(Request $req, string $id)
     {
-       
+
         echo "<pre>";
 
         $var = Variants::where('variant_id', $id)->first();
 
-        $var->Color=$req->color;
-        $var->Stock=$req->stock;
-        $var->price=$req->price;
-      
+        $var->Color = $req->color;
+        $var->Stock = $req->stock;
+        $var->price = $req->price;
+
         DB::table('variants')->where('variant_id', $id)->update([
             'Color' => $req->color,
-            'Stock'=>$req->stock,
-            'price'=>$req->price,
+            'Stock' => $req->stock,
+            'price' => $req->price,
         ]);
-       
+
         return redirect()->back();
     }
 
@@ -152,7 +151,7 @@ class VariantController extends Controller
         echo "<pre>";
 
         $p = Variants::where('variant_id', $id)->first()->toArray();
-        $ps = json_decode($p['Picture'],true);
+        $ps = json_decode($p['Picture'], true);
         $ps = array_diff($ps, [$pic]);
 
         $x = Picture::where('Picture_id', $pic)->first()->toArray();
@@ -168,15 +167,15 @@ class VariantController extends Controller
         return redirect()->back();
     }
 
-    public function addImg(Request $req,$id)
+    public function addImg(Request $req, $id)
     {
-        echo "<pre><br>";
+
 
         $p = Variants::where('variant_id', $id)->first()->toArray();
-        $ps = json_decode($p['Picture'],true);
+        $ps = json_decode($p['Picture'], true);
 
 
-        $x=$req->file('img');
+        $x = $req->file('img');
 
         $pic = new Picture;
 
@@ -187,7 +186,7 @@ class VariantController extends Controller
         $pic->Picture_id = $pic_id;
         $pic->Source = $pic_na;
 
-        array_push($ps,$pic_id);
+        array_push($ps, $pic_id);
 
         DB::table('variants')->where('variant_id', $id)->update([
             'Picture' => json_encode($ps)
