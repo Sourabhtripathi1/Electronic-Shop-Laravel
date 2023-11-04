@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->foreign('Brand')->references('Brand_id')->on('brands');
 
-            $table->string('Description', 150);
+            $table->string('Description', 350);
             $table->timestamps();
         });
     }
