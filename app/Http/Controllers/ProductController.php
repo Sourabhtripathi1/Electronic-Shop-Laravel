@@ -11,6 +11,7 @@ use App\Models\Variants;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 
@@ -62,54 +63,84 @@ class ProductController extends Controller
      */
     public function store(Request $req)
     {
-        $vars = $req->var_no;
+        try {
+            $vars = $req->var_no;
 
 
-        $prod = new Product;
-        $prod_id = getID(15);
+            $prod = new Product;
+            $prod_id = getID(15);
 
-        $prod->Product_id = $prod_id;
-        $prod->Product_name = $req->pname;
-        $prod->Material = $req->material;
-        $prod->Dimention = $req->dimention;
-        $prod->Brand =  $req->brand;
-        $prod->Category = $req->category;
-        $prod->Description = $req->desc;
+            $prod->Product_id = $prod_id;
+            $prod->Product_name = $req->pname;
+            $prod->Material = $req->material;
+            $prod->Dimention = $req->dimention;
+            $prod->Brand =  $req->brand;
+            $prod->Category = $req->category;
+            $prod->Description = $req->desc;
 
-        $prod->save();
-        $p = $req->file('Picture');
-
-
-        for ($i = 0; $i < $vars; $i++) {
-            $pcs = [];
-
-            foreach ($p[$i + 1] as $x) {
-                $pic = new Picture;
-
-                $pic_id = getID(10);
-                $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
+            $prod->save();
+            $p = $req->file('Picture');
 
 
-                $pic->Picture_id = $pic_id;
-                $pic->Source = $pic_na;
+            for ($i = 0; $i < $vars; $i++) {
+                $pcs = [];
 
-                $x->storeAs('/public/site-assets', $pic_na);
+                foreach ($p[$i + 1] as $x) {
+                    $pic = new Picture;
 
-                $pic->save();
+                    $pic_id = getID(10);
+                    $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
 
-                array_push($pcs, $pic_id);
+
+                    $pic->Picture_id = $pic_id;
+                    $pic->Source = $pic_na;
+
+                    $x->storeAs('/public/site-assets', $pic_na);
+
+                    $pic->save();
+
+                    array_push($pcs, $pic_id);
+                }
+
+                $var = new Variants;
+                $var->variant_id = getID(10);
+                $var->Product_id = $prod_id;
+                $var->Stock = $req->Stock[$i];
+                $var->Picture =   json_encode($pcs);
+                $var->Color = $req->Color[$i];
+                $var->Price = $req->Price[$i];
+
+                $var->save();
+                return redirect('/admins-product');
             }
+        } catch (Exception $e) {
 
-            $var = new Variants;
-            $var->variant_id = getID(10);
-            $var->Product_id = $prod_id;
-            $var->Stock = $req->Stock[$i];
-            $var->Picture =   json_encode($pcs);
-            $var->Color = $req->Color[$i];
-            $var->Price = $req->Price[$i];
 
-            $var->save();
+            // $p_all = Variants::where('Product_id', $prod_id)->all();
+
+            // foreach ($p_all as $p) {
+            //     $id = $p['variant_id'];
+            //     $ps = json_decode($p['Picture']);
+
+            //     echo "<pre>";
+
+            //     foreach ($ps as $s) {
+            //         $x = Picture::where('Picture_id', $s)->first()->toArray();
+
+            //         unlink(public_path("/storage/site-assets/" . $x['Source']));
+            //         DB::table('pictures')->where('Picture_id', $x['Picture_id'])->delete();
+            //     }
+
+            //     DB::table('variants')->where('variant_id', $id)->delete();
+            // }
+
+            // DB::table('products')->where('Product_id', $prod_id)->delete();
+
+            app(ProductController::class)->destroy($prod_id);
+
+            return redirect('/admins-product');
         }
+
 
         return redirect('/admins-product');
     }
@@ -125,17 +156,17 @@ class ProductController extends Controller
 
 
         $prod = Product::where("Product_id", $id)->first()->toArray();
-        $pna=$prod['Product_name'];
+        $pna = $prod['Product_name'];
 
-        $pics=Picture::all()->toArray();
+        $pics = Picture::all()->toArray();
         $var = Variants::where("Product_id", $id)->get();
-        $cat = Category::where('Category_id',$prod['Category'])->first();
-        $br = Brand::where('Brand_id',$prod['Brand'])->first();
+        $cat = Category::where('Category_id', $prod['Category'])->first();
+        $br = Brand::where('Brand_id', $prod['Brand'])->first();
 
-        $cat_na=$cat->Category_Name;
-        $br_na=$br->Brand_Name;
+        $cat_na = $cat->Category_Name;
+        $br_na = $br->Brand_Name;
 
-        $data=compact('id','prod','pna','var','cat_na','br_na','pics','variants','products');
+        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants', 'products');
 
         return view('frontend.ProductPage')->with($data);
     }
@@ -149,9 +180,9 @@ class ProductController extends Controller
         $br = Brand::all();
         $cat = Category::all();
         $var = Variants::where("Product_id", "=", $id)->get()->toArray();
-        $pics=Picture::all()->toArray();
+        $pics = Picture::all()->toArray();
 
-        $data = compact('prod',"br", "cat","var","pics");
+        $data = compact('prod', "br", "cat", "var", "pics");
 
         return view('admin.EditProduct')->with($data);
     }
@@ -166,12 +197,12 @@ class ProductController extends Controller
         $prod = Product::where("Product_id", $id)->first();
 
         DB::table('products')->where('Product_id', $id)->update([
-            'Product_name' => $request->pname ,
-            'Material' => $request->material ,
-            'Dimention' => $request->dimention ,
-            'Brand' => $request->brand ,
+            'Product_name' => $request->pname,
+            'Material' => $request->material,
+            'Dimention' => $request->dimention,
+            'Brand' => $request->brand,
             'Category' => $request->category,
-            'Description' => $request->desc ,
+            'Description' => $request->desc,
 
         ]);
 
@@ -220,12 +251,13 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function add_review(Request $request, string $id){
+    public function add_review(Request $request, string $id)
+    {
 
         echo "<pre>";
         print_r($request->all());
 
-        $review=new Review;
+        $review = new Review;
 
         // $review->User_id=session('user_id');
         // $review->Product_id=
@@ -234,6 +266,4 @@ class ProductController extends Controller
         //  $review->Review_Date=
 
     }
-
-
 }

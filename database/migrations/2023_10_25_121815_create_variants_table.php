@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string("variant_id", 15)->primary();
             $table->string("Product_id", 15);
             $table->float('Stock', 10);
-            $table->string('Color', 10);
+            $table->string('Color', 30);
             $table->string('Picture', 150);
             $table->float('Price', 10);
 
