@@ -1,4 +1,4 @@
-\@extends('frontend.layout.main')
+@extends('frontend.layout.main')
 
 @push('title')
     Home Page
@@ -271,8 +271,7 @@
                                                 <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
                                                     alt="">
                                                 <div class="product-label">
-                                                    {{-- <span class="sale">-30%</span>
-                                                <span class="new">NEW</span> --}}
+
                                                 </div>
                                             </div>
                                             <div class="product-body">
@@ -295,7 +294,8 @@
                                                         @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)"
 
                                         @else
-                                        onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
+                                        onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif
+                                        >
                                                         <i class="fa fa-heart-o"></i>
                                                         <span class="tooltipp">
                                                             add to wishlist
