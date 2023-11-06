@@ -27,7 +27,13 @@ class NavigationController extends Controller
         $category = Category::all()->toArray();
         $brands = Brand::all()->toArray();
 
-        $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart');
+        $lap = Category::where('Category_Name', 'Laptop')->first()->toArray()['Category_id'];
+        $con = Category::where('Category_Name', 'Smart Phone')->first()->toArray()['Category_id'];
+
+        $laptop_products = Product::where('Category', $lap)->get()->toArray();
+        $con_products = Product::where('Category', $con)->get()->toArray();
+
+        $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'laptop_products', 'con_products');
 
         return view('frontend.index')->with($data);
     }
@@ -48,8 +54,8 @@ class NavigationController extends Controller
             $arr = $req->input('query');
             $data = json_decode(base64_decode($arr));
 
-            $cat = count($data->category)>0?$data->category:getAllCat($category);
-            $brnd = count($data->brand)>0?$data->brand: getAllBrand($brands);
+            $cat = count($data->category) > 0 ? $data->category : getAllCat($category);
+            $brnd = count($data->brand) > 0 ? $data->brand : getAllBrand($brands);
             $price = $data->price;
 
             // print_r($cat);
@@ -64,14 +70,12 @@ class NavigationController extends Controller
             $products = array_filter($products_all, function ($item) use ($brnd, $cat, $price, $variants) {
 
                 return (in_array($item['Category'], $cat) && in_array($item['Brand'], $brnd)) && (getPrice($item['Product_id'], $variants) > $price->min && getPrice($item['Product_id'], $variants) < $price->max);
-
             });
 
             $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'products_all');
 
             //  print_r($products);
             return view('frontend.Shop')->with($data);
-
         } else {
 
             $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
