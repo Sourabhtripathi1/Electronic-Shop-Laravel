@@ -11,6 +11,18 @@ function getCategory($id, $category)
     return $id;
 }
 
+function getBrand($id, $brand)
+{
+    foreach ($brand as $item) {
+        if ($item['Category_id'] == $id) {
+            return $item['Category_Name'];
+        }
+    }
+
+    return $id;
+}
+
+
 function getPrice($id, $variants)
 {
 
@@ -72,8 +84,6 @@ function getProductName($id, $products)
     return $prod['Product_name'];
 }
 
-
-
 function getVariantColor($id, $variants)
 {
     $vars  = collect($variants)->first(function ($item) use ($id) {
@@ -129,10 +139,50 @@ function getOrders($id, $order_details)
     return $ord;
 }
 
-function getOrderCount($id,$orders){
+function getOrderCount($id,$orders)
+{
     $ord =  array_values(array_filter($orders, function ($item) use ($id) {
         return $item['User_id'] == $id;
     }));
 
     return count($ord);
 }
+
+function getCatCount($id,$products){
+    $cnt =  array_values(array_filter($products, function ($item) use ($id) {
+        return $item['Category'] == $id;
+    }));
+
+    return count($cnt);
+}
+
+function getBrndCount($id,$products){
+    $cnt =  array_values(array_filter($products, function ($item) use ($id) {
+        return $item['Brand'] == $id;
+    }));
+
+    return count($cnt);
+}
+
+function getAllCat($category){
+    $cat=[];
+
+    foreach ($category as $item) {
+        array_push($cat,$item['Category_id']);
+    }
+
+    return $cat;
+}
+
+function getAllBrand($brnd){
+
+    $br=[];
+
+    foreach ($brnd as $item) {
+        array_push($br,$item['Brand_id']);
+    }
+
+    return $br;
+}
+
+

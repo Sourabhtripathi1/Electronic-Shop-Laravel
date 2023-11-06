@@ -153,59 +153,16 @@
                         <h3 class="aside-title">Categories</h3>
                         <div class="checkbox-filter">
 
+                            @foreach ($category as $item)
                             <div class="input-checkbox">
-                                <input type="checkbox" id="category-1" class="category_check" value="Laptops">
-                                <label for="category-1">
+                                <input type="checkbox" id="cat{{$item['Category_id']}}" class="category_check" value="{{$item['Category_id']}}">
+                                <label for="cat{{$item['Category_id']}}">
                                     <span></span>
-                                    Laptops
-                                    <small>(120)</small>
+                                    {{$item['Category_Name']}}
+                                    <small>({{getCatCount($item['Category_id'],$products_all)}})</small>
                                 </label>
                             </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-2" class="category_check" value="Smartphones">
-                                <label for="category-2">
-                                    <span></span>
-                                    Smartphones
-                                    <small>(740)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-3" class="category_check" value="Cameras">
-                                <label for="category-3">
-                                    <span></span>
-                                    Cameras
-                                    <small>(1450)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-4" class="category_check" value="Accessories">
-                                <label for="category-4">
-                                    <span></span>
-                                    Accessories
-                                    <small>(578)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-5" class="category_check" value="Laptops">
-                                <label for="category-5">
-                                    <span></span>
-                                    Laptops
-                                    <small>(120)</small>
-                                </label>
-                            </div>
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-6" class="category_check" value="Smartphones">
-                                <label for="category-6">
-                                    <span></span>
-                                    Smartphones
-                                    <small>(740)</small>
-                                </label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- /aside Widget -->
@@ -222,7 +179,7 @@
                             </div>
                             <span>-</span>
                             <div class="input-number price-max">
-                                <input id="price-max" type="number" value=999>
+                                <input id="price-max" type="number" value=999999>
                                 <span class="qty-up">+</span>
                                 <span class="qty-down">-</span>
                             </div>
@@ -234,54 +191,16 @@
                     <div class="aside">
                         <h3 class="aside-title">Brand</h3>
                         <div class="checkbox-filter">
+                            @foreach ($brands as $item)
                             <div class="input-checkbox">
-                                <input type="checkbox" id="brand-1" class="brand_checkbox" value="SAMSUNG">
-                                <label for="brand-1">
+                                <input type="checkbox" id="brand{{$item['Brand_id']}}" class="brand_checkbox" value="{{$item['Brand_id']}}">
+                                <label for="brand{{$item['Brand_id']}}">
                                     <span></span>
-                                    SAMSUNG
-                                    <small>(578)</small>
+                                    {{$item['Brand_Name']}}
+                                    <small>({{getBrndCount($item['Brand_id'],$products_all)}})</small>
                                 </label>
                             </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-2" class="brand_checkbox" value="LG">
-                                <label for="brand-2">
-                                    <span></span>
-                                    LG
-                                    <small>(125)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-3" class="brand_checkbox" value="SONY">
-                                <label for="brand-3">
-                                    <span></span>
-                                    SONY
-                                    <small>(755)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-4" class="brand_checkbox" value="SAMSUNG">
-                                <label for="brand-4">
-                                    <span></span>
-                                    SAMSUNG
-                                    <small>(578)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-5" class="brand_checkbox" value="LG">
-                                <label for="brand-5">
-                                    <span></span>
-                                    LG
-                                    <small>(125)</small>
-                                </label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-9" class="brand_checkbox" value="SONY">
-                                <label for="brand-9">
-                                    <span></span>
-                                    SONY
-                                    <small>(755)</small>
-                                </label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- /aside Widget -->

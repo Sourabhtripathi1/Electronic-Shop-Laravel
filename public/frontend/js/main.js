@@ -324,12 +324,12 @@ $(document).ready(function () {
     var priceSlider = document.getElementById("price-slider");
     if (priceSlider) {
         noUiSlider.create(priceSlider, {
-            start: [1, 999],
+            start: [1, 999999],
             connect: true,
             step: 1,
             range: {
                 min: 1,
-                max: 999,
+                max: 999999,
             },
         });
 
@@ -341,7 +341,7 @@ $(document).ready(function () {
         });
 
         priceSlider.noUiSlider.on("slide", function (values, handle) {
-            if (values[0] > 1 || values[1] < 999) {
+            if (values[0] > 1 || values[1] < 999999) {
                 $("#apply_filters").show();
             } else {
                 $("#apply_filters").hide();

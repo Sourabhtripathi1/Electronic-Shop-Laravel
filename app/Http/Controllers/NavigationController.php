@@ -37,38 +37,52 @@ class NavigationController extends Controller
 
         if ($req->input('query')) {
 
-            echo "<pre>";
+            $category = Category::all()->toArray();
+            $brands = Brand::all()->toArray();
+            $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+            $products_all = Product::all()->toArray();
+            $products = Product::all()->toArray();
+            $variants = Variants::all()->toArray();
+            $images = Picture::all()->toArray();
 
             $arr = $req->input('query');
             $data = json_decode(base64_decode($arr));
 
-            $category = $data->category;
-            $brand = $data->brand;
+            $cat = count($data->category)>0?$data->category:getAllCat($category);
+            $brnd = count($data->brand)>0?$data->brand: getAllBrand($brands);
             $price = $data->price;
 
-        print_r($data);
+            // print_r($cat);
+            // echo "<br>";
+            // print_r($brnd);
+            // echo "<br>";
+            // print_r($price);
 
-            // $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
-            // $products = Product::all()->toArray();
-            // $variants = Variants::all()->toArray();
-            // $images = Picture::all()->toArray();
-            // $category = Category::all()->toArray();
-            // $brands = Brand::all()->toArray();
 
-            // $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart');
 
-            // return view('frontend.Shop')->with($data);
+
+            $products = array_filter($products_all, function ($item) use ($brnd, $cat, $price, $variants) {
+
+                return (in_array($item['Category'], $cat) && in_array($item['Brand'], $brnd)) && (getPrice($item['Product_id'], $variants) > $price->min && getPrice($item['Product_id'], $variants) < $price->max);
+
+            });
+
+            $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'products_all');
+
+            //  print_r($products);
+            return view('frontend.Shop')->with($data);
 
         } else {
 
             $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
             $products = Product::all()->toArray();
+            $products_all = Product::all()->toArray();
             $variants = Variants::all()->toArray();
             $images = Picture::all()->toArray();
             $category = Category::all()->toArray();
             $brands = Brand::all()->toArray();
 
-            $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart');
+            $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'products_all');
 
             return view('frontend.Shop')->with($data);
         }
@@ -96,7 +110,6 @@ class NavigationController extends Controller
 
     public function userDashboard()
     {
-
 
         return view('frontend.UserDashboard');
     }
