@@ -167,10 +167,6 @@
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/shop">Shop </a></li>
                     <li><a href="/about">About</a></li>
-                    <li><a href="#">Laptops</a></li>
-                    <li><a href="#">Smartphones</a></li>
-                    <li><a href="#">Cameras</a></li>
-                    <li><a href="#">Accessories</a></li>
                 </ul>
                 <!-- /NAV -->
             </div>
