@@ -125,6 +125,7 @@ Shop Page
                 <li><a href="/">Home</a></li>
                 <li class="active"><a href="/shop">Shop </a></li>
                 <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact Us</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -142,7 +143,11 @@ Shop Page
     <div class="container">
         <!-- row -->
         <div class="row">
+
+
+
             <!-- ASIDE -->
+
             <div id="aside" class="col-md-3">
                 <!-- aside Widget -->
                 <div class="aside">

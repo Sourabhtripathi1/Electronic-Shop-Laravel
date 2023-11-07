@@ -97,7 +97,10 @@ class NavigationController extends Controller
         return view('frontend.about');
     }
 
-
+    public function contactUsPage()
+    {
+        return view('frontend.ContactUs');
+    }
 
 
 

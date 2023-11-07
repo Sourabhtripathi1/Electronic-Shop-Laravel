@@ -47,11 +47,11 @@ Route::get('/', [NavigationController::class, 'indexPage']);
 
 Route::get('/shop', [NavigationController::class, 'shopPage']);
 
+Route::get('/contact', [NavigationController::class, 'contactUsPage']);
+
 // Route::get('/shop/{$id}', [NavigationController::class, 'filteredshopPage']);
 
-Route::get('/about', function () {
-    return view('frontend.about');
-});
+Route::get('/about',  [NavigationController::class, 'about']);
 
 Route::get('/product/{id}', [ProductController::class, 'show']);
 
