@@ -194,4 +194,9 @@ class NavigationController extends Controller
         $data = compact('variants', 'pictures', 'products', 'cart', 'user');
         return view('frontend.checkout')->with($data);
     }
+
+    public function postQuery(Request $req){
+        echo "<pre>";
+        
+    }
 }

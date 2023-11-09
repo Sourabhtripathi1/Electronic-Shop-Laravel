@@ -49,7 +49,7 @@ Route::get('/shop', [NavigationController::class, 'shopPage']);
 
 Route::get('/contact', [NavigationController::class, 'contactUsPage']);
 
-// Route::get('/shop/{$id}', [NavigationController::class, 'filteredshopPage']);
+Route::post('/query/post', [NavigationController::class, 'postQuery']);
 
 Route::get('/about',  [NavigationController::class, 'about']);
 
