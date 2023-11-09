@@ -38,24 +38,10 @@ User Wishlist Page
             </div>
             <!-- /LOGO -->
 
-            <!-- SEARCH BAR -->
-            <div class="col-md-6">
-                <div class="header-search">
-                    <form>
-                        <select class="input-select">
-                            <option value="0">All Categories</option>
-                            <option value="1">Category 01</option>
-                            <option value="1">Category 02</option>
-                        </select>
-                        <input class="input" placeholder="Search here">
-                        <button class="search-btn">Search</button>
-                    </form>
-                </div>
-            </div>
-            <!-- /SEARCH BAR -->
+
 
             <!-- ACCOUNT -->
-            <div class="col-md-3 clearfix">
+            <div class="col-md-3 clearfix header-opt-cnt">
                 <div class="header-ctn">
                     <!-- Wishlist -->
                     <div>
