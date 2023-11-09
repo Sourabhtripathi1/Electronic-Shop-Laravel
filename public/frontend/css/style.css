@@ -2467,8 +2467,8 @@ textarea.input {
 
 @media (max-width: 1024px) {
 
-    .header-opt-cnt {
-        position: relative;
+    .header-links-pull-left {
+        display: none;
     }
 
     .responsive-container-block.Container {
@@ -2521,6 +2521,10 @@ textarea.input {
 }
 
 @media only screen and (max-width: 991px) {
+    .header-opt-cnt {
+        position: relative;
+    }
+
     #top-header .header-links.pull-left {
         float: none !important;
     }
