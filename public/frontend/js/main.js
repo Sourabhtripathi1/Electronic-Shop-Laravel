@@ -173,7 +173,7 @@
 
 $(document).ready(function () {
     "use strict";
-
+    moveElementBasedOnWidth();
     // Mobile Nav toggle
     $(".menu-toggle > a").on("click", function (e) {
         e.preventDefault();
@@ -412,8 +412,30 @@ $(document).ready(function () {
             price: { max: maxPrice, min: minPrice },
         };
 
-        var qry2=btoa(JSON.stringify(qry));
+        var qry2 = btoa(JSON.stringify(qry));
 
-        window.location.href=`?query=${qry2}`
+        window.location.href = `?query=${qry2}`;
+    });
+
+    $(window).resize(function () {
+        moveElementBasedOnWidth();
+    });
+
+    $(".filter").click(function () {
+        $(".innerFilter").toggleClass("hidden");
     });
 });
+
+function moveElementBasedOnWidth() {
+    var screenWidth = $(window).width();
+
+    if (screenWidth <= 991) {
+        // Move the element to the destination container on small screens
+        $("#aside").appendTo(".innerFilter");
+        $("#filterSection").show();
+    } else {
+        // Move the element back to its original container on larger screens
+        $("#aside").appendTo(".mainfilter");
+        $("#filterSection").hide();
+    }
+}

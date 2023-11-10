@@ -2459,6 +2459,44 @@ textarea.input {
 
 }
 
+.header-opt-cnt .header-ctn {
+    position: absolute;
+    left: 0;
+}
+
+
+
+
+/*=========================================================
+	|| -> CUSTOM CSS
+===========================================================*/
+
+
+#filterSection {
+    background-color: #b9babc;
+    border: #333;
+    /* margin: 0 5rem 0 5rem; */
+}
+
+
+#filterSection .filter {
+    margin: 15px 5px;
+}
+
+#filterSection .filter {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/*=========================================================
+	|| -> CUSTOM CSS
+===========================================================*/
+
+
+
+
 /*=========================================================
 	15 -> RESPONSIVE
 ===========================================================*/
@@ -2521,9 +2559,17 @@ textarea.input {
 }
 
 @media only screen and (max-width: 991px) {
+
     .header-opt-cnt {
         position: relative;
     }
+
+    .header-opt-cnt .header-ctn {
+        position: relative;
+    }
+
+
+
 
     #top-header .header-links.pull-left {
         float: none !important;
