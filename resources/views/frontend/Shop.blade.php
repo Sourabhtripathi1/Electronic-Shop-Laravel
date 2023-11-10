@@ -131,19 +131,25 @@
 
 
 
-                <div id="filterSection" class="container">
-                    <div class="filter">
-                        <div>
-                            filter
-                        </div>
-                        <div class="sign">
-                            +
-                        </div>
+          <div style="padding:0 15px; ">
+            <div id="filterSection" class="container">
+                <div class="filter">
+                    <div>
+                        Filter
                     </div>
-                    <div class="innerFilter hidden">
+                    <div class="sign">
+                        +
+                    </div>
 
+                    <div class="sign- hidden">
+                        -
                     </div>
                 </div>
+                <div class="innerFilter hidden">
+
+                </div>
+            </div>
+          </div>
 
                 <div class="mainfilter">
 
@@ -219,7 +225,8 @@
                     <!-- /ASIDE -->
                 </div>
 
-                <!-- STORE -->
+              @if (count($products)>0)
+                    <!-- STORE -->
                 <div id="store" class="col-md-9">
                     <!-- store products -->
                     <div class="row">
@@ -301,8 +308,6 @@
                         <div class="clearfix visible-lg visible-md"></div>
                         --}}
 
-
-
                     </div>
                     <!-- /store products -->
 
@@ -310,16 +315,19 @@
                     <div class="store-filter clearfix">
                         <span class="store-qty">Showing 20-100 products</span>
                         <ul class="store-pagination">
-                            <li class="active">1</li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+
+                            {{-- <li><a href="#"><i class="fa fa-angle-right"></i></a></li> --}}
                         </ul>
                     </div>
                     <!-- /store bottom filter -->
                 </div>
                 <!-- /STORE -->
+
+                @else
+
+                <h2 style="color: #d10024">No record found </h2>
+
+              @endif
             </div>
             <!-- /row -->
         </div>

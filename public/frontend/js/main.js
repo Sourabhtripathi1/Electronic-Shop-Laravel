@@ -423,7 +423,16 @@ $(document).ready(function () {
 
     $(".filter").click(function () {
         $(".innerFilter").toggleClass("hidden");
+        $(".sign").toggleClass("hidden");
+        $(".sign-").toggleClass("hidden");
     });
+    addProductPagination();
+    productPagination(1);
+
+    $(".paginate-product").click(function($this){
+        const page = parseInt($(this).data("page"));
+        productPagination(page);
+    })
 });
 
 function moveElementBasedOnWidth() {
@@ -437,5 +446,41 @@ function moveElementBasedOnWidth() {
         // Move the element back to its original container on larger screens
         $("#aside").appendTo(".mainfilter");
         $("#filterSection").hide();
+    }
+}
+
+function productPagination(page) {
+    var itemsPerPage = 2;
+    var products = $(".product_tab");
+
+    $(".product_tab").each(function(){
+        $(this).addClass('hidden');
+    });
+
+    var tot = products.length;
+
+    const totalPages = Math.ceil(tot / itemsPerPage);
+
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    for (let index = startIndex; index < endIndex; index++) {
+        $('.product_tab').eq(index).removeClass("hidden");
+
+    }
+
+
+}
+
+function addProductPagination() {
+    var cnt = 2;
+    var products = $(".product_tab");
+
+    var tot = products.length;
+
+    const totalPages = Math.ceil(tot / cnt);
+
+    for (let i = 1; i <= totalPages; i++) {
+        $(".store-pagination").append(`<li><a href="#" class="page paginate-product"  data-page="${i}">${i}</a></li>`);
     }
 }

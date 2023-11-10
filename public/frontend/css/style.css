@@ -2473,20 +2473,25 @@ textarea.input {
 
 
 #filterSection {
-    background-color: #b9babc;
-    border: #333;
-    /* margin: 0 5rem 0 5rem; */
+    border-radius: 30px;
+margin-bottom: 15px;
+padding: 0px 10px;
+border: #d10024 1px solid;
 }
 
 
 #filterSection .filter {
-    margin: 15px 5px;
-}
-
-#filterSection .filter {
-    display: flex;
+    margin: 10px 5px;   display: flex;
     justify-content: space-between;
+    font-size:medium;
+    font-weight: 600;
+    color:#d10024;
+
 }
+
+
+
+
 
 
 
