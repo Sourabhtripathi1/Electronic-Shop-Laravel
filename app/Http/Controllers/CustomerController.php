@@ -286,10 +286,21 @@ class CustomerController extends Controller
                 $ordet->save();
 
                 DB::table('carts')->where('Sno', $item['Sno'])->delete();
-            }
-            ;
+            };
         }
 
         return redirect()->back();
+    }
+
+    public function UpdateUser()
+    {
+        DB::table('customers')->where('User_id', session('user_id'))->update([
+            'Name' =>  request()->input('name'),
+            'Username' =>  request()->input('uname'),
+            'Email' => request()->input('email'),
+        ]);
+        $user = Customer::where('User_id', session('user_id'))->first()->toArray();
+
+        return response()->json(['message' => $user]);
     }
 }

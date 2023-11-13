@@ -75,11 +75,18 @@ function remove_from_wishlist(url) {
     });
 }
 
-function add_to_cart(url){
-
- window.location.href=url;
+function add_to_cart(url) {
+    window.location.href = url;
 }
 
+$("#profile_name").change(function () {
+    $(".save-button").css("visibility", "visible");
+});
 
+$("#profile-uname").change(function () {
+    $(".save-button").css("visibility", "visible");
+});
 
-
+$("#profile-email").change(function () {
+    $(".save-button").css("visibility", "visible");
+});

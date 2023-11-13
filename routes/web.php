@@ -71,6 +71,7 @@ Route::group(["prefix" => "/user", "middleware" => "isValidUser"], function () {
     Route::get('cart', [NavigationController::class, 'userCart']);
     Route::get('checkout', [NavigationController::class, 'userCheckout']);
     Route::post('checkout', [CustomerController::class, 'userCheckout']);
+    Route::get('update', [CustomerController::class, 'UpdateUser']);
 });
 
 Route::post('/products/{id}/add-review', [ProductController::class, 'add_review'])->middleware('isValidUser');

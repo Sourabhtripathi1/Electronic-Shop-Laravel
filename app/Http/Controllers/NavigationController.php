@@ -142,10 +142,13 @@ class NavigationController extends Controller
 
     public function userProfile()
     {
+        $user = Customer::where('User_id', session('user_id'))->first()->toArray();
 
-
-        return view('frontend.UserProfile');
+        $data = compact('user');
+        return view('frontend.UserProfile')->with($data);
     }
+
+
 
     public function userLogin()
     {
@@ -195,8 +198,8 @@ class NavigationController extends Controller
         return view('frontend.checkout')->with($data);
     }
 
-    public function postQuery(Request $req){
+    public function postQuery(Request $req)
+    {
         echo "<pre>";
-        
     }
 }
