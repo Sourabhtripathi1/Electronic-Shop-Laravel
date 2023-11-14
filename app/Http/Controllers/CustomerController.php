@@ -247,49 +247,51 @@ class CustomerController extends Controller
 
     public function userCheckout(Request $req)
     {
-        $user = Customer::where('User_id', session('user_id'))->first()->toArray();
-        $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
-        $variants = Variants::all()->toArray();
-        $products = Product::all()->toArray();
+        // $user = Customer::where('User_id', session('user_id'))->first()->toArray();
+        // $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
+        // $variants = Variants::all()->toArray();
+        // $products = Product::all()->toArray();
 
-        echo "<pre>";
-        if ($req['payment'] == "COD") {
-            $order_id = getID('15');
+        // echo "<pre>";
 
-            $order = new Orders;
+        // $order_id = getID('15');
 
-            $order->Order_id = $order_id;
-            $order->Order_Date = date("y-m-d");
-            $order->User_id = $user['User_id'];
-            $order->Username = $user['Username'];
-            $order->name = $req['name'];
-            $order->email = $req['email'];
-            $order->Hno = $req['Hno'];
-            $order->Address = $req['area'] . ", " . $req['city'] . ", " . $req['state'] . ", " . $req['country'];
-            $order->Payment_Method = $req['payment'];
-            $order->contact = $req['tel'];
-            $order->PINCODE = $req['zip'];
-            $order->Status = "Placed";
+        // $order = new Orders;
 
-            $order->save();
+        // $order->Order_id = $order_id;
+        // $order->Order_Date = date("y-m-d");
+        // $order->User_id = $user['User_id'];
+        // $order->Username = $user['Username'];
+        // $order->name = $req['name'];
+        // $order->email = $req['email'];
+        // $order->Hno = $req['Hno'];
+        // $order->Address = $req['area'] . ", " . $req['city'] . ", " . $req['state'] . ", " . $req['country'];
+        // $order->Payment_Method = $req['payment'];
+        // $order->contact = $req['tel'];
+        // $order->PINCODE = $req['zip'];
+        // $order->Status = "Placed";
 
-            foreach ($cart as $item) {
-                $ordet = new Order_details;
+        // $order->save();
 
-                $ordet->Order_id = $order_id;
-                $ordet->Product_id = $item['Product_id'];
-                $ordet->Variant_id = $item['Variant_id'];
-                $ordet->Product_name = getProductNameFromVariant($item['Variant_id'], $variants, $products);
-                $ordet->Price = $item['Price'];
-                $ordet->Quantity = $item['Quantity'];
+        // foreach ($cart as $item) {
+        //     $ordet = new Order_details;
 
-                $ordet->save();
+        //     $ordet->Order_id = $order_id;
+        //     $ordet->Product_id = $item['Product_id'];
+        //     $ordet->Variant_id = $item['Variant_id'];
+        //     $ordet->Product_name = getProductNameFromVariant($item['Variant_id'], $variants, $products);
+        //     $ordet->Price = $item['Price'];
+        //     $ordet->Quantity = $item['Quantity'];
 
-                DB::table('carts')->where('Sno', $item['Sno'])->delete();
-            };
-        }
+        //     $ordet->save();
 
-        return redirect()->back();
+        //     DB::table('carts')->where('Sno', $item['Sno'])->delete();
+        // };
+
+
+        // return redirect()->back();
+
+        return redirect("/");
     }
 
     public function UpdateUser()

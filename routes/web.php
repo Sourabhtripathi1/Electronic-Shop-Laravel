@@ -70,7 +70,7 @@ Route::group(["prefix" => "/user", "middleware" => "isValidUser"], function () {
     Route::get('wishlist', [NavigationController::class, 'userWishlist']);
     Route::get('cart', [NavigationController::class, 'userCart']);
     Route::get('checkout', [NavigationController::class, 'userCheckout']);
-    Route::post('checkout', [CustomerController::class, 'userCheckout']);
+    Route::post('checkout', [CustomerController::class, 'userCheckout'])->middleware('PaymentValidate');
     Route::get('update', [CustomerController::class, 'UpdateUser']);
 });
 
