@@ -55,7 +55,6 @@ Route::get('/about',  [NavigationController::class, 'about']);
 
 Route::get('/product/{id}', [ProductController::class, 'show']);
 
-
 Route::get('/user/login', [NavigationController::class, 'userLogin']);
 
 Route::get('/user/logout', [NavigationController::class, 'userLogout']);
@@ -89,7 +88,7 @@ Route::get('/user/cart/inc/{id}', [CustomerController::class, 'inc_to_cart'])->m
 
 Route::get('/user/cart/dec/{id}', [CustomerController::class, 'dec_to_cart'])->middleware('isValidUser');
 
-
+Route::get('/payment/get', [NavigationController::class, 'managePayment']);
 
 
 

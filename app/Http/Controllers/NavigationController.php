@@ -14,6 +14,7 @@ use App\Models\Product;
 use App\Models\Variants;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Ixudra\Curl\Facades\Curl;
 
 class NavigationController extends Controller
 {
@@ -201,5 +202,36 @@ class NavigationController extends Controller
     public function postQuery(Request $req)
     {
         echo "<pre>";
+    }
+
+    public function managePayment(Request $req)
+    {
+        echo "<pre>";
+
+        $data = array(
+            "merchantId" => "PGTESTPAYUAT",
+            "merchantTransactionId" => "MT7850590068188104",
+            "merchantUserId" => "MUID123",
+            "amount" => 10000,
+            "redirectUrl" => "https://webhook.site/redirect-url",
+            "redirectMode" => "REDIRECT",
+            "callbackUrl" => "https://webhook.site/callback-url",
+            "mobileNumber" => "9999999999",
+            "paymentInstrument" => array(
+                "type" => "PAY_PAGE"
+            )
+        );
+
+
+        print_r($data);
+
+
+
+        $enc_header = base64_encode(json_encode($data));
+
+        curl::to('https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay')
+            ->withHeader('Content-Type:application/json')
+            ->withHeader('X-VERIFY:' . $enc_header)
+            ->post();
     }
 }

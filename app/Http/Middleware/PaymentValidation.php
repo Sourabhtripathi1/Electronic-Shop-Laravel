@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Ixudra\Curl\Facades\Curl;
 
 class PaymentValidation
 {
@@ -19,7 +18,8 @@ class PaymentValidation
         if ($request['payment'] == "COD") {
             return $next($request);
         } else {
-            return redirect()->back();
+
+            return redirect('/payment/get');
         }
     }
 }
