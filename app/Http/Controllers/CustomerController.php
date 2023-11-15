@@ -245,6 +245,24 @@ class CustomerController extends Controller
         return ["result" => "success", "msg" => "removed"];
     }
 
+    public function UpdateUser()
+    {
+        DB::table('customers')->where('User_id', session('user_id'))->update([
+            'Name' =>  request()->input('name'),
+            'Username' =>  request()->input('uname'),
+            'Email' => request()->input('email'),
+        ]);
+        $user = Customer::where('User_id', session('user_id'))->first()->toArray();
+
+        return response()->json(['message' => $user]);
+    }
+
+
+
+
+
+
+
     public function userCheckout(Request $req)
     {
         // $user = Customer::where('User_id', session('user_id'))->first()->toArray();
@@ -292,17 +310,5 @@ class CustomerController extends Controller
         // return redirect()->back();
 
         return redirect("/");
-    }
-
-    public function UpdateUser()
-    {
-        DB::table('customers')->where('User_id', session('user_id'))->update([
-            'Name' =>  request()->input('name'),
-            'Username' =>  request()->input('uname'),
-            'Email' => request()->input('email'),
-        ]);
-        $user = Customer::where('User_id', session('user_id'))->first()->toArray();
-
-        return response()->json(['message' => $user]);
     }
 }

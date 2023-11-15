@@ -204,6 +204,13 @@ class NavigationController extends Controller
         echo "<pre>";
     }
 
+
+
+
+
+
+
+
     public function managePayment(Request $req)
     {
         echo "<pre>";
@@ -213,9 +220,9 @@ class NavigationController extends Controller
             "merchantTransactionId" => "MT7850590068188104",
             "merchantUserId" => "MUID123",
             "amount" => 10000,
-            "redirectUrl" => "https://webhook.site/redirect-url",
-            "redirectMode" => "REDIRECT",
-            "callbackUrl" => "https://webhook.site/callback-url",
+            "redirectUrl" => env('APP_URL') . "/payment/response",
+            "redirectMode" => "POST",
+            "callbackUrl" => env('APP_URL') . "/payment/response",
             "mobileNumber" => "9999999999",
             "paymentInstrument" => array(
                 "type" => "PAY_PAGE"
@@ -225,13 +232,53 @@ class NavigationController extends Controller
 
         print_r($data);
 
+        $encode = base64_encode(json_encode($data));
 
+        $saltKey = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399';
+        $saltIndex = 1;
 
-        $enc_header = base64_encode(json_encode($data));
+        $string = $encode . '/pg/v1/pay' . $saltKey;
+        $sha256 = hash('sha256', $string);
 
-        curl::to('https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay')
+        $finalXHeader = $sha256 . '###' . $saltIndex;
+
+        $response = Curl::to('https://api-preprod.phonepe.com/apis/merchant-simulator/pg/v1/pay')
             ->withHeader('Content-Type:application/json')
-            ->withHeader('X-VERIFY:' . $enc_header)
+            ->withHeader('X-VERIFY:' . $finalXHeader)
+            ->withData(json_encode(['request' => $encode]))
             ->post();
+
+        $rData = json_decode($response);
+
+        print_r($rData);
+
+        return redirect()->to($rData->data->instrumentResponse->redirectInfo->url);
+    }
+
+    public function PaymentResponse(Request $request)
+    {
+        $input = $request->all();
+
+        // dd($input);
+
+        $saltKey = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399';
+        $saltIndex = 1;
+
+        $finalXHeader = hash('sha256', '/pg/v1/status/' . $input['merchantId'] . '/' . $input['transactionId'] . $saltKey) . '###' . $saltIndex;
+
+        $response = Curl::to('https://api-preprod.phonepe.com/apis/merchant-simulator/pg/v1/status/' . $input['merchantId'] . '/' . $input['transactionId'])
+            ->withHeader('Content-Type:application/json')
+            ->withHeader('accept:application/json')
+            ->withHeader('X-VERIFY:' . $finalXHeader)
+            ->withHeader('X-MERCHANT-ID:' . $input['transactionId'])
+            ->get();
+
+        // if (json_decode($response)->success == true) {
+        //     return redirect('/user/checkout');
+        // } else {
+        // }
+
+        session()->put('user_id', "K2D7eE0MK7rDgas");
+        return redirect('/user/checkout');
     }
 }

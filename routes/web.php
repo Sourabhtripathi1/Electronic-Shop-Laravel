@@ -90,6 +90,8 @@ Route::get('/user/cart/dec/{id}', [CustomerController::class, 'dec_to_cart'])->m
 
 Route::get('/payment/get', [NavigationController::class, 'managePayment']);
 
+Route::post('/payment/response', [NavigationController::class, 'PaymentResponse']);
+
 
 
 
