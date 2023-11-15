@@ -273,12 +273,11 @@ class NavigationController extends Controller
             ->withHeader('X-MERCHANT-ID:' . $input['transactionId'])
             ->get();
 
-        // if (json_decode($response)->success == true) {
-        //     return redirect('/user/checkout');
-        // } else {
-        // }
-
-        session()->put('user_id', "K2D7eE0MK7rDgas");
-        return redirect('/user/checkout');
+        if (json_decode($response)->success == true) {
+            session()->put('user_id', "K2D7eE0MK7rDgas");
+            return redirect('/user/checkout');
+        } else {
+            echo 'Payment Unsuccessful';
+        }
     }
 }
