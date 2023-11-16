@@ -15,6 +15,7 @@ use App\Models\Variants;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\DB;
 
 class NavigationController extends Controller
 {
@@ -215,14 +216,16 @@ class NavigationController extends Controller
     {
         echo "<pre>";
 
+        print_r(session('payment_data'));
+
         $data = array(
             "merchantId" => "PGTESTPAYUAT",
             "merchantTransactionId" => "MT7850590068188104",
             "merchantUserId" => "MUID123",
             "amount" => 10000,
-            "redirectUrl" => env('APP_URL') . "/payment/response",
+            "redirectUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id') . "&Udata=" . json_encode(session('payment_data')),
             "redirectMode" => "POST",
-            "callbackUrl" => env('APP_URL') . "/payment/response",
+            "callbackUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id'),
             "mobileNumber" => "9999999999",
             "paymentInstrument" => array(
                 "type" => "PAY_PAGE"
@@ -250,7 +253,7 @@ class NavigationController extends Controller
 
         $rData = json_decode($response);
 
-        print_r($rData);
+        // print_r($rData);
 
         return redirect()->to($rData->data->instrumentResponse->redirectInfo->url);
     }
@@ -259,7 +262,7 @@ class NavigationController extends Controller
     {
         $input = $request->all();
 
-        // dd($input);
+        dd(json_decode($request->input('Udata')));
 
         $saltKey = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399';
         $saltIndex = 1;
@@ -273,8 +276,54 @@ class NavigationController extends Controller
             ->withHeader('X-MERCHANT-ID:' . $input['transactionId'])
             ->get();
 
+        $rData = json_decode($response);
+
+        dd($rData);
+
         if (json_decode($response)->success == true) {
-            session()->put('user_id', "K2D7eE0MK7rDgas");
+            session()->put('user_id', $request->input('user'));
+
+            // $user = Customer::where('User_id', session('user_id'))->first()->toArray();
+            // $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
+            // $variants = Variants::all()->toArray();
+            // $products = Product::all()->toArray();
+
+            // echo "<pre>";
+
+            // $order_id = getID('15');
+
+            // $order = new Orders;
+
+            // $order->Order_id = $order_id;
+            // $order->Order_Date = date("y-m-d");
+            // $order->User_id = $user['User_id'];
+            // $order->Username = $user['Username'];
+            // $order->name = $request['name'];
+            // $order->email = $request['email'];
+            // $order->Hno = $request['Hno'];
+            // $order->Address = $request['area'] . ", " . $request['city'] . ", " . $request['state'] . ", " . $request['country'];
+            // $order->Payment_Method = $request['payment'];
+            // $order->contact = $request['tel'];
+            // $order->PINCODE = $request['zip'];
+            // $order->Status = "Placed";
+
+            // $order->save();
+
+            // foreach ($cart as $item) {
+            //     $ordet = new Order_details;
+
+            //     $ordet->Order_id = $order_id;
+            //     $ordet->Product_id = $item['Product_id'];
+            //     $ordet->Variant_id = $item['Variant_id'];
+            //     $ordet->Product_name = getProductNameFromVariant($item['Variant_id'], $variants, $products);
+            //     $ordet->Price = $item['Price'];
+            //     $ordet->Quantity = $item['Quantity'];
+
+            //     $ordet->save();
+
+            //     DB::table('carts')->where('Sno', $item['Sno'])->delete();
+            // };
+
             return redirect('/user/checkout');
         } else {
             echo 'Payment Unsuccessful';

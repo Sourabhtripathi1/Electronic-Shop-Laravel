@@ -18,7 +18,7 @@ class PaymentValidation
         if ($request['payment'] == "COD") {
             return $next($request);
         } else {
-
+            session()->put('payment_data', $request->all());
             return redirect('/payment/get');
         }
     }

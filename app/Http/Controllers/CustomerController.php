@@ -265,50 +265,48 @@ class CustomerController extends Controller
 
     public function userCheckout(Request $req)
     {
-        // $user = Customer::where('User_id', session('user_id'))->first()->toArray();
-        // $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
-        // $variants = Variants::all()->toArray();
-        // $products = Product::all()->toArray();
+        $user = Customer::where('User_id', session('user_id'))->first()->toArray();
+        $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
+        $variants = Variants::all()->toArray();
+        $products = Product::all()->toArray();
 
-        // echo "<pre>";
+        echo "<pre>";
 
-        // $order_id = getID('15');
+        $order_id = getID('15');
 
-        // $order = new Orders;
+        $order = new Orders;
 
-        // $order->Order_id = $order_id;
-        // $order->Order_Date = date("y-m-d");
-        // $order->User_id = $user['User_id'];
-        // $order->Username = $user['Username'];
-        // $order->name = $req['name'];
-        // $order->email = $req['email'];
-        // $order->Hno = $req['Hno'];
-        // $order->Address = $req['area'] . ", " . $req['city'] . ", " . $req['state'] . ", " . $req['country'];
-        // $order->Payment_Method = $req['payment'];
-        // $order->contact = $req['tel'];
-        // $order->PINCODE = $req['zip'];
-        // $order->Status = "Placed";
+        $order->Order_id = $order_id;
+        $order->Order_Date = date("y-m-d");
+        $order->User_id = $user['User_id'];
+        $order->Username = $user['Username'];
+        $order->name = $req['name'];
+        $order->email = $req['email'];
+        $order->Hno = $req['Hno'];
+        $order->Address = $req['area'] . ", " . $req['city'] . ", " . $req['state'] . ", " . $req['country'];
+        $order->Payment_Method = $req['payment'];
+        $order->contact = $req['tel'];
+        $order->PINCODE = $req['zip'];
+        $order->Status = "Placed";
 
-        // $order->save();
+        $order->save();
 
-        // foreach ($cart as $item) {
-        //     $ordet = new Order_details;
+        foreach ($cart as $item) {
+            $ordet = new Order_details;
 
-        //     $ordet->Order_id = $order_id;
-        //     $ordet->Product_id = $item['Product_id'];
-        //     $ordet->Variant_id = $item['Variant_id'];
-        //     $ordet->Product_name = getProductNameFromVariant($item['Variant_id'], $variants, $products);
-        //     $ordet->Price = $item['Price'];
-        //     $ordet->Quantity = $item['Quantity'];
+            $ordet->Order_id = $order_id;
+            $ordet->Product_id = $item['Product_id'];
+            $ordet->Variant_id = $item['Variant_id'];
+            $ordet->Product_name = getProductNameFromVariant($item['Variant_id'], $variants, $products);
+            $ordet->Price = $item['Price'];
+            $ordet->Quantity = $item['Quantity'];
 
-        //     $ordet->save();
+            $ordet->save();
 
-        //     DB::table('carts')->where('Sno', $item['Sno'])->delete();
-        // };
+            DB::table('carts')->where('Sno', $item['Sno'])->delete();
+        };
 
 
-        // return redirect()->back();
-
-        return redirect("/");
+        return redirect()->back();
     }
 }
