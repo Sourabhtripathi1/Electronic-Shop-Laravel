@@ -16,6 +16,8 @@ use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
+use Mail;
+use App\Mail\queryMail;
 
 
 
@@ -214,7 +216,17 @@ class NavigationController extends Controller
 
     public function postQuery(Request $req)
     {
-        echo "<pre>";
+        $mailData = [
+            'title' => $req->subject,
+            'Name'=> $req->name,
+            'mail'=> $req->mail,
+            'message'=> $req->message,
+            'contact'=>$req->contact,
+        ];
+
+        Mail::to('ganeshprasadtripathi38@gmail.com')->send(new queryMail($mailData));
+
+        return redirect()->back()->with('success','Query sent Successfully');
     }
 
 
@@ -231,10 +243,10 @@ class NavigationController extends Controller
 
         $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
 
-        $price=0;
+        $price = 0;
 
         foreach ($cart as $value) {
-            $price+=$value['Price']*$value['Quantity'];
+            $price += $value['Price'] * $value['Quantity'];
         }
 
 
@@ -243,7 +255,7 @@ class NavigationController extends Controller
             "merchantId" => "PGTESTPAYUAT",
             "merchantTransactionId" => "MT78507788068188104",
             "merchantUserId" => "MUID123",
-            "amount" => ($price+50)*100,
+            "amount" => ($price + 50) * 100,
             "redirectUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id') . "&udata=" . base64_encode(json_encode(session('payment_data'))),
             "redirectMode" => "POST",
             "callbackUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id') . "&udata=" . base64_encode(json_encode(session('payment_data'))),
@@ -276,16 +288,16 @@ class NavigationController extends Controller
 
         // print_r($rData);
 
-       return redirect()->to($rData->data->instrumentResponse->redirectInfo->url);
+        return redirect()->to($rData->data->instrumentResponse->redirectInfo->url);
     }
 
     public function PaymentResponse(Request $request)
     {
         $input = $request->all();
 
-        $user_data=json_decode(base64_decode($request->input('udata')));
+        $user_data = json_decode(base64_decode($request->input('udata')));
 
-         //dd($user_data);
+        //dd($user_data);
 
         $saltKey = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399';
         $saltIndex = 1;
@@ -345,7 +357,8 @@ class NavigationController extends Controller
                 $ordet->save();
 
                 DB::table('carts')->where('Sno', $item['Sno'])->delete();
-            };
+            }
+            ;
 
             return redirect('/user/checkout');
         } else {
