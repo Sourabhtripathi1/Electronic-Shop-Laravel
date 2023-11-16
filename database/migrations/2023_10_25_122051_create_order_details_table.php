@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('Order_id', 15);
             $table->string('Product_id', 15);
             $table->string('Variant_id', 15);
-            $table->string('Product_name', 40);
+            $table->string('Product_name', 100);
             $table->float('Price', 10);
             $table->float('Quantity', 10);
 

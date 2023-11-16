@@ -17,6 +17,18 @@ use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
 
+
+
+function getID($length)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $id = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomIndex = rand(0, strlen($characters) - 1);
+        $id .= $characters[$randomIndex];
+    }
+    return $id;
+}
 class NavigationController extends Controller
 {
     public function indexPage()
@@ -216,16 +228,25 @@ class NavigationController extends Controller
     {
         echo "<pre>";
 
-        print_r(session('payment_data'));
+
+        $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
+
+        $price=0;
+
+        foreach ($cart as $value) {
+            $price+=$value['Price']*$value['Quantity'];
+        }
+
+
 
         $data = array(
             "merchantId" => "PGTESTPAYUAT",
-            "merchantTransactionId" => "MT7850590068188104",
+            "merchantTransactionId" => "MT78507788068188104",
             "merchantUserId" => "MUID123",
-            "amount" => 10000,
-            "redirectUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id') . "&Udata=" . json_encode(session('payment_data')),
+            "amount" => ($price+50)*100,
+            "redirectUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id') . "&udata=" . base64_encode(json_encode(session('payment_data'))),
             "redirectMode" => "POST",
-            "callbackUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id'),
+            "callbackUrl" => env('APP_URL') . "/payment/response?user=" . session('user_id') . "&udata=" . base64_encode(json_encode(session('payment_data'))),
             "mobileNumber" => "9999999999",
             "paymentInstrument" => array(
                 "type" => "PAY_PAGE"
@@ -255,14 +276,16 @@ class NavigationController extends Controller
 
         // print_r($rData);
 
-        return redirect()->to($rData->data->instrumentResponse->redirectInfo->url);
+       return redirect()->to($rData->data->instrumentResponse->redirectInfo->url);
     }
 
     public function PaymentResponse(Request $request)
     {
         $input = $request->all();
 
-        dd(json_decode($request->input('Udata')));
+        $user_data=json_decode(base64_decode($request->input('udata')));
+
+         //dd($user_data);
 
         $saltKey = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399';
         $saltIndex = 1;
@@ -278,51 +301,51 @@ class NavigationController extends Controller
 
         $rData = json_decode($response);
 
-        dd($rData);
+        //dd($rData);
 
         if (json_decode($response)->success == true) {
             session()->put('user_id', $request->input('user'));
 
-            // $user = Customer::where('User_id', session('user_id'))->first()->toArray();
-            // $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
-            // $variants = Variants::all()->toArray();
-            // $products = Product::all()->toArray();
+            $user = Customer::where('User_id', session('user_id'))->first()->toArray();
+            $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
+            $variants = Variants::all()->toArray();
+            $products = Product::all()->toArray();
 
-            // echo "<pre>";
+            echo "<pre>";
 
-            // $order_id = getID('15');
+            $order_id = getID('15');
 
-            // $order = new Orders;
+            $order = new Orders;
 
-            // $order->Order_id = $order_id;
-            // $order->Order_Date = date("y-m-d");
-            // $order->User_id = $user['User_id'];
-            // $order->Username = $user['Username'];
-            // $order->name = $request['name'];
-            // $order->email = $request['email'];
-            // $order->Hno = $request['Hno'];
-            // $order->Address = $request['area'] . ", " . $request['city'] . ", " . $request['state'] . ", " . $request['country'];
-            // $order->Payment_Method = $request['payment'];
-            // $order->contact = $request['tel'];
-            // $order->PINCODE = $request['zip'];
-            // $order->Status = "Placed";
+            $order->Order_id = $order_id;
+            $order->Order_Date = date("y-m-d");
+            $order->User_id = $user['User_id'];
+            $order->Username = $user['Username'];
+            $order->name = $user_data->name;
+            $order->email = $user_data->email;
+            $order->Hno = $user_data->Hno;
+            $order->Address = $user_data->area . ", " . $user_data->city . ", " . $user_data->state . ", " . $user_data->country;
+            $order->Payment_Method = $user_data->payment;
+            $order->contact = $user_data->tel;
+            $order->PINCODE = $user_data->zip;
+            $order->Status = "Placed";
 
-            // $order->save();
+            $order->save();
 
-            // foreach ($cart as $item) {
-            //     $ordet = new Order_details;
+            foreach ($cart as $item) {
+                $ordet = new Order_details;
 
-            //     $ordet->Order_id = $order_id;
-            //     $ordet->Product_id = $item['Product_id'];
-            //     $ordet->Variant_id = $item['Variant_id'];
-            //     $ordet->Product_name = getProductNameFromVariant($item['Variant_id'], $variants, $products);
-            //     $ordet->Price = $item['Price'];
-            //     $ordet->Quantity = $item['Quantity'];
+                $ordet->Order_id = $order_id;
+                $ordet->Product_id = $item['Product_id'];
+                $ordet->Variant_id = $item['Variant_id'];
+                $ordet->Product_name = getProductNameFromVariant($item['Variant_id'], $variants, $products);
+                $ordet->Price = $item['Price'];
+                $ordet->Quantity = $item['Quantity'];
 
-            //     $ordet->save();
+                $ordet->save();
 
-            //     DB::table('carts')->where('Sno', $item['Sno'])->delete();
-            // };
+                DB::table('carts')->where('Sno', $item['Sno'])->delete();
+            };
 
             return redirect('/user/checkout');
         } else {
