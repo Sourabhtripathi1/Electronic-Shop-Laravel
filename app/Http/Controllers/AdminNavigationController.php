@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Order_details;
 use App\Models\Orders;
@@ -36,8 +38,14 @@ class AdminNavigationController extends Controller
     }
 
     public function adminIndex(){
+        $user = Customer::all()->toArray();
+        $products = Product::all()->toArray();
+        $categories=Category::all()->toArray();
+        $brands=Brand::all()->toArray();
+$today_order=Orders::where('Order_Date',date("Y-m-d"))->get()->toArray();
 
+$data=compact('user','products','categories','brands','today_order');
 
-        return view('admin.admin-index');
+        return view('admin.admin-index')->with($data);
     }
 }

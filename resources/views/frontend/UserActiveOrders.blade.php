@@ -216,33 +216,61 @@ Active Orders Page
         <h1 style="color: #d10024;">Active orders</h1>
 
         <br>
-        <table class="table table-striped activeOrders-table">
+        <table class="table table-striped allOrders-table">
 
             <thead>
                 <tr>
-                    <th></th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Status</th>
+
+                    <th>
+                      <div style="display: flex;justify-content: space-between;">
+                        <div>Product</div>
+                        <div>Price</div>
+                      </div>
+                    </th>
+
+                    <th>
+                        <div>
+                            Status
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($orders as $item)
-                <tr>
-                    <td>
-                        {{-- <img  src="{{ env('APP_URL') }}/storage/site-assets/{{ getVariantImage($cart_item['Variant_id'], $variants, $pictures) }}"> --}}
-                    </td>
-                    <td>
+                    @php
+                        $ord = getOrders($item['Order_id'], $order_details);
+                    @endphp
+                    <tr>
+                        <td class="order-product">
+                            @foreach ($ord as $ord_item)
+                                <div class="prod-set">
+                                    <div class="prod-img">
+                                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage($ord_item['Variant_id'], $variants, $pictures) }}"
+                                            alt="">
 
-                    </td>
 
-                    <td>
-                        {{-- {{ getVariantPrice($cart_item['Variant_id'], $variants) * $cart_item['Quantity'] }} --}}
-                    </td>
-                    <td>
+                                    </div>
+                                    <div class="prod-title" >
+                                        {{ getProductName($ord_item['Product_id'], $products) }}
+                                        ({{ getVariantColor($ord_item['Variant_id'], $variants) }})
 
-                    </td>
-                </tr>
+                                            <b>* {{ $ord_item['Quantity'] }}</b>
+
+                                    </div>
+
+
+                                    <div class="prod-price">
+                                        :{{ getVariantPrice($ord_item['Variant_id'], $variants) * $ord_item['Quantity'] }}
+                                    </div>
+                                </div>
+                            @endforeach
+
+
+                        </td>
+                        <td>
+                           {{ $item['Status']}}
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
 

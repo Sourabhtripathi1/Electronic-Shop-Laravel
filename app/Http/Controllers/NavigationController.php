@@ -139,20 +139,27 @@ class NavigationController extends Controller
 
     public function userAllOrders()
     {
-        $orders = Orders::where('User_id', session('user_id'))->where('Status', 'Dilevered')->get()->toArray();
+        $products = Product::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $variants = Variants::all()->toArray();
+        $orders = Orders::where('User_id', session('user_id'))->get()->toArray();
         $order_details = Order_details::all()->toArray();
 
-        $data = compact('orders', 'order_details');
+        $data = compact('orders', 'order_details','variants','pictures','products');
 
         return view('frontend.UserAllOrders')->with($data);
     }
 
     public function userActiveOrders()
     {
+        $products = Product::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $variants = Variants::all()->toArray();
+
         $orders = Orders::where('User_id', session('user_id'))->where('Status', '!=', 'Dilevered')->get()->toArray();
         $order_details = Order_details::all()->toArray();
 
-        $data = compact('orders', 'order_details');
+        $data = compact('orders', 'order_details','variants','pictures','products');
         return view('frontend.UserActiveOrders')->with($data);
     }
 
