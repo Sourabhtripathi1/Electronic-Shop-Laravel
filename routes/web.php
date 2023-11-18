@@ -22,26 +22,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::resource('/admins-product', ProductController::class);
-Route::resource('/admins-category', CategoryController::class);
-Route::resource('/admins-brand', BrandController::class);
+Route::resource('/admins-product', ProductController::class)->middleware('isAdmin');
+Route::resource('/admins-category', CategoryController::class)->middleware('isAdmin');
+Route::resource('/admins-brand', BrandController::class)->middleware('isAdmin');
 
-Route::get('/del/{id}/{pic}', [VariantController::class, 'delImg'])->name('delImg.del');
-Route::post('/add/{id}', [VariantController::class, 'addImg']);
+Route::get('/del/{id}/{pic}', [VariantController::class, 'delImg'])->name('delImg.del')->middleware('isAdmin');
+Route::post('/add/{id}', [VariantController::class, 'addImg'])->middleware('isAdmin');
 
 Route::post('/user/sign-up', [CustomerController::class, 'Customer_signup']);
 Route::post('/user/sign-in', [CustomerController::class, 'Customer_login']);
 
 
-Route::resource('/admins-product/variant', VariantController::class);
+Route::resource('/admins-product/variant', VariantController::class)->middleware('isAdmin');
 
-Route::get('/admins-index',  [AdminNavigationController::class, 'adminIndex']);
+Route::get('/admins-index',  [AdminNavigationController::class, 'adminIndex'])->middleware('isAdmin');
 
-Route::get('/customers-list', [AdminNavigationController::class, 'CustomerList']);
+Route::get('/customers-list', [AdminNavigationController::class, 'CustomerList'])->middleware('isAdmin');
 
-Route::get('/order/status/update', [AdminFunctions::class, 'updateCart']);
+Route::get('/order/status/update', [AdminFunctions::class, 'updateCart'])->middleware('isAdmin');
 
-Route::get('/orders-list', [AdminNavigationController::class, 'OrderList']);
+Route::get('/orders-list', [AdminNavigationController::class, 'OrderList'])->middleware('isAdmin');
 
 Route::get('/', [NavigationController::class, 'indexPage']);
 
@@ -91,6 +91,14 @@ Route::get('/user/cart/dec/{id}', [CustomerController::class, 'dec_to_cart'])->m
 Route::get('/payment/get', [NavigationController::class, 'managePayment']);
 
 Route::post('/payment/response', [NavigationController::class, 'PaymentResponse']);
+
+Route::get('/admins/validate/admin',  [AdminNavigationController::class, 'adminLogin']);
+
+Route::post('/admin/login',  [AdminNavigationController::class, 'login']);
+
+Route::get('/admin/logout',  [AdminNavigationController::class, 'logout']);
+
+
 
 
 

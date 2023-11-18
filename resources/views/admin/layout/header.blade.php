@@ -31,7 +31,7 @@
 		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="admins-index">
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{env('APP_URL')}}/admins-index">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
@@ -43,14 +43,14 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active">
-				<a class="nav-link" href="/admins-index">
+				<a class="nav-link" href="{{env('APP_URL')}}/admins-index">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>
 			</li>
 
 
 			<li class="nav-item active">
-				<a class="nav-link" href="/">
+				<a class="nav-link" href="{{env('APP_URL')}}">
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>View Site</span></a>
 			</li>
@@ -72,8 +72,8 @@
 				</a>
 				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="/admins-product/create">Add Products </a>
-						<a class="collapse-item" href="/admins-product">View Products</a>
+						<a class="collapse-item" href="{{env('APP_URL')}}/admins-product/create">Add Products </a>
+						<a class="collapse-item" href="{{env('APP_URL')}}/admins-product">View Products</a>
 					</div>
 				</div>
 			</li>
@@ -83,13 +83,13 @@
 
 			<!-- Nav Item - Charts -->
 			<li class="nav-item">
-				<a class="nav-link" href="/customers-list">
+				<a class="nav-link" href="{{env('APP_URL')}}/customers-list">
 
 					<span>Customers</span></a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="/orders-list">
+				<a class="nav-link" href="{{env('APP_URL')}}/orders-list">
 					<span>View Orders</span></a>
 			</li>
 
@@ -99,13 +99,13 @@
 				Categories & brands
 			</div>
 			<li class="nav-item">
-				<a class="nav-link" href="/admins-category">
+				<a class="nav-link" href="{{env('APP_URL')}}/admins-category">
 
 					<span>Categories</span></a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="/admins-brand">
+				<a class="nav-link" href="{{env('APP_URL')}}/admins-brand">
 
 					<span>Brands</span></a>
 			</li>
@@ -114,7 +114,7 @@
 			<hr class="sidebar-divider">
 			<!-- Nav Item - Tables -->
 			<li class="nav-item">
-				<a class="nav-link" href="Admin-logout.php">
+				<a class="nav-link" href="{{env('APP_URL')}}/admin/logout">
 					<i class="fas fa-fw fa-table"></i>
 					<span>Logout</span></a>
 			</li>

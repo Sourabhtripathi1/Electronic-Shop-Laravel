@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
+                  <p>Thank You for visiting<strong> {{env('APP_NAME')}}</strong></p>
+                      {{-- <form method="GET" action="{{env('APP_URL')}}/news-letter">
+                        <input class="input" type="email" placeholder="Enter Your Email" required>
                         <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
+                    </form> --}}
                     <ul class="newsletter-follow">
                         <li>
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -19,11 +19,9 @@
                             <a href="#"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a target="blank" href="https://www.instagram.com/sourabh.tripathi.1447/"><i class="fa fa-instagram"></i></a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -45,7 +43,7 @@
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+
                         <ul class="footer-links">
                             <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
                             <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>

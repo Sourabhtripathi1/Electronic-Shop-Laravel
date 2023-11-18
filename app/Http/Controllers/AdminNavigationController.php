@@ -18,7 +18,7 @@ class AdminNavigationController extends Controller
     public function OrderList()
     {
         $user = Customer::all();
-        $orders = Orders::all()->toArray();
+        $orders = Orders::orderBy('Order_Date', 'desc')->get()->toArray();
         $order_details = Order_details::all()->toArray();
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
@@ -49,5 +49,35 @@ class AdminNavigationController extends Controller
         $data = compact('user', 'products', 'categories', 'brands', 'today_order');
 
         return view('admin.admin-index')->with($data);
+    }
+
+    public function adminLogin()
+    {
+        return view('admin.adminLogin');
+    }
+
+    public function login(Request $req)
+    {
+        if ($req->Uname == "Admin") {
+            if ($req->pswd == "1") {
+
+                session()->put('admin_id', "Admin");
+
+                return redirect('/admins-index');
+            } else {
+                return redirect('/admins/validate/admin')->with('msg', 'Invalid Password !');
+            }
+        } else {
+            return redirect('/admins/validate/admin')->with('msg', 'Invalid Username !');
+        }
+
+
+    }
+
+    public function logout()
+    {
+        session()->remove('admin_id');
+
+        return redirect('/');
     }
 }
