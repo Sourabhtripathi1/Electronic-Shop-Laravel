@@ -29,22 +29,24 @@ class AdminNavigationController extends Controller
         return view('admin.ViewOrders')->with($data);
     }
 
-    public function CustomerList(){
+    public function CustomerList()
+    {
         $users = Customer::all();
         $orders = Orders::all()->toArray();
-        $data = compact('users','orders');
+        $data = compact('users', 'orders');
 
         return view('admin.ViewCustomers')->with($data);
     }
 
-    public function adminIndex(){
+    public function adminIndex()
+    {
         $user = Customer::all()->toArray();
         $products = Product::all()->toArray();
-        $categories=Category::all()->toArray();
-        $brands=Brand::all()->toArray();
-$today_order=Orders::where('Order_Date',date("Y-m-d"))->get()->toArray();
+        $categories = Category::all()->toArray();
+        $brands = Brand::all()->toArray();
+        $today_order = Orders::where('Order_Date', date("Y-m-d"))->get()->toArray();
 
-$data=compact('user','products','categories','brands','today_order');
+        $data = compact('user', 'products', 'categories', 'brands', 'today_order');
 
         return view('admin.admin-index')->with($data);
     }

@@ -83,7 +83,7 @@
 } */
 
 
-#admin-orders table{
+#admin-orders table {
     width: 1600px !important;
 }
 
@@ -98,19 +98,19 @@
 
 
 
-.prod-set{
+.prod-set {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
 }
 
-.prod-img img{
+.prod-img img {
     max-height: 40px;
     max-width: 40px;
 
 }
 
-.prod-img{
+.prod-img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,9 +120,11 @@
 
 }
 
-.prod-price{
+.prod-price {
     font-weight: 800;
     margin-left: 5px;
 }
 
-
+.noStyleLink {
+    text-decoration: none !important;
+}

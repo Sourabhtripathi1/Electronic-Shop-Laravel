@@ -16,8 +16,8 @@ use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
-use Mail;
 use App\Mail\queryMail;
+use Mail;
 
 
 
@@ -145,7 +145,7 @@ class NavigationController extends Controller
         $orders = Orders::where('User_id', session('user_id'))->get()->toArray();
         $order_details = Order_details::all()->toArray();
 
-        $data = compact('orders', 'order_details','variants','pictures','products');
+        $data = compact('orders', 'order_details', 'variants', 'pictures', 'products');
 
         return view('frontend.UserAllOrders')->with($data);
     }
@@ -159,7 +159,7 @@ class NavigationController extends Controller
         $orders = Orders::where('User_id', session('user_id'))->where('Status', '!=', 'Dilevered')->get()->toArray();
         $order_details = Order_details::all()->toArray();
 
-        $data = compact('orders', 'order_details','variants','pictures','products');
+        $data = compact('orders', 'order_details', 'variants', 'pictures', 'products');
         return view('frontend.UserActiveOrders')->with($data);
     }
 
@@ -225,15 +225,15 @@ class NavigationController extends Controller
     {
         $mailData = [
             'title' => $req->subject,
-            'Name'=> $req->name,
-            'mail'=> $req->mail,
-            'message'=> $req->message,
-            'contact'=>$req->contact,
+            'Name' => $req->name,
+            'mail' => $req->mail,
+            'message' => $req->message,
+            'contact' => $req->contact,
         ];
 
         Mail::to('ganeshprasadtripathi38@gmail.com')->send(new queryMail($mailData));
 
-        return redirect()->back()->with('success','Query sent Successfully');
+        return redirect()->back()->with('success', 'Query sent Successfully');
     }
 
 
@@ -364,8 +364,7 @@ class NavigationController extends Controller
                 $ordet->save();
 
                 DB::table('carts')->where('Sno', $item['Sno'])->delete();
-            }
-            ;
+            };
 
             return redirect('/user/checkout');
         } else {
