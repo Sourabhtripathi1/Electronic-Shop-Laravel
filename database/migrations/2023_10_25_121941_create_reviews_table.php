@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('Review_no');
             $table->string('User_id', 15);
             $table->string('Product_id', 15);
-            $table->string('Variant_id', 15);
             $table->string('name', 40);
             $table->string('email', 50);
             $table->string('content', 60);
@@ -23,7 +22,6 @@ return new class extends Migration
 
             $table->foreign('User_id')->references('User_id')->on('customers');
             $table->foreign('Product_id')->references('Product_id')->on('products');
-            $table->foreign('Variant_id')->references('variant_id')->on('variants');
             $table->timestamps();
         });
     }

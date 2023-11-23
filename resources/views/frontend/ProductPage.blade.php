@@ -146,7 +146,7 @@
     </nav>
     <!-- /NAVIGATION -->
 
-    <br><br><br><br><br><br>
+    <br><br>
 
 
     <!-- SECTION -->
@@ -257,7 +257,7 @@
 
 
                         <ul class="product-btns">
-                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}/{{ getFirstVariant($id, $products, $variants) }}"
+                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}/{{ getFirstVariant($id, $products, $variants) }}/2"
                                     id="add_wishlist_button"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 
                         </ul>
@@ -279,7 +279,7 @@
 
                                 console.log(wishlist_url + "/" + selectedAction2);
 
-                                document.getElementById('add_wishlist_button').href = wishlist_url + "/" + selectedAction2;
+                                document.getElementById('add_wishlist_button').href = wishlist_url + "/" + selectedAction2 + "/2";
                             }
                         </script>
 
@@ -357,7 +357,7 @@
                                     <div class="col-md-6">
                                         <div id="reviews">
                                             <ul class="reviews">
-                                                <li>
+                                                <li class="review_tab">
                                                     <div class="review-heading">
                                                         <h5 class="name">John</h5>
                                                         <p class="date">27 DEC 2018, 8:0 PM</p>
@@ -369,13 +369,13 @@
                                                     </div>
                                                 </li>
 
-
                                             </ul>
                                             <ul class="reviews-pagination">
-                                                <li class="active">1</li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
+
+                                                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
+                                                <li><a href="#" class="paginate-review" data-page="3">2</a></li>
+                                                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
+
 
                                             </ul>
                                         </div>
@@ -467,4 +467,110 @@
         <!-- /container -->
     </div>
     <!-- /Section -->
+
+    <div class="col-md-6">
+        <div id="reviews">
+            <ul class="reviews">
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+                <li class="review_tab">
+                    <div class="review-heading">
+                        <h5 class="name">John</h5>
+                        <p class="date">27 DEC 2018, 8:0 PM</p>
+
+                    </div>
+                    <div class="review-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                    </div>
+                </li>
+
+            </ul>
+            <ul class="reviews-pagination">
+
+                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
+                <li><a href="#" class="paginate-review" data-page="3">2</a></li>
+                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
+
+
+            </ul>
+        </div>
+    </div>
 @endsection

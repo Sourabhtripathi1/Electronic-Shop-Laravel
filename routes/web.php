@@ -79,6 +79,10 @@ Route::get('/products/wishlist/add/{id}/{var}', [CustomerController::class, 'add
 
 Route::get('/products/wishlist/remove/{id}', [CustomerController::class, 'remove_wishlist'])->middleware('isValidUser');
 
+Route::get('/products/wishlist/add/{id}/{var}/2', [CustomerController::class, 'add_wishlist2'])->middleware('isValidUser');
+
+
+
 Route::post('/user/cart/add', [CustomerController::class, 'add_to_cart'])->middleware('isValidUser');
 Route::get('/user/cart/add/{id}/{var}', [CustomerController::class, 'add_to_cart2'])->middleware('isValidUser');
 

@@ -254,16 +254,20 @@ class ProductController extends Controller
     public function add_review(Request $request, string $id)
     {
 
-        echo "<pre>";
-        print_r($request->all());
-
         $review = new Review;
 
-        // $review->User_id=session('user_id');
-        // $review->Product_id=
-        // $review->Variant_id=
-        // $review->content=
-        //  $review->Review_Date=
+        $review->User_id=session('user_id');
+        $review->Product_id= $id;
+
+        $review->name=$request->name;
+        $review->email=$request->mail;
+
+        $review->content=$request->content;
+         $review->Review_Date=date("Y-m-d");
+
+         $review->save();
+
+         return redirect()->back();
 
     }
 }

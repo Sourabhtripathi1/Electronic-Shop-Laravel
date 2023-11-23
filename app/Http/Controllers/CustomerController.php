@@ -162,6 +162,27 @@ class CustomerController extends Controller
         }
     }
 
+    public function add_wishlist2(string $id, $var)
+    {
+
+        $wishlist = Wishlist::where("Product_id", $id)->where('User_id', session("user_id"))->get()->toArray();
+
+        if (count($wishlist) == 0) {
+            $wish = new Wishlist;
+
+            $wish->Product_id = $id;
+            $wish->Variant_id = $var;
+            $wish->User_id = session("user_id");
+
+
+            $wish->save();
+
+            return redirect()->back()->with('success','Added to wishlist');
+        } else {
+            return redirect()->back()->with('error','Already exixt on wishlist');
+        }
+    }
+
     public function remove_wishlist(string $id)
     {
         DB::table('wishlists')->where('Sno', $id)->delete();

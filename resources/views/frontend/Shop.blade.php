@@ -231,9 +231,6 @@
                     <!-- store products -->
                     <div class="row">
                         <!-- product -->
-                        @php
-                            $cnt = 1;
-                        @endphp
 
                         @foreach ($products as $item)
                             <div class="col-md-4 col-xs-6 product_tab ">
@@ -289,18 +286,7 @@
                                 </div>
                             </div>
 
-                            @if ($cnt % 2 == 0)
-                                <div class="clearfix visible-sm visible-xs"></div>
-                            @endif
 
-
-                            @if ($cnt % 3 == 0)
-                                <div class="clearfix visible-lg visible-md "></div>
-                            @endif
-
-                            @php
-                                $cnt++;
-                            @endphp
                         @endforeach
 
                         {{--

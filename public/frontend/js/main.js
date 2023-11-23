@@ -426,6 +426,7 @@ $(document).ready(function () {
         $(".sign").toggleClass("hidden");
         $(".sign-").toggleClass("hidden");
     });
+
     addProductPagination();
     productPagination(1);
 
@@ -433,6 +434,17 @@ $(document).ready(function () {
         const page = parseInt($(this).data("page"));
         productPagination(page);
     });
+
+    addReviewPagination();
+    reviewPagination(1);
+
+    $(".paginate-review").click(function ($this) {
+        const page = parseInt($(this).data("page"));
+        reviewPagination(page);
+
+    });
+
+
 });
 
 function moveElementBasedOnWidth() {
@@ -450,7 +462,7 @@ function moveElementBasedOnWidth() {
 }
 
 function productPagination(page) {
-    var itemsPerPage = 2;
+    var itemsPerPage = 5;
     var products = $(".product_tab");
 
     $(".product_tab").each(function () {
@@ -467,10 +479,26 @@ function productPagination(page) {
     for (let index = startIndex; index < endIndex; index++) {
         $(".product_tab").eq(index).removeClass("hidden");
     }
+
+    var hidden = $(".product_tab.hidden").length;
+    var visible = $(".product_tab:not(.hidden)");
+    var i = 1;
+    visible.each((index, item) => {
+        if (i % 2 == 0) {
+            $(item).after(`<div class="clearfix visible-sm visible-xs"></div>`);
+        } else if (i % 3 == 0) {
+            $(item).after(
+                `<div class="clearfix visible-lg visible-md "></div>`
+            );
+        } else {
+            console.log(i);
+        }
+        i++;
+    });
 }
 
 function addProductPagination() {
-    var cnt = 2;
+    var cnt = 5;
     var products = $(".product_tab");
 
     var tot = products.length;
@@ -482,4 +510,43 @@ function addProductPagination() {
             `<li><a href="#" class="page paginate-product"  data-page="${i}">${i}</a></li>`
         );
     }
+}
+
+function reviewPagination(page) {
+    var itemsPerPage = 4;
+    var products = $(".review_tab");
+
+    $(".review_tab").each(function () {
+        $(this).addClass("hidden");
+    });
+
+    var tot = products.length;
+
+    const totalPages = Math.ceil(tot / itemsPerPage);
+
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    for (let index = startIndex; index < endIndex; index++) {
+        $(".review_tab").eq(index).removeClass("hidden");
+    }
+}
+
+function addReviewPagination() {
+    var cnt = 4;
+    var products = $(".review_tab");
+
+    var tot = products.length;
+
+    const totalPages = Math.ceil(tot / cnt);
+
+    for (let i = 1; i <= totalPages; i++) {
+        $(".reviews-pagination").append(
+            `<li><a href="#" class="paginate-review"  data-page="${i}">${i}</a></li>`
+        );
+    }
+
+   console.log($(".review_tab").length);
+
+console.log("324324");
 }
