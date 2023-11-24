@@ -39,7 +39,6 @@ class ProductController extends Controller
         $Brands = Brand::all()->toArray();
         $Category = Category::all()->toArray();
 
-
         $data = compact('Products', 'Variants', 'Brands', 'Category');
 
         return view('admin.ViewProducts')->with($data);
@@ -48,6 +47,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         $br = Brand::all();
@@ -63,83 +63,89 @@ class ProductController extends Controller
      */
     public function store(Request $req)
     {
-        try {
-            $vars = $req->var_no;
+
+        $rules = [
+            'pname'=>'required|string',
+            'material'=>'required|string',
+            'category'=>'required|string',
+            'dimention'=>'required|string',
+            'brand'=>'required|string',
+            'desc'=>'required|string',
+            'Stock.*'=>'required|numeric',
+            'Color.*'=>'required|string',
+            'Price.*'=>'required|numeric',
+        ];
+
+        $messages = [
+            'Stock.*.required' => 'Each element in the Stock field is required.',
+            'Price.*.required' => 'Each element in the Price field is required.',
+            'Color.*.required' => 'Each element in the Color field is required.',
+            'Color.*.string' => 'Each element in the Color field should be string.',
+            'Stock.*.numeric' => 'Each element in the Stock field should be numeric.',
+            'Price.*.numeric' => 'Each element in the Price field should be numeric.',
+        ];
+
+        $req->validate($rules, $messages);
 
 
-            $prod = new Product;
-            $prod_id = getID(15);
-
-            $prod->Product_id = $prod_id;
-            $prod->Product_name = $req->pname;
-            $prod->Material = $req->material;
-            $prod->Dimention = $req->dimention;
-            $prod->Brand =  $req->brand;
-            $prod->Category = $req->category;
-            $prod->Description = $req->desc;
-
-            $prod->save();
-            $p = $req->file('Picture');
 
 
-            for ($i = 0; $i < $vars; $i++) {
-                $pcs = [];
-
-                foreach ($p[$i + 1] as $x) {
-                    $pic = new Picture;
-
-                    $pic_id = getID(10);
-                    $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
+        // try {
+        //     $vars = $req->var_no;
 
 
-                    $pic->Picture_id = $pic_id;
-                    $pic->Source = $pic_na;
+        //     $prod = new Product;
+        //     $prod_id = getID(15);
 
-                    $x->storeAs('/public/site-assets', $pic_na);
+        //     $prod->Product_id = $prod_id;
+        //     $prod->Product_name = $req->pname;
+        //     $prod->Material = $req->material;
+        //     $prod->Dimention = $req->dimention;
+        //     $prod->Brand =  $req->brand;
+        //     $prod->Category = $req->category;
+        //     $prod->Description = $req->desc;
 
-                    $pic->save();
-
-                    array_push($pcs, $pic_id);
-                }
-
-                $var = new Variants;
-                $var->variant_id = getID(10);
-                $var->Product_id = $prod_id;
-                $var->Stock = $req->Stock[$i];
-                $var->Picture =   json_encode($pcs);
-                $var->Color = $req->Color[$i];
-                $var->Price = $req->Price[$i];
-
-                $var->save();
-                return redirect('/admins-product');
-            }
-        } catch (Exception $e) {
+        //     $prod->save();
+        //     $p = $req->file('Picture');
 
 
-            // $p_all = Variants::where('Product_id', $prod_id)->all();
+        //     for ($i = 0; $i < $vars; $i++) {
+        //         $pcs = [];
 
-            // foreach ($p_all as $p) {
-            //     $id = $p['variant_id'];
-            //     $ps = json_decode($p['Picture']);
+        //         foreach ($p[$i + 1] as $x) {
+        //             $pic = new Picture;
 
-            //     echo "<pre>";
+        //             $pic_id = getID(10);
+        //             $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
 
-            //     foreach ($ps as $s) {
-            //         $x = Picture::where('Picture_id', $s)->first()->toArray();
 
-            //         unlink(public_path("/storage/site-assets/" . $x['Source']));
-            //         DB::table('pictures')->where('Picture_id', $x['Picture_id'])->delete();
-            //     }
+        //             $pic->Picture_id = $pic_id;
+        //             $pic->Source = $pic_na;
 
-            //     DB::table('variants')->where('variant_id', $id)->delete();
-            // }
+        //             $x->storeAs('/public/site-assets', $pic_na);
 
-            // DB::table('products')->where('Product_id', $prod_id)->delete();
+        //             $pic->save();
 
-            app(ProductController::class)->destroy($prod_id);
+        //             array_push($pcs, $pic_id);
+        //         }
 
-            return redirect('/admins-product');
-        }
+        //         $var = new Variants;
+        //         $var->variant_id = getID(10);
+        //         $var->Product_id = $prod_id;
+        //         $var->Stock = $req->Stock[$i];
+        //         $var->Picture =   json_encode($pcs);
+        //         $var->Color = $req->Color[$i];
+        //         $var->Price = $req->Price[$i];
+
+        //         $var->save();
+        //         return redirect('/admins-product');
+        //     }
+        // } catch (Exception $e) {
+
+        //     app(ProductController::class)->destroy($prod_id);
+
+        //     return redirect('/admins-product');
+        // }
 
 
         return redirect('/admins-product');
