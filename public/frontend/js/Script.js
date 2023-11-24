@@ -44,6 +44,11 @@ function cart_form_submit() {
 
     form.submit();
 }
+
+
+
+
+
 $("#terms").change(function () {
     if ($(this).is(":checked")) {
         console.log("x");
@@ -90,3 +95,6 @@ $("#profile-uname").change(function () {
 $("#profile-email").change(function () {
     $(".save-button").css("visibility", "visible");
 });
+
+
+

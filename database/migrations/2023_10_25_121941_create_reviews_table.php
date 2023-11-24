@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('Product_id', 15);
             $table->string('name', 40);
             $table->string('email', 50);
-            $table->string('content', 60);
+            $table->string('content', 150);
             $table->date('Review_Date');
 
             $table->foreign('User_id')->references('User_id')->on('customers');

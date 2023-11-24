@@ -357,25 +357,22 @@
                                     <div class="col-md-6">
                                         <div id="reviews">
                                             <ul class="reviews">
+
+                                                @foreach ($reviews as $item)
                                                 <li class="review_tab">
                                                     <div class="review-heading">
-                                                        <h5 class="name">John</h5>
-                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <h5 class="name">{{ $item['name'] }}</h5>
+                                                        <p class="date">{{ $item['Review_Date'] }}</p>
 
                                                     </div>
                                                     <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                        <p>{{ $item['content'] }}</p>
                                                     </div>
                                                 </li>
+                                                @endforeach
 
                                             </ul>
                                             <ul class="reviews-pagination">
-
-                                                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
-                                                <li><a href="#" class="paginate-review" data-page="3">2</a></li>
-                                                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
-
 
                                             </ul>
                                         </div>
@@ -468,109 +465,62 @@
     </div>
     <!-- /Section -->
 
-    <div class="col-md-6">
-        <div id="reviews">
-            <ul class="reviews">
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-                <li class="review_tab">
-                    <div class="review-heading">
-                        <h5 class="name">John</h5>
-                        <p class="date">27 DEC 2018, 8:0 PM</p>
-
-                    </div>
-                    <div class="review-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                    </div>
-                </li>
-
-            </ul>
-            <ul class="reviews-pagination">
-
-                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
-                <li><a href="#" class="paginate-review" data-page="3">2</a></li>
-                <li><a href="#" class="paginate-review" data-page="2">2</a></li>
 
 
-            </ul>
-        </div>
-    </div>
+
+    <script>
+        $(document).ready(function() {
+
+            addReviewPagination();
+            reviewPagination(1);
+
+            $(".paginate-review").click(function($this) {
+                const page = parseInt($(this).data("page"));
+                reviewPagination(page);
+
+            });
+
+        });
+
+        function reviewPagination(page) {
+            var itemsPerPage = 4;
+            var products = $(".review_tab");
+
+            $(".review_tab").each(function() {
+                $(this).addClass("hidden");
+            });
+
+            var tot = products.length;
+
+            const totalPages = Math.ceil(tot / itemsPerPage);
+
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+
+            for (let index = startIndex; index < endIndex; index++) {
+                $(".review_tab").eq(index).removeClass("hidden");
+            }
+        }
+
+        function addReviewPagination() {
+            var cnt = 4;
+            var products = $(".review_tab");
+
+            var tot = products.length;
+
+            const totalPages = Math.ceil(tot / cnt);
+
+            for (let i = 1; i <= totalPages; i++) {
+                $(".reviews-pagination").append(
+                    `<li><a href="#" class="paginate-review"  data-page="${i}">${i}</a></li>`
+                );
+
+                if (i==5) {
+                    break;
+                }
+            }
+
+
+        }
+    </script>
 @endsection

@@ -150,10 +150,10 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
+        $reviews=Review::where('Product_id',$id)->get()->toArray();
 
         $variants = Variants::all()->toArray();
         $products = Product::all()->toArray();
-
 
         $prod = Product::where("Product_id", $id)->first()->toArray();
         $pna = $prod['Product_name'];
@@ -166,7 +166,7 @@ class ProductController extends Controller
         $cat_na = $cat->Category_Name;
         $br_na = $br->Brand_Name;
 
-        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants', 'products');
+        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants', 'products','reviews');
 
         return view('frontend.ProductPage')->with($data);
     }
