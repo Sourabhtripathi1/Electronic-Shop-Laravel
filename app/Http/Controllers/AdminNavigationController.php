@@ -30,6 +30,21 @@ class AdminNavigationController extends Controller
         return view('admin.ViewOrders')->with($data);
     }
 
+    public function todayOrders(){
+        $user = Customer::all();
+        $orders = Orders::orderBy('Order_Date', 'desc')->where('Order_Date',date('Y-m-d'))->get()->toArray();
+        $order_details = Order_details::all()->toArray();
+        $variants = Variants::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $products = Product::all()->toArray();
+
+        $data = compact('variants', 'pictures', 'products', 'user', 'orders', 'order_details');
+
+        return view('admin.TodayOrders')->with($data);
+    }
+
+
+
     public function CustomerList()
     {
         $users = Customer::all();

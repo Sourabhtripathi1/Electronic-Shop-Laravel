@@ -102,7 +102,7 @@ Route::post('/admin/login',  [AdminNavigationController::class, 'login']);
 
 Route::get('/admin/logout',  [AdminNavigationController::class, 'logout']);
 
-
+Route::get('/admin/todayorder',  [AdminNavigationController::class, 'todayOrders'])->middleware('isAdmin');
 
 
 
