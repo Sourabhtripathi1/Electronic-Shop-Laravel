@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Customer;
@@ -58,10 +59,14 @@ class AdminNavigationController extends Controller
 
     public function login(Request $req)
     {
-        if ($req->Uname == "Admin") {
-            if ($req->pswd == "1") {
 
-                session()->put('admin_id', "Admin");
+       try {
+        $x=Admin::where('Username',$req->Uname)->get()->toArray();
+
+        if ($req->Uname == $x[0]['Username']) {
+            if ($req->pswd == $x[0]['password']) {
+
+                session()->put('admin_id', $x[0]['id']);
 
                 return redirect('/admins-index');
             } else {
@@ -70,8 +75,9 @@ class AdminNavigationController extends Controller
         } else {
             return redirect('/admins/validate/admin')->with('msg', 'Invalid Username !');
         }
-
-
+       } catch (\Throwable $th) {
+        return redirect('/admins/validate/admin')->with('msg', 'Invalid Username !');
+       }
     }
 
     public function logout()

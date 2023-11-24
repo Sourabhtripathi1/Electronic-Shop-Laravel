@@ -282,8 +282,6 @@ class CustomerController extends Controller
 
 
 
-
-
     public function userCheckout(Request $req)
     {
         $user = Customer::where('User_id', session('user_id'))->first()->toArray();
