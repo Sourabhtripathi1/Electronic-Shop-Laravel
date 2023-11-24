@@ -34,8 +34,8 @@
                             <option value="{{ $x->Category_id }}"
                                 @php
 if ($x->Category_id==$prod['Category']) {
-                                    echo "selected";
-                                } @endphp>
+                                         echo "selected";
+                                     } @endphp>
                                 {{ $x->Category_Name }}</option>
                         @endforeach
                     </select>
@@ -48,7 +48,7 @@ if ($x->Category_id==$prod['Category']) {
                             <option value="{{ $x->Brand_id }}"
                                 @php
 if ($x->Brand_id==$prod['Brand']) {
-                                    echo "selected";
+                                         echo "selected";
                                 } @endphp>
                                 {{ $x->Brand_Name }}</option>
                         @endforeach
@@ -232,7 +232,7 @@ if ($x->Brand_id==$prod['Brand']) {
 
                                                             @foreach ($x as $p)
                                                                 <div class="prologo-container">
-                                                                    <img height="100px" width="150px"
+                                                                    <img height="100px"
                                                                         src="{{ asset('/storage/site-assets/') }}/{{ $p['Source'] }}"
                                                                         class="prologo ">
                                                                     <div class="delete-container">
@@ -285,11 +285,11 @@ if ($x->Brand_id==$prod['Brand']) {
                                                 </div>
 
                                                 <script>
-                                                    function editVariantForm{{ $v['variant_id'] }}(){
-    const myform=document.getElementById('editVariantForm{{ $v['variant_id'] }}');
-     myform.submit()
+                                                    function editVariantForm{{ $v['variant_id'] }}() {
+                                                        const myform = document.getElementById('editVariantForm{{ $v['variant_id'] }}');
+                                                        myform.submit()
 
-}
+                                                    }
                                                 </script>
 
                                             </div>
