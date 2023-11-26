@@ -428,7 +428,7 @@
                             <div id="tab1" class="tab-pane active">
                                 <div class="products-slick" data-nav="#slick-nav-1">
 
-                                    @foreach ($con_products as $item)
+                                    @foreach ($phone_products as $item)
                                         <div class="product">
                                             <div class="product-img">
                                                 <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
@@ -518,7 +518,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product07.png" alt="">
+                                    <img src="./img/product07.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -531,7 +531,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product08.png" alt="">
+                                    <img src="./img/product08.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -544,7 +544,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product09.png" alt="">
+                                    <img src="./img/product09.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -559,7 +559,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product01.png" alt="">
+                                    <img src="./img/product01.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -572,7 +572,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product02.png" alt="">
+                                    <img src="./img/product02.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -585,7 +585,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product03.png" alt="">
+                                    <img src="./img/product03.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -611,7 +611,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product04.png" alt="">
+                                    <img src="./img/product04.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -624,7 +624,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product05.png" alt="">
+                                    <img src="./img/product05.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -637,7 +637,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product06.png" alt="">
+                                    <img src="./img/product06.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -652,7 +652,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product07.png" alt="">
+                                    <img src="./img/product07.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -665,7 +665,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product08.png" alt="">
+                                    <img src="./img/product08.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -678,7 +678,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product09.png" alt="">
+                                    <img src="./img/product09.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -706,7 +706,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product01.png" alt="">
+                                    <img src="./img/product01.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -719,7 +719,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product02.png" alt="">
+                                    <img src="./img/product02.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -732,7 +732,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product03.png" alt="">
+                                    <img src="./img/product03.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -747,7 +747,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product04.png" alt="">
+                                    <img src="./img/product04.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -760,7 +760,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product05.png" alt="">
+                                    <img src="./img/product05.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -773,7 +773,7 @@
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
-                                    <img src="{{ env('APP_URL') }}/frontend/img/product06.png" alt="">
+                                    <img src="./img/product06.png" alt="">
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category">Category</p>
@@ -792,4 +792,40 @@
         <!-- /container -->
     </div>
     <!-- /SECTION -->
+
+
+
+    {{--
+    <div>
+        @php
+            $i = 0;
+        @endphp
+        @foreach ($headphone_products as $item)
+            @if ($i % 3 == 0)
+                <div>
+            @endif
+            <!-- product widget -->
+            <div class="product-widget">
+                <div class="product-img">
+                    <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
+                        alt="">
+                </div>
+                <div class="product-body">
+                    <p class="product-category"> {{ getCategory($item['Category'], $category) }}</p>
+                    <h3 class="product-name"><a
+                            href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                            {{ $item['Product_name'] }}</a></h3>
+                    <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                    </h4>
+                </div>
+            </div>
+            <!-- /product widget -->
+            @if ($i % 3 == 0)
+        </div>
+        @endif
+        @php
+            $i++;
+        @endphp
+        @endforeach
+    </div> --}}
 @endsection

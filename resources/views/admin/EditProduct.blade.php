@@ -196,7 +196,7 @@ if ($x->Brand_id==$prod['Brand']) {
                                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Variant</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -261,13 +261,13 @@ if ($x->Brand_id==$prod['Brand']) {
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <input type="file" class="btn btn-primary btn-sm"
-                                                            onChange="addImg{{ $v['variant_id'] }}()" name="img">
+                                                            onChange=`addImg{{ $v['variant_id'] }}()` name="img">
 
                                                     </form>
 
                                                     <script>
                                                         function addImg{{ $v['variant_id'] }}() {
-                                                            const myform = document.getElementById('submitimg{{ $v['variant_id'] }}');
+                                                            const myform = document.getElementById(`submitimg{{ $v['variant_id'] }}`);
                                                             myform.submit()
 
 
@@ -286,7 +286,7 @@ if ($x->Brand_id==$prod['Brand']) {
 
                                                 <script>
                                                     function editVariantForm{{ $v['variant_id'] }}() {
-                                                        const myform = document.getElementById('editVariantForm{{ $v['variant_id'] }}');
+                                                        const myform = document.getElementById(`editVariantForm{{ $v['variant_id'] }}`);
                                                         myform.submit()
 
                                                     }

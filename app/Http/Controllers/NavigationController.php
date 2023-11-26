@@ -44,12 +44,19 @@ class NavigationController extends Controller
         $brands = Brand::all()->toArray();
 
         $lap = Category::where('Category_Name', 'Laptop')->first()->toArray()['Category_id'];
-        $con = Category::where('Category_Name', 'Smart Phone')->first()->toArray()['Category_id'];
+        $phone = Category::where('Category_Name', 'Smart Phone')->first()->toArray()['Category_id'];
+        $camera = Category::where('Category_Name', 'Camera')->first()->toArray()['Category_id'];
+        $tv = Category::where('Category_Name', 'Television')->first()->toArray()['Category_id'];
+        $headphone = Category::where('Category_Name', 'Headphones')->first()->toArray()['Category_id'];
 
         $laptop_products = Product::where('Category', $lap)->get()->toArray();
-        $con_products = Product::where('Category', $con)->get()->toArray();
+        $phone_products = Product::where('Category', $phone)->get()->toArray();
+        $camera_products = Product::where('Category', $camera)->get()->toArray();
+        $tv_products = Product::where('Category', $tv)->get()->toArray();
+        $headphone_products = Product::where('Category', $headphone)->get()->toArray();
 
-        $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'laptop_products', 'con_products');
+
+        $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'laptop_products', 'phone_products', 'camera_products', 'tv_products', 'headphone_products');
 
         return view('frontend.index')->with($data);
     }
@@ -73,15 +80,6 @@ class NavigationController extends Controller
             $cat = count($data->category) > 0 ? $data->category : getAllCat($category);
             $brnd = count($data->brand) > 0 ? $data->brand : getAllBrand($brands);
             $price = $data->price;
-
-            // print_r($cat);
-            // echo "<br>";
-            // print_r($brnd);
-            // echo "<br>";
-            // print_r($price);
-
-
-
 
             $products = array_filter($products_all, function ($item) use ($brnd, $cat, $price, $variants) {
 
@@ -231,7 +229,7 @@ class NavigationController extends Controller
             'contact' => $req->contact,
         ];
 
-        Mail::to('ganeshprasadtripathi38@gmail.com')->send(new queryMail($mailData));
+        // Mail::to('ganeshprasadtripathi38@gmail.com')->send(new queryMail($mailData));
 
         return redirect()->back()->with('success', 'Query sent Successfully');
     }

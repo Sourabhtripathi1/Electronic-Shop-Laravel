@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="newsletter">
-                  <p>Thank You for visiting<strong> {{env('APP_NAME')}}</strong></p>
-                      {{-- <form method="GET" action="{{env('APP_URL')}}/news-letter">
-                        <input class="input" type="email" placeholder="Enter Your Email" required>
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    <p>Thank You for visiting<strong> {{env('APP_NAME')}}</strong></p>
+                    {{-- <form method="GET" action="{{env('APP_URL')}}/news-letter">
+                    <input class="input" type="email" placeholder="Enter Your Email" required>
+                    <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
                     </form> --}}
                     <ul class="newsletter-follow">
                         <li>
@@ -45,9 +45,8 @@
                         <h3 class="footer-title">About Us</h3>
 
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+91-8619826308</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i>sourabhtripathi8103@email.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -56,7 +55,6 @@
                     <div class="footer">
                         <h3 class="footer-title">Categories</h3>
                         <ul class="footer-links">
-                            <li><a href="#">Hot deals</a></li>
                             <li><a href="#">Laptops</a></li>
                             <li><a href="#">Smartphones</a></li>
                             <li><a href="#">Cameras</a></li>
@@ -74,7 +72,6 @@
                             <li><a href="#">About Us</a></li>
                             <li><a href="#">Contact Us</a></li>
                             <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Orders and Returns</a></li>
                             <li><a href="#">Terms & Conditions</a></li>
                         </ul>
                     </div>
@@ -87,7 +84,6 @@
                             <li><a href="#">My Account</a></li>
                             <li><a href="#">View Cart</a></li>
                             <li><a href="#">Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
                             <li><a href="#">Help</a></li>
                         </ul>
                     </div>
@@ -106,12 +102,12 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <ul class="footer-payments">
-                        <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-                        <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-                        <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-                        <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-                        <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-                        <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                        <li><a><i class="fa fa-cc-visa"></i></a></li>
+                        <li><a><i class="fa fa-credit-card"></i></a></li>
+                        <li><a><i class="fa fa-cc-paypal"></i></a></li>
+                        <li><a><i class="fa fa-cc-mastercard"></i></a></li>
+                        <li><a><i class="fa fa-cc-discover"></i></a></li>
+                        <li><a><i class="fa fa-cc-amex"></i></a></li>
                     </ul>
                     <span class="copyright">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
