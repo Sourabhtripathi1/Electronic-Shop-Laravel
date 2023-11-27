@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Picture;
 use App\Models\Review;
 use App\Models\Variants;
+use App\Models\Cart;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -58,22 +59,23 @@ class ProductController extends Controller
         return view('admin.AddProduct')->with($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
     public function store(Request $req)
     {
 
         $rules = [
-            'pname'=>'required|string',
-            'material'=>'required|string',
-            'category'=>'required|string',
-            'dimention'=>'required|string',
-            'brand'=>'required|string',
-            'desc'=>'required|string',
-            'Stock.*'=>'required|numeric',
-            'Color.*'=>'required|string',
-            'Price.*'=>'required|numeric',
+            'pname' => 'required|string|max:200',
+            'material' => 'required|string|max:50',
+            'category' => 'required|string|max:15',
+            'dimention' => 'required|string|max:20',
+            'brand' => 'required|string|max:15',
+            'desc' => 'required|string|max:2500',
+            'Stock.*' => 'required|numeric|max:99999999',
+            'Color.*' => 'required|string|max:30',
+            'Price.*' => 'required|numeric|max:99999999',
+            'Picture' => 'required|file|mimetypes:jpeg,png,gif,webp',
         ];
 
         $messages = [
@@ -83,7 +85,12 @@ class ProductController extends Controller
             'Color.*.string' => 'Each element in the Color field should be string.',
             'Stock.*.numeric' => 'Each element in the Stock field should be numeric.',
             'Price.*.numeric' => 'Each element in the Price field should be numeric.',
-        ];
+            'Stock.*.max' => 'Amount in each element of Stock field should be less than 99999999.',
+            'Color.*.max:30' => 'Characters in each element of Color field should be less than 30.',
+            'Price.*.max' => 'Amount in each element of Price field should be less than 99999999.',
+            'Picture.*.image' => 'The file must be an image.',
+            'Picture.*.mimetypes' => 'The file must be an image.',
+           ];
 
         $req->validate($rules, $messages);
 
@@ -101,7 +108,7 @@ class ProductController extends Controller
         //     $prod->Product_name = $req->pname;
         //     $prod->Material = $req->material;
         //     $prod->Dimention = $req->dimention;
-        //     $prod->Brand =  $req->brand;
+        //     $prod->Brand = $req->brand;
         //     $prod->Category = $req->category;
         //     $prod->Description = $req->desc;
 
@@ -133,7 +140,7 @@ class ProductController extends Controller
         //         $var->variant_id = getID(10);
         //         $var->Product_id = $prod_id;
         //         $var->Stock = $req->Stock[$i];
-        //         $var->Picture =   json_encode($pcs);
+        //         $var->Picture = json_encode($pcs);
         //         $var->Color = $req->Color[$i];
         //         $var->Price = $req->Price[$i];
 
@@ -144,11 +151,11 @@ class ProductController extends Controller
 
         //     app(ProductController::class)->destroy($prod_id);
 
-        //     return redirect('/admins-product');
+        //     return redirect()->back()->with('error');
+
         // }
-
-
         return redirect('/admins-product');
+
     }
 
     /**
@@ -156,7 +163,10 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $reviews=Review::where('Product_id',$id)->get()->toArray();
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+
+        $reviews = Review::where('Product_id', $id)->get()->toArray();
 
         $variants = Variants::all()->toArray();
         $products = Product::all()->toArray();
@@ -169,10 +179,12 @@ class ProductController extends Controller
         $cat = Category::where('Category_id', $prod['Category'])->first();
         $br = Brand::where('Brand_id', $prod['Brand'])->first();
 
+        $pictures = Picture::all()->toArray();
+
         $cat_na = $cat->Category_Name;
         $br_na = $br->Brand_Name;
 
-        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants', 'products','reviews');
+        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants','pictures' ,'products', 'reviews','wish_count','cart');
 
         return view('frontend.ProductPage')->with($data);
     }
@@ -262,18 +274,18 @@ class ProductController extends Controller
 
         $review = new Review;
 
-        $review->User_id=session('user_id');
-        $review->Product_id= $id;
+        $review->User_id = session('user_id');
+        $review->Product_id = $id;
 
-        $review->name=$request->name;
-        $review->email=$request->mail;
+        $review->name = $request->name;
+        $review->email = $request->mail;
 
-        $review->content=$request->content;
-         $review->Review_Date=date("Y-m-d");
+        $review->content = $request->content;
+        $review->Review_Date = date("Y-m-d");
 
-         $review->save();
+        $review->save();
 
-         return redirect()->back();
+        return redirect()->back();
 
     }
 }

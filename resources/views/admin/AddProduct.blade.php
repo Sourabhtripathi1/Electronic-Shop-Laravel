@@ -12,6 +12,10 @@
 
 
     @if (count($errors) > 0)
+    <pre>
+        {{print_r($errors)}}
+    </pre>
+
         <div class="alert alert-danger">
             <ul style="margin: 0.75rem 0rem">
                 @if ($errors->has('Color.*'))
@@ -23,6 +27,9 @@
                 @if ($errors->has('Stock.*'))
                     <li> {{ $errors->first('Stock.*') }}</li>
                 @endif
+                @if ($errors->has('Picture.*'))
+                <li> {{ $errors->first('Picture.*') }}</li>
+            @endif
             </ul>
         </div>
     @endif

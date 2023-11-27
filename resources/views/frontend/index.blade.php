@@ -31,7 +31,7 @@
                             <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
-
+                                <div class="qty">{{$wish_count}}</div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -41,65 +41,35 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
-
+                                @if (session('user_id') !== null)
+                                <div class="qty">{{count($cart)}}</div>
+                                @else
+                                <div class="qty">0</div>
+                                @endif
                             </a>
                             <div class="cart-dropdown">
                                 @if (session('user_id') !== null)
                                     @if (count($cart) > 0)
                                         <div class="cart-list">
+                                            @foreach ($cart as $item)
                                             <div class="product-widget">
                                                 <div class="product-img">
-                                                    <img src="{{ env('APP_URL') }}/frontend/img/product01.png"
-                                                        alt="">
+                                                    <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                                                    alt="">
                                                 </div>
                                                 <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a>
+                                                    <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                                        {{ getProductName($item['Product_id'], $products) }}</a>
                                                     </h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                                    <h4 class="product-price"><span class="qty">{{$item['Quantity']}}x</span>₹{{ getPrice($item['Product_id'], $variants) }}</h4>
                                                 </div>
                                                 <button class="delete"><i class="fa fa-close"></i></button>
                                             </div>
-
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="{{ env('APP_URL') }}/frontend/img/product02.png"
-                                                        alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a>
-                                                    </h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="{{ env('APP_URL') }}/frontend/img/product02.png"
-                                                        alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a>
-                                                    </h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="{{ env('APP_URL') }}/frontend/img/product01.png"
-                                                        alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a>
-                                                    </h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <div class="cart-summary">
-                                            <small>4 Item(s) selected</small>
-                                            <h5>SUBTOTAL: $2940.00</h5>
+                                            <small>{{count($cart)}} Item(s) selected</small>
+                                            <h5>SUBTOTAL: ₹{{getCartTotal($cart)}}</h5>
                                         </div>
                                     @else
                                         cart is empty
@@ -242,7 +212,7 @@
                                     @foreach ($products as $item)
                                         <div class="product">
                                             <div class="product-img">
-                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
+                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
                                                     alt="">
                                                 <div class="product-label">
 
@@ -336,7 +306,7 @@
                                     @foreach ($laptop_products as $item)
                                         <div class="product">
                                             <div class="product-img">
-                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
+                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
                                                     alt="">
                                                 <div class="product-label">
 
@@ -431,7 +401,7 @@
                                     @foreach ($phone_products as $item)
                                         <div class="product">
                                             <div class="product-img">
-                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
+                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
                                                     alt="">
                                                 <div class="product-label">
 
@@ -507,325 +477,154 @@
             <div class="row">
                 <div class="col-md-4 col-xs-6">
                     <div class="section-title">
-                        <h4 class="title">Top selling</h4>
+                        <h4 class="title">Camera</h4>
                         <div class="section-nav">
                             <div id="slick-nav-3" class="products-slick-nav"></div>
                         </div>
                     </div>
 
                     <div class="products-widget-slick" data-nav="#slick-nav-3">
-                        <div>
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product07.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
 
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product08.png" alt="">
+                        @php
+                            $i = 0;
+                        @endphp
+                        @foreach ($camera_products as $item)
+                            @if ($i == 0)
+                                <div>
+                                @else
+                                    @if ($i % 3 == 0)
                                 </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
+                                <div>
+                            @endif
+                        @endif
+                        <!-- product widget -->
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                                    alt="">
                             </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product09.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
+                            <div class="product-body">
+                                <p class="product-category"> {{ getCategory($item['Category'], $category) }}</p>
+                                <h3 class="product-name"><a
+                                        href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                        {{ $item['Product_name'] }}</a></h3>
+                                <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                                </h4>
                             </div>
-                            <!-- product widget -->
                         </div>
-
-                        <div>
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product01.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product02.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product03.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- product widget -->
-                        </div>
+                        <!-- /product widget -->
+                        @if ($i == count($camera_products) - 1)
                     </div>
+                    @endif
+
+                    @php
+                        $i++;
+                    @endphp
+                    @endforeach
                 </div>
-
-                <div class="col-md-4 col-xs-6">
-                    <div class="section-title">
-                        <h4 class="title">Top selling</h4>
-                        <div class="section-nav">
-                            <div id="slick-nav-4" class="products-slick-nav"></div>
-                        </div>
-                    </div>
-
-                    <div class="products-widget-slick" data-nav="#slick-nav-4">
-                        <div>
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product04.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product05.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product06.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- product widget -->
-                        </div>
-
-                        <div>
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product07.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product08.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product09.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- product widget -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="clearfix visible-sm visible-xs"></div>
-
-                <div class="col-md-4 col-xs-6">
-                    <div class="section-title">
-                        <h4 class="title">Top selling</h4>
-                        <div class="section-nav">
-                            <div id="slick-nav-5" class="products-slick-nav"></div>
-                        </div>
-                    </div>
-
-                    <div class="products-widget-slick" data-nav="#slick-nav-5">
-                        <div>
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product01.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product02.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product03.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- product widget -->
-                        </div>
-
-                        <div>
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product04.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product05.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- /product widget -->
-
-                            <!-- product widget -->
-                            <div class="product-widget">
-                                <div class="product-img">
-                                    <img src="./img/product06.png" alt="">
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">Category</p>
-                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                    <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                </div>
-                            </div>
-                            <!-- product widget -->
-                        </div>
-                    </div>
-                </div>
-
             </div>
-            <!-- /row -->
+
+            <div class="col-md-4 col-xs-6">
+                <div class="section-title">
+                    <h4 class="title">Television</h4>
+                    <div class="section-nav">
+                        <div id="slick-nav-4" class="products-slick-nav"></div>
+                    </div>
+                </div>
+
+                <div class="products-widget-slick" data-nav="#slick-nav-4">
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach ($tv_products as $item)
+                        @if ($i == 0)
+                            <div>
+                            @else
+                                @if ($i % 3 == 0)
+                            </div>
+                            <div>
+                        @endif
+                    @endif
+                    <!-- product widget -->
+                    <div class="product-widget">
+                        <div class="product-img">
+                            <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                                alt="">
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category"> {{ getCategory($item['Category'], $category) }}</p>
+                            <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                    {{ $item['Product_name'] }}</a></h3>
+                            <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- /product widget -->
+                    @if ($i == count($tv_products) - 1)
+                </div>
+                @endif
+
+                @php
+                    $i++;
+                @endphp
+                @endforeach
+            </div>
         </div>
-        <!-- /container -->
+
+        <div class="clearfix visible-sm visible-xs"></div>
+
+        <div class="col-md-4 col-xs-6">
+            <div class="section-title">
+                <h4 class="title">Headphones</h4>
+                <div class="section-nav">
+                    <div id="slick-nav-5" class="products-slick-nav"></div>
+                </div>
+            </div>
+
+            <div class="products-widget-slick" data-nav="#slick-nav-5">
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($headphone_products as $item)
+                    @if ($i == 0)
+                        <div>
+                        @else
+                            @if ($i % 3 == 0)
+                        </div>
+                        <div>
+                    @endif
+                @endif
+                <!-- product widget -->
+                <div class="product-widget">
+                    <div class="product-img">
+                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                            alt="">
+                    </div>
+                    <div class="product-body">
+                        <p class="product-category"> {{ getCategory($item['Category'], $category) }}</p>
+                        <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                {{ $item['Product_name'] }}</a></h3>
+                        <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                        </h4>
+                    </div>
+                </div>
+                <!-- /product widget -->
+                @if ($i == count($headphone_products) - 1)
+            </div>
+            @endif
+
+            @php
+                $i++;
+            @endphp
+            @endforeach
+        </div>
+    </div>
+
+    </div>
+    <!-- /row -->
+    </div>
+    <!-- /container -->
     </div>
     <!-- /SECTION -->
 
-
-
-    {{--
-    <div>
-        @php
-            $i = 0;
-        @endphp
-        @foreach ($headphone_products as $item)
-            @if ($i % 3 == 0)
-                <div>
-            @endif
-            <!-- product widget -->
-            <div class="product-widget">
-                <div class="product-img">
-                    <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $images) }}"
-                        alt="">
-                </div>
-                <div class="product-body">
-                    <p class="product-category"> {{ getCategory($item['Category'], $category) }}</p>
-                    <h3 class="product-name"><a
-                            href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                            {{ $item['Product_name'] }}</a></h3>
-                    <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
-                    </h4>
-                </div>
-            </div>
-            <!-- /product widget -->
-            @if ($i % 3 == 0)
-        </div>
-        @endif
-        @php
-            $i++;
-        @endphp
-        @endforeach
-    </div> --}}
 @endsection

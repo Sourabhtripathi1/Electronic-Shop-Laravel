@@ -33,13 +33,13 @@
                             <td>{{ $p['Product_name'] }}</td>
                             <td>
                                 @php
-                                    
+
                                     array_filter($Brands, function ($val) use ($p) {
                                         if ($p['Brand'] == $val['Brand_id']) {
                                             echo $val['Brand_Name'];
                                         }
                                     });
-                                    
+
                                 @endphp
                             </td>
                             <td>
@@ -56,13 +56,13 @@
                             <td>{{ $p['Material'] }}</td>
                             <td>
                                 @php
-                                    
+
                                     $x = array_filter($Variants, function ($val) use ($p) {
                                         if ($p['Product_id'] == $val['Product_id']) {
                                             return $val;
                                         }
                                     });
-                                    
+
                                 @endphp
 
                                 @php
@@ -135,6 +135,6 @@
         <a href="/admins-product/create" class=""><button class="btn btn-primary">Create new Product</button></a>
     @endif
 
-
+    <br><br> <br><br>
     <!-- /.container-fluid -->
 @endsection

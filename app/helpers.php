@@ -185,4 +185,13 @@ function getAllBrand($brnd){
     return $br;
 }
 
+function getCartTotal($cart){
+    $total=0;
+    foreach ($cart as  $item) {
+        if($item['User_id']==session('user_id')){
+            $total+=($item['Quantity']*$item['Price']);
+        }
+    }
+    return $total;
+}
 

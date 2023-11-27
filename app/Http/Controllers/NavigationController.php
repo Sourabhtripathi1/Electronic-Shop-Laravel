@@ -35,11 +35,11 @@ class NavigationController extends Controller
 {
     public function indexPage()
     {
-
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
         $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
         $products = Product::all()->toArray();
         $variants = Variants::all()->toArray();
-        $images = Picture::all()->toArray();
+        $pictures = Picture::all()->toArray();
         $category = Category::all()->toArray();
         $brands = Brand::all()->toArray();
 
@@ -56,23 +56,24 @@ class NavigationController extends Controller
         $headphone_products = Product::where('Category', $headphone)->get()->toArray();
 
 
-        $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'laptop_products', 'phone_products', 'camera_products', 'tv_products', 'headphone_products');
+        $data = compact('products', 'variants', 'pictures', 'brands', 'category', 'cart','wish_count', 'laptop_products', 'phone_products', 'camera_products', 'tv_products', 'headphone_products');
 
         return view('frontend.index')->with($data);
     }
 
     public function shopPage(Request $req)
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
 
         if ($req->input('query')) {
 
             $category = Category::all()->toArray();
             $brands = Brand::all()->toArray();
-            $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
             $products_all = Product::all()->toArray();
             $products = Product::all()->toArray();
             $variants = Variants::all()->toArray();
-            $images = Picture::all()->toArray();
+            $pictures = Picture::all()->toArray();
 
             $arr = $req->input('query');
             $data = json_decode(base64_decode($arr));
@@ -86,21 +87,20 @@ class NavigationController extends Controller
                 return (in_array($item['Category'], $cat) && in_array($item['Brand'], $brnd)) && (getPrice($item['Product_id'], $variants) > $price->min && getPrice($item['Product_id'], $variants) < $price->max);
             });
 
-            $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'products_all');
+            $data = compact('products', 'variants', 'pictures', 'brands', 'category', 'products_all', 'cart','wish_count');
 
             //  print_r($products);
             return view('frontend.Shop')->with($data);
         } else {
 
-            $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
             $products = Product::all()->toArray();
             $products_all = Product::all()->toArray();
             $variants = Variants::all()->toArray();
-            $images = Picture::all()->toArray();
+            $pictures = Picture::all()->toArray();
             $category = Category::all()->toArray();
             $brands = Brand::all()->toArray();
 
-            $data = compact('products', 'variants', 'images', 'brands', 'category', 'cart', 'products_all');
+            $data = compact('products', 'variants', 'pictures', 'brands', 'category', 'products_all', 'cart','wish_count');
 
             return view('frontend.Shop')->with($data);
         }
@@ -108,12 +108,27 @@ class NavigationController extends Controller
 
     public function about()
     {
-        return view('frontend.about');
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+        $variants = Variants::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $products = Product::all()->toArray();
+
+        $data=compact('products', 'variants', 'pictures','cart','wish_count');
+
+        return view('frontend.about')->with($data);
     }
 
     public function contactUsPage()
     {
-        return view('frontend.ContactUs');
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+        $variants = Variants::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $products = Product::all()->toArray();
+        $data=compact('products', 'variants', 'pictures','cart','wish_count');
+
+        return view('frontend.ContactUs')->with($data);
     }
 
 
@@ -131,25 +146,37 @@ class NavigationController extends Controller
 
     public function userDashboard()
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+        $variants = Variants::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $products = Product::all()->toArray();
+        $data=compact('products', 'variants', 'pictures','cart','wish_count');
 
-        return view('frontend.UserDashboard');
+        return view('frontend.UserDashboard')->with($data);
     }
 
     public function userAllOrders()
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+
         $products = Product::all()->toArray();
         $pictures = Picture::all()->toArray();
         $variants = Variants::all()->toArray();
         $orders = Orders::where('User_id', session('user_id'))->get()->toArray();
         $order_details = Order_details::all()->toArray();
 
-        $data = compact('orders', 'order_details', 'variants', 'pictures', 'products');
+        $data = compact('orders', 'order_details', 'variants', 'pictures', 'products', 'cart','wish_count');
 
         return view('frontend.UserAllOrders')->with($data);
     }
 
     public function userActiveOrders()
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+
         $products = Product::all()->toArray();
         $pictures = Picture::all()->toArray();
         $variants = Variants::all()->toArray();
@@ -157,15 +184,20 @@ class NavigationController extends Controller
         $orders = Orders::where('User_id', session('user_id'))->where('Status', '!=', 'Dilevered')->get()->toArray();
         $order_details = Order_details::all()->toArray();
 
-        $data = compact('orders', 'order_details', 'variants', 'pictures', 'products');
+        $data = compact('orders', 'order_details', 'variants', 'pictures', 'products', 'cart','wish_count');
         return view('frontend.UserActiveOrders')->with($data);
     }
 
     public function userProfile()
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+        $variants = Variants::all()->toArray();
+        $pictures = Picture::all()->toArray();
+        $products = Product::all()->toArray();
         $user = Customer::where('User_id', session('user_id'))->first()->toArray();
 
-        $data = compact('user');
+        $data = compact('products', 'variants', 'pictures','user', 'cart','wish_count');
         return view('frontend.UserProfile')->with($data);
     }
 
@@ -186,36 +218,43 @@ class NavigationController extends Controller
 
     public function userCart()
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
+
         $cart = Cart::where("User_id", session('user_id'))->get()->toArray();
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
         $products = Product::all()->toArray();
 
-        $data = compact('cart', 'variants', 'pictures', 'products');
+        $data = compact( 'variants', 'pictures', 'products', 'cart','wish_count');
         return view('frontend.UserCart')->with($data);
     }
 
     public function userWishlist()
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
 
         $wishlist = Wishlist::where("User_id", session('user_id'))->get()->toArray();
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
         $products = Product::all()->toArray();
 
-        $data = compact('wishlist', 'variants', 'pictures', 'products');
+        $data = compact('wishlist', 'variants', 'pictures', 'products', 'cart','wish_count');
         return view('frontend.UserWishlist')->with($data);
     }
 
     public function userCheckout()
     {
+        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+      
         $user = Customer::where('User_id', session('user_id'))->first()->toArray();
         $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
         $products = Product::all()->toArray();
 
-        $data = compact('variants', 'pictures', 'products', 'cart', 'user');
+        $data = compact('variants', 'pictures', 'products', 'cart','wish_count', 'user');
         return view('frontend.checkout')->with($data);
     }
 

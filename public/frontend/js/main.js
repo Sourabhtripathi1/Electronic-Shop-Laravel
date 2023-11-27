@@ -455,7 +455,7 @@ function moveElementBasedOnWidth() {
 }
 
 function productPagination(page) {
-    var itemsPerPage = 5;
+    var itemsPerPage = 9;
     var products = $(".product_tab");
 
     $(".product_tab").each(function () {
@@ -476,8 +476,13 @@ function productPagination(page) {
     var hidden = $(".product_tab.hidden").length;
     var visible = $(".product_tab:not(.hidden)");
     var i = 1;
+    
     visible.each((index, item) => {
-        if (i % 2 == 0) {
+        if(i % 2 == 0 && i % 3 == 0){
+            $(item).after(
+                `<div class="clearfix visible-sm visible-xs"></div><div class="clearfix visible-lg visible-md "></div>`
+                );
+        }else if (i % 2 == 0) {
             $(item).after(`<div class="clearfix visible-sm visible-xs"></div>`);
         } else if (i % 3 == 0) {
             $(item).after(
@@ -491,7 +496,7 @@ function productPagination(page) {
 }
 
 function addProductPagination() {
-    var cnt = 5;
+    var cnt = 9;
     var products = $(".product_tab");
 
     var tot = products.length;
