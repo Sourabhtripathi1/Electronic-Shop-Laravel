@@ -75,7 +75,6 @@ class ProductController extends Controller
             'Stock.*' => 'required|numeric|max:99999999',
             'Color.*' => 'required|string|max:30',
             'Price.*' => 'required|numeric|max:99999999',
-            'Picture' => 'required|file|mimetypes:jpeg,png,gif,webp',
         ];
 
         $messages = [
@@ -88,74 +87,70 @@ class ProductController extends Controller
             'Stock.*.max' => 'Amount in each element of Stock field should be less than 99999999.',
             'Color.*.max:30' => 'Characters in each element of Color field should be less than 30.',
             'Price.*.max' => 'Amount in each element of Price field should be less than 99999999.',
-            'Picture.*.image' => 'The file must be an image.',
-            'Picture.*.mimetypes' => 'The file must be an image.',
-           ];
+        ];
 
         $req->validate($rules, $messages);
 
+        // retrn redirect('/admins-product');u
 
 
 
-        // try {
-        //     $vars = $req->var_no;
+        try {
+            $vars = $req->var_no;
 
 
-        //     $prod = new Product;
-        //     $prod_id = getID(15);
+            $prod = new Product;
+            $prod_id = getID(15);
 
-        //     $prod->Product_id = $prod_id;
-        //     $prod->Product_name = $req->pname;
-        //     $prod->Material = $req->material;
-        //     $prod->Dimention = $req->dimention;
-        //     $prod->Brand = $req->brand;
-        //     $prod->Category = $req->category;
-        //     $prod->Description = $req->desc;
+            $prod->Product_id = $prod_id;
+            $prod->Product_name = $req->pname;
+            $prod->Material = $req->material;
+            $prod->Dimention = $req->dimention;
+            $prod->Brand = $req->brand;
+            $prod->Category = $req->category;
+            $prod->Description = $req->desc;
 
-        //     $prod->save();
-        //     $p = $req->file('Picture');
-
-
-        //     for ($i = 0; $i < $vars; $i++) {
-        //         $pcs = [];
-
-        //         foreach ($p[$i + 1] as $x) {
-        //             $pic = new Picture;
-
-        //             $pic_id = getID(10);
-        //             $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
+            $prod->save();
+            $p = $req->file('Picture');
 
 
-        //             $pic->Picture_id = $pic_id;
-        //             $pic->Source = $pic_na;
+            for ($i = 0; $i < $vars; $i++) {
+                $pcs = [];
 
-        //             $x->storeAs('/public/site-assets', $pic_na);
+                foreach ($p[$i + 1] as $x) {
+                    $pic = new Picture;
 
-        //             $pic->save();
+                    $pic_id = getID(10);
+                    $pic_na = getID(35) . '.' . $x->getClientOriginalExtension();
 
-        //             array_push($pcs, $pic_id);
-        //         }
 
-        //         $var = new Variants;
-        //         $var->variant_id = getID(10);
-        //         $var->Product_id = $prod_id;
-        //         $var->Stock = $req->Stock[$i];
-        //         $var->Picture = json_encode($pcs);
-        //         $var->Color = $req->Color[$i];
-        //         $var->Price = $req->Price[$i];
+                    $pic->Picture_id = $pic_id;
+                    $pic->Source = $pic_na;
 
-        //         $var->save();
-        //         return redirect('/admins-product');
-        //     }
-        // } catch (Exception $e) {
+                    $x->storeAs('/public/site-assets', $pic_na);
 
-        //     app(ProductController::class)->destroy($prod_id);
+                    $pic->save();
 
-        //     return redirect()->back()->with('error');
+                    array_push($pcs, $pic_id);
+                }
 
-        // }
-        return redirect('/admins-product');
+                $var = new Variants;
+                $var->variant_id = getID(10);
+                $var->Product_id = $prod_id;
+                $var->Stock = $req->Stock[$i];
+                $var->Picture = json_encode($pcs);
+                $var->Color = $req->Color[$i];
+                $var->Price = $req->Price[$i];
 
+                $var->save();
+                return redirect('/admins-product');
+            }
+        } catch (Exception $e) {
+
+            app(ProductController::class)->destroy($prod_id);
+
+            return redirect()->back()->with('error');
+        }
     }
 
     /**
@@ -163,7 +158,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $wish_count=session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
+        $wish_count = session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
         $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
 
         $reviews = Review::where('Product_id', $id)->get()->toArray();
@@ -184,7 +179,7 @@ class ProductController extends Controller
         $cat_na = $cat->Category_Name;
         $br_na = $br->Brand_Name;
 
-        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants','pictures' ,'products', 'reviews','wish_count','cart');
+        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants', 'pictures', 'products', 'reviews', 'wish_count', 'cart');
 
         return view('frontend.ProductPage')->with($data);
     }
@@ -286,6 +281,5 @@ class ProductController extends Controller
         $review->save();
 
         return redirect()->back();
-
     }
 }
