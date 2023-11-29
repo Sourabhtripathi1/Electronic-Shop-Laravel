@@ -57,7 +57,9 @@
                             <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
+                                @if ($wish_count>0)
                                 <div class="qty">{{ $wish_count }}</div>
+                                @endif
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -69,8 +71,7 @@
                                 <span>Your Cart</span>
                                 @if (session('user_id') !== null)
                                     <div class="qty">{{ count($cart) }}</div>
-                                @else
-                                    <div class="qty">0</div>
+
                                 @endif
                             </a>
                             <div class="cart-dropdown">
