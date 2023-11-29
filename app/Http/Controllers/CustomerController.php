@@ -129,7 +129,7 @@ class CustomerController extends Controller
 
                     session()->put('user_id', $x[0]['User_id']);
 
-                    return redirect('/');
+                    return redirect('/user/dashboard');
                 } else {
                     return redirect('/user/login')->with('msg', 'Invalid Password !');
                 }
