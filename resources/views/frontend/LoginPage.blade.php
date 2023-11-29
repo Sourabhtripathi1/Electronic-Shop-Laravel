@@ -125,6 +125,55 @@
         <h2 class="display-heading">{{ session('msg') }} </h2>
     @endif
 
+    @if (count($errors) > 0)
+        <div class="display-heading">
+            <ul>
+                @error('email')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+                @error('Uname')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+                @error('name')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+                @error('password')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+                @error('cnf_password')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+                @error('pswd')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+            </ul>
+        </div>
+    @endif
+
 
     <div class="headg">
         <h1 style="font-size: 40px; font-weight: 900; color:rgb(196, 178, 178);">
@@ -138,8 +187,8 @@
             <form action="{{ env('APP_URL') }}/user/sign-in" method="POST">
                 @csrf
                 <label for="chk" aria-hidden="false">Login</label>
-                <input type="text" name="Uname" placeholder="User Name" required="">
-                <input type="password" name="pswd" placeholder="Password" required="">
+                <input type="text" name="Uname" placeholder="User Name" required>
+                <input type="password" name="pswd" placeholder="Password" required>
                 <br>
                 <button type="submit">Login</button>
             </form>
@@ -152,16 +201,16 @@
 
                 <label for="chk" aria-hidden="false">Sign up</label>
                 <div id="detail">
-                    <input type="email" name="email" placeholder="Email" required="">
-                    <input type="text" name="Uname" placeholder="User name" required="">
-                    <input type="text" name="name" placeholder="Name" required="">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="Uname" placeholder="User name" required>
+                    <input type="text" name="name" placeholder="Name" required>
                     <br>
                     <button type="button" onclick="add_click()">Submit</button>
                 </div>
 
                 <div id="pswd_section" style="display: none">
-                    <input type="password" name="password" placeholder="Password" required="">
-                    <input type="password" name="cnf_password" placeholder="Confirmation Password" required="">
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" name="cnf_password" placeholder="Confirmation Password" required>
                     <br>
                     <button type="submit">Confirm</button>
                 </div>

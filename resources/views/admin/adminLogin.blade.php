@@ -125,6 +125,29 @@
         <h2 class="display-heading">{{ session('msg') }} </h2>
     @endif
 
+    @if (count($errors) > 0)
+        <div class="display-heading">
+            <ul>
+                @error('Uname')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+                @error('pswd')
+                    <li>
+                        <h3>
+                            {{ $message }}
+                        </h3>
+                    </li>
+                @enderror
+
+            </ul>
+        </div>
+    @endif
+
+
 
 
     <div class="headg">

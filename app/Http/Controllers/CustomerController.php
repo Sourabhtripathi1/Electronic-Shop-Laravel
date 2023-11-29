@@ -84,8 +84,7 @@ class CustomerController extends Controller
 
     public function Customer_signup(Request $req)
     {
-        // echo "<pre>";
-        // print_r($req->all());
+
 
         $req->validate([
             'email' => 'required|email',
@@ -93,13 +92,12 @@ class CustomerController extends Controller
             'name' => 'required',
             'password' => 'required',
             'cnf_password' => 'required|same:password'
+        ],[
+            'email.email'=>'Invalid Email Type',
+            'cnf_password.same'=>'Confirm Password do nat match with Password'
         ]);
 
         $x = Customer::where('Email', $req->email)->orWhere('Username', $req->Uname)->get();
-
-        print_r($x);
-
-        echo count($x);
 
         if (count($x) == 0) {
             $cus = new Customer;
@@ -119,6 +117,12 @@ class CustomerController extends Controller
 
     public function Customer_login(Request $req)
     {
+
+        $req->validate([
+            'Uname' => 'required',
+            'pswd' => 'required'
+        ]);
+
         $x = Customer::where('Email', $req->Uname)->orWhere('Username', $req->Uname)->get()->toArray();
 
         if (count($x) > 0) {
