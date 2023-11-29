@@ -17,13 +17,22 @@
                 @csrf
                 <div class="mb-3">
                     <label for="" class="form-label">Category Name</label>
-                    <input type="text" class="form-control" id="" name="Category_name">
+                    <input type="text" class="form-control" id="" name="Category_name" required>
                 </div>
+                @error('Category_name')
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
                 <div class="mb-3">
                     <label for="" class="form-label">Add Category Pic</label>
-                    <input type="file" class="form-control" name="category_pic" id="">
-
+                    <input type="file" class="form-control" name="category_pic" id="" required>
                 </div>
+                @error('category_pic')
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

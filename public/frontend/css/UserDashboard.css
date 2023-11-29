@@ -151,7 +151,6 @@ a {
     margin: 15px 0;
 }
 
-
 .profile-record h3 {
     color: #d10024;
 }
@@ -169,42 +168,76 @@ a {
     visibility: hidden;
 }
 
-.prod-set{
+.prod-set {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
 }
 
-.prod-img img{
+.prod-img img {
     max-height: 40px;
     max-width: 40px;
-
 }
 
-.prod-img{
+.prod-img {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 5px;
     width: 40px;
     height: 40px;
-
 }
 
-.prod-price{
+.prod-price {
     font-weight: 800;
     margin-left: 5px;
 }
 
+.card-wrapper-d {
+    display: flex;
+    flex-wrap: wrap;
 
+    /* justify-content: space-between; */
+}
 
+.card-d {
+    height: 100px;
+    width: 30%;
+    border-radius: 0.65rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgb(36 33 33 / 10%);
+    border: none;
+    border-left: 4px;
+    background-color: whitesmoke;
+    border-left-style: solid;
+    border-left-color: #d10024;
 
+    margin: 10px;
+}
 
+.card-body-d {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.card-heading-d {
+    padding: 3px;
+}
 
+.card-heading-d h4 {
+    color: #6d6d71c7;
+}
+
+.card-count {
+    padding: 0px 3px;
+}
+
+.card-count h3 {
+    color: #d10024;
+}
 
 @media screen and (max-width: 992px) {
-
     .profile-record {
         display: block;
     }
@@ -261,6 +294,17 @@ a {
         width: 100% !important;
         z-index: 100 !important;
         background-color: #b56c7947 !important;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .card-d {
+        width: 45%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .card-d {
+        width: 100%;
     }
 }
 

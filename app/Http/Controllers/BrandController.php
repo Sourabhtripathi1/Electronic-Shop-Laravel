@@ -51,6 +51,12 @@ class BrandController extends Controller
      */
     public function store(Request $req)
     {
+
+        $req->validate([
+            'brand_name' => 'required|string|max:50',
+            'brand_pic' => 'required|image|mimes:jpeg,jpg,png,gif,webp',
+        ]);
+
         $br = new Brand;
         $pic = new Picture;
 

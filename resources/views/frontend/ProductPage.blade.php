@@ -52,70 +52,73 @@
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix header-opt-cnt">
                     <div class="header-ctn">
-                     <!-- Wishlist -->
-                     <div>
-                        <a href="{{ env('APP_URL') }}/user/wishlist">
-                            <i class="fa fa-heart-o"></i>
-                            <span>Your Wishlist</span>
-                            <div class="qty">{{$wish_count}}</div>
-                        </a>
-                    </div>
-                    <!-- /Wishlist -->
+                        <!-- Wishlist -->
+                        <div>
+                            <a href="{{ env('APP_URL') }}/user/wishlist">
+                                <i class="fa fa-heart-o"></i>
+                                <span>Your Wishlist</span>
+                                <div class="qty">{{ $wish_count }}</div>
+                            </a>
+                        </div>
+                        <!-- /Wishlist -->
 
-                    <!-- Cart -->
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>Your Cart</span>
-                            @if (session('user_id') !== null)
-                            <div class="qty">{{count($cart)}}</div>
-                            @else
-                            <div class="qty">0</div>
-                            @endif
-                        </a>
-                        <div class="cart-dropdown">
-                            @if (session('user_id') !== null)
-                                @if (count($cart) > 0)
-                                    <div class="cart-list">
-                                        @foreach ($cart as $item)
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
-                                                alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                                    {{ getProductName($item['Product_id'], $products) }}</a>
-                                                </h3>
-                                                <h4 class="product-price"><span class="qty">{{$item['Quantity']}}x</span>₹{{ getPrice($item['Product_id'], $variants) }}</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
+                        <!-- Cart -->
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Your Cart</span>
+                                @if (session('user_id') !== null)
+                                    <div class="qty">{{ count($cart) }}</div>
+                                @else
+                                    <div class="qty">0</div>
+                                @endif
+                            </a>
+                            <div class="cart-dropdown">
+                                @if (session('user_id') !== null)
+                                    @if (count($cart) > 0)
+                                        <div class="cart-list">
+                                            @foreach ($cart as $item)
+                                                <div class="product-widget">
+                                                    <div class="product-img">
+                                                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <h3 class="product-name"><a
+                                                                href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                                                {{ getProductName($item['Product_id'], $products) }}</a>
+                                                        </h3>
+                                                        <h4 class="product-price"><span
+                                                                class="qty">{{ $item['Quantity'] }}x</span>₹{{ getPrice($item['Product_id'], $variants) }}
+                                                        </h4>
+                                                    </div>
+                                                    <button class="delete"><i class="fa fa-close"></i></button>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="cart-summary">
-                                        <small>{{count($cart)}} Item(s) selected</small>
-                                        <h5>SUBTOTAL: ₹{{getCartTotal($cart)}}</h5>
+                                        <div class="cart-summary">
+                                            <small>{{ count($cart) }} Item(s) selected</small>
+                                            <h5>SUBTOTAL: ₹{{ getCartTotal($cart) }}</h5>
+                                        </div>
+                                    @else
+                                        cart is empty
+                                    @endif
+                                    <div class="cart-btns">
+                                        <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
+                                        <a href="{{ env('APP_URL') }}/user/checkout">Checkout <i
+                                                class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 @else
-                                    cart is empty
+                                    Please Login !
+
+                                    <br>
+
+                                    <a href="{{ env('APP_URL') }}/user/dashboard"
+                                        class="cart_login"><button>Login</button></a>
                                 @endif
-                                <div class="cart-btns">
-                                    <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
-                                    <a href="{{ env('APP_URL') }}/user/checkout">Checkout <i
-                                            class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            @else
-                                Please Login !
-
-                                <br>
-
-                                <a href="{{ env('APP_URL') }}/user/dashboard"
-                                    class="cart_login"><button>Login</button></a>
-                            @endif
+                            </div>
                         </div>
-                    </div>
-                    <!-- /Cart -->
+                        <!-- /Cart -->
 
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
@@ -248,8 +251,7 @@
                                 style="display: none">
                                 @csrf
                                 <input type="text" name="prod_id" id="prod_id" value="{{ $id }}">
-                                <input type="text" name="var_id" id="var_id"
-                                    value="{{ $var[0]['variant_id'] }}">
+                                <input type="text" name="var_id" id="var_id" value="{{ $var[0]['variant_id'] }}">
                                 <input type="text" name="qty" id="qtny" value="">
 
 
@@ -371,16 +373,16 @@
                                             <ul class="reviews">
 
                                                 @foreach ($reviews as $item)
-                                                <li class="review_tab">
-                                                    <div class="review-heading">
-                                                        <h5 class="name">{{ $item['name'] }}</h5>
-                                                        <p class="date">{{ $item['Review_Date'] }}</p>
+                                                    <li class="review_tab">
+                                                        <div class="review-heading">
+                                                            <h5 class="name">{{ $item['name'] }}</h5>
+                                                            <p class="date">{{ $item['Review_Date'] }}</p>
 
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <p>{{ $item['content'] }}</p>
-                                                    </div>
-                                                </li>
+                                                        </div>
+                                                        <div class="review-body">
+                                                            <p>{{ $item['content'] }}</p>
+                                                        </div>
+                                                    </li>
                                                 @endforeach
 
                                             </ul>
@@ -527,7 +529,7 @@
                     `<li><a href="#" class="paginate-review"  data-page="${i}">${i}</a></li>`
                 );
 
-                if (i==5) {
+                if (i == 5) {
                     break;
                 }
             }

@@ -12,9 +12,9 @@
 
 
     @if (count($errors) > 0)
-    <pre>
+        {{-- <pre>
         {{print_r($errors)}}
-    </pre>
+    </pre> --}}
 
         <div class="alert alert-danger">
             <ul style="margin: 0.75rem 0rem">
@@ -28,8 +28,8 @@
                     <li> {{ $errors->first('Stock.*') }}</li>
                 @endif
                 @if ($errors->has('Picture.*'))
-                <li> {{ $errors->first('Picture.*') }}</li>
-            @endif
+                    <li> {{ $errors->first('Picture.*') }}</li>
+                @endif
             </ul>
         </div>
     @endif
@@ -42,7 +42,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="" name="pname">
+                    <input type="text" class="form-control" id="" name="pname" required>
                     <br>
                     @error('pname')
                         <div class="alert alert-danger">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Material</label>
-                    <input type="text" class="form-control" id="" name="material">
+                    <input type="text" class="form-control" id="" name="material" required>
                     <br>
                     @error('material')
                         <div class="alert alert-danger">
@@ -62,7 +62,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Category</label>
-                    <select class="form-control" name="category">
+                    <select class="form-control" name="category" required>
                         <option selected disabled>Select Category:</option>
                         @foreach ($cat as $x)
                             <option value="{{ $x->Category_id }}">{{ $x->Category_Name }}</option>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label" name="brand">Brand</label>
-                    <select class="form-control" name="brand">
+                    <select class="form-control" name="brand" required>
                         <option selected disabled>Select Brand:</option>
                         @foreach ($br as $x)
                             <option value="{{ $x->Brand_id }}">{{ $x->Brand_Name }}</option>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Dimention</label>
-                    <input type="text" class="form-control" id="" name="dimention">
+                    <input type="text" class="form-control" id="" name="dimention" required>
                     <br>
                     @error('dimention')
                         <div class="alert alert-danger">
@@ -118,7 +118,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Description</label>
-                    <textarea class="form-control" name="desc" id="" rows="3"></textarea>
+                    <textarea class="form-control" name="desc" id="" rows="3" required></textarea>
                     <br>
                     @error('desc')
                         <div class="alert alert-danger">

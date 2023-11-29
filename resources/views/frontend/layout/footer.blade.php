@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="newsletter">
-                    <p>Thank You for visiting<strong> {{env('APP_NAME')}}</strong></p>
+                    <p>Thank You for visiting<strong> {{ env('APP_NAME') }}</strong></p>
                     {{-- <form method="GET" action="{{env('APP_URL')}}/news-letter">
                     <input class="input" type="email" placeholder="Enter Your Email" required>
                     <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
@@ -19,7 +19,8 @@
                             <a href="#"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a target="blank" href="https://www.instagram.com/sourabh.tripathi.1447/"><i class="fa fa-instagram"></i></a>
+                            <a target="blank" href="https://www.instagram.com/sourabh.tripathi.1447/"><i
+                                    class="fa fa-instagram"></i></a>
                         </li>
 
                     </ul>
@@ -111,9 +112,12 @@
                     </ul>
                     <span class="copyright">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>
+                        Copyright &copy;
+                        <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script> All rights reserved | This template is made with <i
+                            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </span>
 
@@ -129,13 +133,13 @@
 <!-- /FOOTER -->
 
 <!-- jQuery Plugins -->
-<script src="{{env('APP_URL')}}/frontend/js/jquery.min.js"></script>
-<script src="{{env('APP_URL')}}/frontend/js/bootstrap.min.js"></script>
-<script src="{{env('APP_URL')}}/frontend/js/slick.min.js"></script>
-<script src="{{env('APP_URL')}}/frontend/js/nouislider.min.js"></script>
-<script src="{{env('APP_URL')}}/frontend/js/jquery.zoom.min.js"></script>
-<script src="{{env('APP_URL')}}/frontend/js/main.js"></script>
-<script src="{{env('APP_URL')}}/frontend/js/Script.js"></script>
+<script src="{{ env('APP_URL') }}/frontend/js/jquery.min.js"></script>
+<script src="{{ env('APP_URL') }}/frontend/js/bootstrap.min.js"></script>
+<script src="{{ env('APP_URL') }}/frontend/js/slick.min.js"></script>
+<script src="{{ env('APP_URL') }}/frontend/js/nouislider.min.js"></script>
+<script src="{{ env('APP_URL') }}/frontend/js/jquery.zoom.min.js"></script>
+<script src="{{ env('APP_URL') }}/frontend/js/main.js"></script>
+<script src="{{ env('APP_URL') }}/frontend/js/Script.js"></script>
 </body>
 
 </html>

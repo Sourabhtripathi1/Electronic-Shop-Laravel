@@ -35,7 +35,7 @@ Route::post('/user/sign-in', [CustomerController::class, 'Customer_login']);
 
 Route::resource('/admins-product/variant', VariantController::class)->middleware('isAdmin');
 
-Route::get('/admins-index',  [AdminNavigationController::class, 'adminIndex'])->middleware('isAdmin');
+Route::get('/admins-index', [AdminNavigationController::class, 'adminIndex'])->middleware('isAdmin');
 
 Route::get('/customers-list', [AdminNavigationController::class, 'CustomerList'])->middleware('isAdmin');
 
@@ -51,7 +51,7 @@ Route::get('/contact', [NavigationController::class, 'contactUsPage']);
 
 Route::post('/query/post', [NavigationController::class, 'postQuery']);
 
-Route::get('/about',  [NavigationController::class, 'about']);
+Route::get('/about', [NavigationController::class, 'about']);
 
 Route::get('/product/{id}', [ProductController::class, 'show']);
 
@@ -96,13 +96,13 @@ Route::get('/payment/get', [NavigationController::class, 'managePayment']);
 
 Route::post('/payment/response', [NavigationController::class, 'PaymentResponse']);
 
-Route::get('/admins/validate/admin',  [AdminNavigationController::class, 'adminLogin']);
+Route::get('/admins/validate/admin', [AdminNavigationController::class, 'adminLogin']);
 
-Route::post('/admin/login',  [AdminNavigationController::class, 'login']);
+Route::post('/admin/login', [AdminNavigationController::class, 'login']);
 
-Route::get('/admin/logout',  [AdminNavigationController::class, 'logout']);
+Route::get('/admin/logout', [AdminNavigationController::class, 'logout']);
 
-Route::get('/admin/todayorder',  [AdminNavigationController::class, 'todayOrders'])->middleware('isAdmin');
+Route::get('/admin/todayorder', [AdminNavigationController::class, 'todayOrders'])->middleware('isAdmin');
 
 
 

@@ -46,9 +46,15 @@ function addVariant() {
             input.setAttribute("type", "file");
             input.setAttribute("multiple", "true");
             input.setAttribute("name", `${x}[${var_value}][]`);
+            input.setAttribute("required", "true");
+        } else if (x == "Stock" || x == "Price") {
+            input.setAttribute("type", "number");
+            input.setAttribute("name", `${x}[]`);
+            input.setAttribute("required", "true");
         } else {
             input.setAttribute("type", "text");
             input.setAttribute("name", `${x}[]`);
+            input.setAttribute("required", "true");
         }
 
         input.classList.add("form-control");
@@ -75,7 +81,3 @@ function removeVariant() {
         variant[x - 1].remove();
     }
 }
-
-
-
-

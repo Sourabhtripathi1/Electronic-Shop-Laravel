@@ -111,7 +111,7 @@
 
         .display-heading {
             position: fixed;
-            top:0;
+            top: 0;
             text-align: center;
             color: #E0DEDE
         }
@@ -121,8 +121,8 @@
 <body>
 
     @if (session('msg'))
-    {{-- <h2 class="display-heading">Email or Username Already Exist! </h2> --}}
-    <h2 class="display-heading">{{session('msg')}} </h2>
+        {{-- <h2 class="display-heading">Email or Username Already Exist! </h2> --}}
+        <h2 class="display-heading">{{ session('msg') }} </h2>
     @endif
 
 

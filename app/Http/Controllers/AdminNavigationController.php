@@ -30,9 +30,10 @@ class AdminNavigationController extends Controller
         return view('admin.ViewOrders')->with($data);
     }
 
-    public function todayOrders(){
+    public function todayOrders()
+    {
         $user = Customer::all();
-        $orders = Orders::orderBy('Order_Date', 'desc')->where('Order_Date',date('Y-m-d'))->get()->toArray();
+        $orders = Orders::orderBy('Order_Date', 'desc')->where('Order_Date', date('Y-m-d'))->get()->toArray();
         $order_details = Order_details::all()->toArray();
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
@@ -75,24 +76,24 @@ class AdminNavigationController extends Controller
     public function login(Request $req)
     {
 
-       try {
-        $x=Admin::where('Username',$req->Uname)->get()->toArray();
+        try {
+            $x = Admin::where('Username', $req->Uname)->get()->toArray();
 
-        if ($req->Uname == $x[0]['Username']) {
-            if ($req->pswd == $x[0]['password']) {
+            if ($req->Uname == $x[0]['Username']) {
+                if ($req->pswd == $x[0]['password']) {
 
-                session()->put('admin_id', $x[0]['id']);
+                    session()->put('admin_id', $x[0]['id']);
 
-                return redirect('/admins-index');
+                    return redirect('/admins-index');
+                } else {
+                    return redirect('/admins/validate/admin')->with('msg', 'Invalid Password !');
+                }
             } else {
-                return redirect('/admins/validate/admin')->with('msg', 'Invalid Password !');
+                return redirect('/admins/validate/admin')->with('msg', 'Invalid Username !');
             }
-        } else {
+        } catch (\Throwable $th) {
             return redirect('/admins/validate/admin')->with('msg', 'Invalid Username !');
         }
-       } catch (\Throwable $th) {
-        return redirect('/admins/validate/admin')->with('msg', 'Invalid Username !');
-       }
     }
 
     public function logout()

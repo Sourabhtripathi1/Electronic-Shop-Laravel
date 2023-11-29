@@ -75,6 +75,7 @@ class ProductController extends Controller
             'Stock.*' => 'required|numeric|max:99999999',
             'Color.*' => 'required|string|max:30',
             'Price.*' => 'required|numeric|max:99999999',
+            'Picture.*.*' => 'required|image|mimes:jpeg,jpg,png,gif,webp',
         ];
 
         $messages = [
@@ -87,11 +88,13 @@ class ProductController extends Controller
             'Stock.*.max' => 'Amount in each element of Stock field should be less than 99999999.',
             'Color.*.max:30' => 'Characters in each element of Color field should be less than 30.',
             'Price.*.max' => 'Amount in each element of Price field should be less than 99999999.',
+            'Picture.*.*.image' => 'Submitted files are not of image type.',
+            'Picture.*.*.mimes' => 'Submitted files are not of image type.',
         ];
 
         $req->validate($rules, $messages);
 
-        // retrn redirect('/admins-product');u
+        // return redirect('/admins-product');
 
 
 
@@ -205,7 +208,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        echo "<pre>";
+
+        $request->validate([
+            'pname' => 'required|string|max:200',
+            'material' => 'required|string|max:50',
+            'category' => 'required|string|max:15',
+            'dimention' => 'required|string|max:20',
+            'brand' => 'required|string|max:15',
+            'desc' => 'required|string|max:2500',
+
+        ]);
 
         $prod = Product::where("Product_id", $id)->first();
 

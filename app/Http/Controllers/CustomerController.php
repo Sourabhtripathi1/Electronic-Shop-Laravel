@@ -177,9 +177,9 @@ class CustomerController extends Controller
 
             $wish->save();
 
-            return redirect()->back()->with('success','Added to wishlist');
+            return redirect()->back()->with('success', 'Added to wishlist');
         } else {
-            return redirect()->back()->with('error','Already exixt on wishlist');
+            return redirect()->back()->with('error', 'Already exixt on wishlist');
         }
     }
 
@@ -269,8 +269,8 @@ class CustomerController extends Controller
     public function UpdateUser()
     {
         DB::table('customers')->where('User_id', session('user_id'))->update([
-            'Name' =>  request()->input('name'),
-            'Username' =>  request()->input('uname'),
+            'Name' => request()->input('name'),
+            'Username' => request()->input('uname'),
             'Email' => request()->input('email'),
         ]);
         $user = Customer::where('User_id', session('user_id'))->first()->toArray();
@@ -323,7 +323,8 @@ class CustomerController extends Controller
             $ordet->save();
 
             DB::table('carts')->where('Sno', $item['Sno'])->delete();
-        };
+        }
+        ;
 
 
         return redirect()->back();

@@ -31,7 +31,7 @@
                             <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
-                                <div class="qty">{{$wish_count}}</div>
+                                <div class="qty">{{ $wish_count }}</div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -42,9 +42,9 @@
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
                                 @if (session('user_id') !== null)
-                                <div class="qty">{{count($cart)}}</div>
+                                    <div class="qty">{{ count($cart) }}</div>
                                 @else
-                                <div class="qty">0</div>
+                                    <div class="qty">0</div>
                                 @endif
                             </a>
                             <div class="cart-dropdown">
@@ -52,24 +52,27 @@
                                     @if (count($cart) > 0)
                                         <div class="cart-list">
                                             @foreach ($cart as $item)
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
-                                                    alt="">
+                                                <div class="product-widget">
+                                                    <div class="product-img">
+                                                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <h3 class="product-name"><a
+                                                                href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                                                {{ getProductName($item['Product_id'], $products) }}</a>
+                                                        </h3>
+                                                        <h4 class="product-price"><span
+                                                                class="qty">{{ $item['Quantity'] }}x</span>₹{{ getPrice($item['Product_id'], $variants) }}
+                                                        </h4>
+                                                    </div>
+                                                    <button class="delete"><i class="fa fa-close"></i></button>
                                                 </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                                        {{ getProductName($item['Product_id'], $products) }}</a>
-                                                    </h3>
-                                                    <h4 class="product-price"><span class="qty">{{$item['Quantity']}}x</span>₹{{ getPrice($item['Product_id'], $variants) }}</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
                                             @endforeach
                                         </div>
                                         <div class="cart-summary">
-                                            <small>{{count($cart)}} Item(s) selected</small>
-                                            <h5>SUBTOTAL: ₹{{getCartTotal($cart)}}</h5>
+                                            <small>{{ count($cart) }} Item(s) selected</small>
+                                            <h5>SUBTOTAL: ₹{{ getCartTotal($cart) }}</h5>
                                         </div>
                                     @else
                                         cart is empty

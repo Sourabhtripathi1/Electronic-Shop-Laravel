@@ -41,11 +41,10 @@
     display: none;
 } */
 
-
 .deletelogo {
     position: absolute;
-    top: 10px;
-    left: 6rem;
+    top: 5px;
+    right: 5px;
     opacity: 0;
     transition: opacity 0.3s ease;
     cursor: pointer;
@@ -59,14 +58,12 @@
     position: relative;
     display: inline-block;
     margin: 10px;
-
 }
 
 .prologo-container img {
     border: rgb(76, 75, 75) 2px solid;
     border-radius: 10px;
 }
-
 
 #admin-orders {
     margin-top: 3rem !important;
@@ -82,7 +79,6 @@
     width: 10px;
 } */
 
-
 #admin-orders table {
     width: 1600px !important;
 }
@@ -96,8 +92,6 @@
     margin-right: 5px;
 }
 
-
-
 .prod-set {
     display: flex;
     justify-content: space-between;
@@ -107,7 +101,6 @@
 .prod-img img {
     max-height: 40px;
     max-width: 40px;
-
 }
 
 .prod-img {
@@ -117,7 +110,6 @@
     margin-right: 5px;
     width: 40px;
     height: 40px;
-
 }
 
 .prod-price {

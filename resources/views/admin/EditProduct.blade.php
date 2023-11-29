@@ -10,6 +10,46 @@
 
 @section('main-section')
     <!-- Content Row -->
+    @if (count($errors) > 0)
+        {{--     <pre>
+        {{print_r($errors)}}
+    </pre> --}}
+
+        <div class="alert alert-danger">
+            <ul style="margin: 0.75rem 0rem">
+                @if ($errors->has('color'))
+                    <li>{{ $errors->first('color') }}</li>
+                @endif
+                @if ($errors->has('price'))
+                    <li> {{ $errors->first('price') }}</li>
+                @endif
+                @if ($errors->has('stock'))
+                    <li> {{ $errors->first('stock') }}</li>
+                @endif
+                @if ($errors->has('pics'))
+                    <li> {{ $errors->first('pics') }}</li>
+                @endif
+                @if ($errors->has('pname'))
+                    <li> {{ $errors->first('pname') }}</li>
+                @endif
+                @if ($errors->has('material'))
+                    <li> {{ $errors->first('material') }}</li>
+                @endif
+                @if ($errors->has('category'))
+                    <li> {{ $errors->first('category') }}</li>
+                @endif
+                @if ($errors->has('dimention'))
+                    <li> {{ $errors->first('dimention') }}</li>
+                @endif
+                @if ($errors->has('brand'))
+                    <li> {{ $errors->first('brand') }}</li>
+                @endif
+                @if ($errors->has('desc'))
+                    <li> {{ $errors->first('desc') }}</li>
+                @endif
+            </ul>
+        </div>
+    @endif
 
     <div class="row">
 
@@ -19,21 +59,22 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" name="pname" value="{{ $prod['Product_name'] }}">
+                    <input type="text" class="form-control" name="pname" value="{{ $prod['Product_name'] }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Material</label>
                     <input type="text" class="form-control" id="" name="material"
-                        value="{{ $prod['Material'] }}">
+                        value="{{ $prod['Material'] }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Category</label>
-                    <select class="form-control" name="category">
+                    <select class="form-control" name="category" required>
                         <option selected disabled>Select Category:</option>
                         @foreach ($cat as $x)
                             <option value="{{ $x->Category_id }}"
                                 @php
-if ($x->Category_id==$prod['Category']) {
+if ($x->Category_id==$prod['Category'])
+{
                                          echo "selected";
                                      } @endphp>
                                 {{ $x->Category_Name }}</option>
@@ -42,12 +83,13 @@ if ($x->Category_id==$prod['Category']) {
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label" name="brand">Brand</label>
-                    <select class="form-control" name="brand">
+                    <select class="form-control" name="brand" required>
                         <option selected disabled>Select Brand:</option>
                         @foreach ($br as $x)
                             <option value="{{ $x->Brand_id }}"
                                 @php
-if ($x->Brand_id==$prod['Brand']) {
+if ($x->Brand_id==$prod['Brand'])
+{
                                          echo "selected";
                                 } @endphp>
                                 {{ $x->Brand_Name }}</option>
@@ -56,12 +98,12 @@ if ($x->Brand_id==$prod['Brand']) {
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Dimention</label>
-                    <input type="text" class="form-control" name="dimention" value="{{ $prod['Dimention'] }}">
+                    <input type="text" class="form-control" name="dimention" value="{{ $prod['Dimention'] }}" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Description</label>
-                    <textarea class="form-control" name="desc" rows="3">{{ $prod['Description'] }}</textarea>
+                    <textarea class="form-control" name="desc" rows="3" required>{{ $prod['Description'] }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -101,17 +143,17 @@ if ($x->Brand_id==$prod['Brand']) {
                                     <div class="container">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Color</label>
-                                            <input type="text" class="form-control" name="color">
+                                            <input type="text" class="form-control" name="color" required>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="" class="form-label">Stock</label>
-                                            <input type="text" class="form-control" name="stock">
+                                            <input type="number" class="form-control" name="stock" required>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="" class="form-label">Price</label>
-                                            <input type="text" class="form-control" name="price">
+                                            <input type="number" class="form-control" name="price" required>
                                         </div>
 
                                         <div class="mb-3">
@@ -214,19 +256,22 @@ if ($x->Brand_id==$prod['Brand']) {
                                                                 <div class="mb-3">
                                                                     <label for="" class="form-label">Color</label>
                                                                     <input type="text" class="form-control"
-                                                                        name="color" value="{{ $v['Color'] }}">
+                                                                        name="color" value="{{ $v['Color'] }}"
+                                                                        required>
                                                                 </div>
 
                                                                 <div class="mb-3">
                                                                     <label for="" class="form-label">Stock</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="stock" value="{{ $v['Stock'] }}">
+                                                                    <input type="number" class="form-control"
+                                                                        name="stock" value="{{ $v['Stock'] }}"
+                                                                        required>
                                                                 </div>
 
                                                                 <div class="mb-3">
                                                                     <label for="" class="form-label">Price</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="price" value="{{ $v['Price'] }}">
+                                                                    <input type="number" class="form-control"
+                                                                        name="price" value="{{ $v['Price'] }}"
+                                                                        required>
                                                                 </div>
                                                             </div>
 

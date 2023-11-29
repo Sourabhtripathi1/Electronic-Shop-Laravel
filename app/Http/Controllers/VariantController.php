@@ -42,6 +42,27 @@ class VariantController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'color' => 'required|string|max:30',
+            'stock' => 'required|numeric|max:99999999',
+            'price' => 'required|numeric|max:99999999',
+            'pics' => 'required|image|mimes:jpeg,jpg,png,gif,webp',
+        ], [
+            'color.required' => "Color is required",
+            'color.string' => "Color should be string",
+            'color.max' => "Maximum length of color should be 30 characters",
+            'stock.required' => "Stock is required",
+            'stock.numeric' => "Stock should number",
+            'stock.max' => "Maximum value of stock exceed",
+            'price.required' => "Price is required",
+            'price.numeric' => "Price should number",
+            'price.max' => "Maximum value of price exceed",
+            'pics.required' => "Image is required",
+            'pics.image' => "Invalid image file type",
+            'pics.mimes' => "Invalid image file type",
+        ]);
+
         echo "<pre>";
 
         $var = new Variants;
@@ -104,8 +125,22 @@ class VariantController extends Controller
      */
     public function update(Request $req, string $id)
     {
+        $req->validate([
+            'color' => 'required|string|max:30',
+            'stock' => 'required|numeric|max:99999999|min:0',
+            'price' => 'required|numeric|max:99999999|min:0',
 
-        echo "<pre>";
+        ], [
+            'color.required' => "Color is required",
+            'color.string' => "Color should be string",
+            'color.max' => "Maximum length of color should be 30 characters",
+            'stock.required' => "Stock is required",
+            'stock.numeric' => "Stock should number",
+            'stock.max' => "Maximum value of stock exceed",
+            'price.required' => "Price is required",
+            'price.numeric' => "Price should number",
+            'price.max' => "Maximum value of price exceed",
+        ]);
 
         $var = Variants::where('variant_id', $id)->first();
 

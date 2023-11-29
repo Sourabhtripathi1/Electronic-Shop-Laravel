@@ -18,13 +18,22 @@
                 @csrf
                 <div class="mb-3">
                     <label for="" class="form-label">Brand Name</label>
-                    <input type="text" class="form-control" id="" name="brand_name">
+                    <input type="text" class="form-control" id="" name="brand_name" required>
                 </div>
+                @error('brand_name')
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
                 <div class="mb-3">
                     <label for="" class="form-label">Add Brand Pic</label>
-                    <input type="file" name="brand_pic" class="form-control" name="" id="">
-
+                    <input type="file" name="brand_pic" class="form-control" id="" required>
                 </div>
+                @error('brand_pic')
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

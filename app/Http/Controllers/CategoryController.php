@@ -49,6 +49,12 @@ class CategoryController extends Controller
      */
     public function store(Request $req)
     {
+
+        $req->validate([
+            'Category_name' => 'required|string|max:50',
+            'category_pic' => 'required|image|mimes:jpeg,jpg,png,gif,webp',
+        ]);
+
         $cat = new Category;
         $pic = new Picture;
 
@@ -93,9 +99,9 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $c = Category::where("Category_id",  $id)->first();
+        $c = Category::where("Category_id", $id)->first();
 
-        $p = Picture::where("Picture_id",  $c->Category_Pic)->first();
+        $p = Picture::where("Picture_id", $c->Category_Pic)->first();
 
         if ($request->file('edCatpic')) {
 
