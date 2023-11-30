@@ -182,7 +182,14 @@ class ProductController extends Controller
         $cat_na = $cat->Category_Name;
         $br_na = $br->Brand_Name;
 
-        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants', 'pictures', 'products', 'reviews', 'wish_count', 'cart');
+        $category=Category::all()->toArray();
+        $brand=Brand::all()->toArray();
+
+        $similar_Product1=Product::Where("Brand",$prod['Brand'])->get()->toArray();
+        $similar_Product2=Product::where("Category",$prod['Category'])->get()->toArray();
+
+
+        $data = compact('id', 'prod', 'pna', 'var', 'cat_na', 'br_na', 'pics', 'variants', 'pictures', 'products', 'reviews', 'wish_count', 'cart','similar_Product1','similar_Product2','category','brand');
 
         return view('frontend.ProductPage')->with($data);
     }

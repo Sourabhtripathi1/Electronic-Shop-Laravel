@@ -31,8 +31,8 @@
                             <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
-                                @if ($wish_count>0)
-                                <div class="qty">{{ $wish_count }}</div>
+                                @if ($wish_count > 0)
+                                    <div class="qty">{{ $wish_count }}</div>
                                 @endif
 
                             </a>
@@ -150,7 +150,8 @@
                         </div>
                         <div class="shop-body">
                             <h3>Laptop<br>Collection</h3>
-                            <a href="{{env('APP_URL')}}/shop?query=eyJjYXRlZ29yeSI6WyJJNjNuNmNlVnVZIl0sImJyYW5kIjpbXSwicHJpY2UiOnsibWF4IjoiOTk5OTk5LjAwIiwibWluIjoiMS4wMCJ9fQ==" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{ env('APP_URL') }}/shop?query=eyJjYXRlZ29yeSI6WyJJNjNuNmNlVnVZIl0sImJyYW5kIjpbXSwicHJpY2UiOnsibWF4IjoiOTk5OTk5LjAwIiwibWluIjoiMS4wMCJ9fQ=="
+                                class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -164,7 +165,8 @@
                         </div>
                         <div class="shop-body">
                             <h3>Headphones<br>Collection</h3>
-                            <a href="{{env('APP_URL')}}/shop?query=eyJjYXRlZ29yeSI6WyJWMWROeUo5SEl2Il0sImJyYW5kIjpbXSwicHJpY2UiOnsibWF4IjoiOTk5OTk5LjAwIiwibWluIjoiMS4wMCJ9fQ==" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{ env('APP_URL') }}/shop?query=eyJjYXRlZ29yeSI6WyJWMWROeUo5SEl2Il0sImJyYW5kIjpbXSwicHJpY2UiOnsibWF4IjoiOTk5OTk5LjAwIiwibWluIjoiMS4wMCJ9fQ=="
+                                class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -178,7 +180,8 @@
                         </div>
                         <div class="shop-body">
                             <h3>Cameras<br>Collection</h3>
-                            <a href="{{env('APP_URL')}}/shop?query=eyJjYXRlZ29yeSI6WyI3bEQ2STBKUUZXIl0sImJyYW5kIjpbXSwicHJpY2UiOnsibWF4IjoiOTk5OTk5LjAwIiwibWluIjoiMS4wMCJ9fQ==" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{ env('APP_URL') }}/shop?query=eyJjYXRlZ29yeSI6WyI3bEQ2STBKUUZXIl0sImJyYW5kIjpbXSwicHJpY2UiOnsibWF4IjoiOTk5OTk5LjAwIiwibWluIjoiMS4wMCJ9fQ=="
+                                class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>

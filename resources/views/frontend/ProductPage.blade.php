@@ -57,8 +57,8 @@
                             <a href="{{ env('APP_URL') }}/user/wishlist">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
-                                @if ($wish_count>0)
-                                <div class="qty">{{ $wish_count }}</div>
+                                @if ($wish_count > 0)
+                                    <div class="qty">{{ $wish_count }}</div>
                                 @endif
                             </a>
                         </div>
@@ -71,7 +71,6 @@
                                 <span>Your Cart</span>
                                 @if (session('user_id') !== null)
                                     <div class="qty">{{ count($cart) }}</div>
-
                                 @endif
                             </a>
                             <div class="cart-dropdown">
@@ -320,7 +319,7 @@
                         <ul class="tab-nav">
                             <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                             <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                            <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                            <li><a data-toggle="tab" href="#tab3">Reviews ({{ count($reviews) }})</a></li>
                         </ul>
                         <!-- /product tab nav -->
 
@@ -440,102 +439,223 @@
                     </div>
                 </div>
 
-                <!-- product -->
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="{{ env('APP_URL') }}/frontend/img/product01.png" alt="">
-                            <div class="product-label">
-                                <span class="sale">-30%</span>
+
+                @foreach ($similar_Product1 as $index => $item)
+                    @if ($item['Product_id'] != $id)
+                        <!-- product -->
+                        <div class="col-md-4 col-lg-3 col-xs-6 product_tab2">
+                            <div class="product">
+                                <div class="product-img">
+                                    <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                                        alt="">
+                                    <div class="product-label">
+
+                                    </div>
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">
+                                        {{ getCategory($item['Category'], $category) }}
+                                    </p>
+                                    <h3 class="product-name"><a
+                                            href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                            {{ $item['Product_name'] }}
+                                        </a></h3>
+                                    <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                                        {{-- <del
+                                class="product-old-price">$990.00</del> --}}
+                                    </h4>
+                                    <div class="product-rating">
+
+                                    </div>
+                                    <div class="product-btns">
+                                        <button class="add-to-wishlist"
+                                            @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)"
+
+                @else
+                onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
+                                            <i class="fa fa-heart-o"></i>
+                                            <span class="tooltipp">
+                                                add to wishlist
+                                            </span>
+                                        </button>
+
+                                        <button class="quick-view"><a
+                                                href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                                <i class="fa fa-eye"></i>
+                                                <span class="tooltipp">
+                                                    quick view
+                                                </span> </a>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <button class="add-to-cart-btn"
+                                        onclick="add_to_cart(`{{ env('APP_URL') }}/user/cart/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        add to cart
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            <div class="product-rating">
+                        <!-- /product -->
+                        @if ($index == 3)
+                        @break
+                    @endif
+                @endif
+            @endforeach
+
+            {{-- </div> --}}
+            <!-- /row -->
+
+            {{-- <div class="row"> --}}
+            @foreach ($similar_Product2 as $index => $item)
+                @if ($item['Product_id'] != $id)
+                    <!-- product -->
+                    <div class="col-md-4 col-lg-3 col-xs-6 product_tab2">
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
+                                    alt="">
+                                <div class="product-label">
+
+                                </div>
                             </div>
-                            <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add
-                                        to wishlist</span></button>
-                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add
-                                        to compare</span></button>
-                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
-                                        view</span></button>
+                            <div class="product-body">
+                                <p class="product-category">
+                                    {{ getCategory($item['Category'], $category) }}
+                                </p>
+                                <h3 class="product-name"><a
+                                        href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                        {{ $item['Product_name'] }}
+                                    </a></h3>
+                                <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                                    {{-- <del
+                                    class="product-old-price">$990.00</del> --}}
+                                </h4>
+                                <div class="product-rating">
+
+                                </div>
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"
+                                        @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)"
+
+                    @else
+                    onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
+                                        <i class="fa fa-heart-o"></i>
+                                        <span class="tooltipp">
+                                            add to wishlist
+                                        </span>
+                                    </button>
+
+                                    <button class="quick-view"><a
+                                            href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                            <i class="fa fa-eye"></i>
+                                            <span class="tooltipp">
+                                                quick view
+                                            </span> </a>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn"
+                                    onclick="add_to_cart(`{{ env('APP_URL') }}/user/cart/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    add to cart
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- /product -->
+                    <!-- /product -->
+                    @if ($index == 3)
+                    @break
+                @endif
+            @endif
+        @endforeach
 
-
-
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
     </div>
-    <!-- /Section -->
+
+</div>
+<!-- /container -->
+</div>
+<!-- /Section -->
+
+<script>
+    var visible = $(".product_tab2");
+    var i = 1;
+
+    visible.each((index, item) => {
+        if (i % 3 == 0) {
+            $(item).after(`<div class="clearfix visible-md "></div>`);
+        } else if (i % 4 == 0) {
+            $(item).after(
+                `<div class="clearfix visible-sm  visible-lg"></div>`
+            );
+        } else {
+            console.log(i);
+        }
+
+        if (i % 2 == 0) {
+            $(item).after(`<div class="clearfix visible-xs"></div>`);
+        }
+        i++;
+    });
+</script>
 
 
 
+<script>
+    $(document).ready(function() {
 
-    <script>
-        $(document).ready(function() {
+        addReviewPagination();
+        reviewPagination(1);
 
-            addReviewPagination();
-            reviewPagination(1);
-
-            $(".paginate-review").click(function($this) {
-                const page = parseInt($(this).data("page"));
-                reviewPagination(page);
-
-            });
+        $(".paginate-review").click(function($this) {
+            const page = parseInt($(this).data("page"));
+            reviewPagination(page);
 
         });
 
-        function reviewPagination(page) {
-            var itemsPerPage = 4;
-            var products = $(".review_tab");
+    });
 
-            $(".review_tab").each(function() {
-                $(this).addClass("hidden");
-            });
+    function reviewPagination(page) {
+        var itemsPerPage = 4;
+        var products = $(".review_tab");
 
-            var tot = products.length;
+        $(".review_tab").each(function() {
+            $(this).addClass("hidden");
+        });
 
-            const totalPages = Math.ceil(tot / itemsPerPage);
+        var tot = products.length;
 
-            const startIndex = (page - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
+        const totalPages = Math.ceil(tot / itemsPerPage);
 
-            for (let index = startIndex; index < endIndex; index++) {
-                $(".review_tab").eq(index).removeClass("hidden");
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        for (let index = startIndex; index < endIndex; index++) {
+            $(".review_tab").eq(index).removeClass("hidden");
+        }
+    }
+
+    function addReviewPagination() {
+        var cnt = 4;
+        var products = $(".review_tab");
+
+        var tot = products.length;
+
+        const totalPages = Math.ceil(tot / cnt);
+
+        for (let i = 1; i <= totalPages; i++) {
+            $(".reviews-pagination").append(
+                `<li><a href="#" class="paginate-review"  data-page="${i}">${i}</a></li>`
+            );
+
+            if (i == 5) {
+                break;
             }
         }
 
-        function addReviewPagination() {
-            var cnt = 4;
-            var products = $(".review_tab");
 
-            var tot = products.length;
-
-            const totalPages = Math.ceil(tot / cnt);
-
-            for (let i = 1; i <= totalPages; i++) {
-                $(".reviews-pagination").append(
-                    `<li><a href="#" class="paginate-review"  data-page="${i}">${i}</a></li>`
-                );
-
-                if (i == 5) {
-                    break;
-                }
-            }
-
-
-        }
-    </script>
+    }
+</script>
 @endsection
