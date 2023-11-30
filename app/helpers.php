@@ -195,3 +195,16 @@ function getCartTotal($cart){
     return $total;
 }
 
+function inStock($id , $variants,$cnt=0){
+    $stk = collect($variants)->first(function ($item) use ($id) {
+        return $item['variant_id'] == $id;
+    });
+
+    if( $stk['Stock']>$cnt){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+

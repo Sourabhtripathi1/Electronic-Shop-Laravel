@@ -11,12 +11,6 @@
 @section('main-section')
 
 
-    @if (session('error'))
-        <script>
-            alert("{{ session('error') }}")
-        </script>
-    @endif
-
     @if (session('success'))
         <script>
             alert("{{ session('success') }}")
@@ -208,6 +202,13 @@
 
 
         <div class="main-container">
+
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="cart-table">
                 @if (count($cart) > 0)
                     <h3 style="color: #d10024;"> Your Cart :</h3><br>
@@ -235,7 +236,7 @@
                                             style="overflow-wrap: anywhere;                                  padding: 0px 6px;">
                                             {{ getProductNameFromVariant($cart_item['Variant_id'], $variants, $products) }}
                                             x
-                                            <b>{{ $cart_item['Quantity'] }}</b>
+                                            <b id="qtypg">{{ $cart_item['Quantity'] }}</b>
                                         </div>
                                         <div class="btn-pm">
                                             <div>
@@ -246,7 +247,7 @@
                                                 @endif
                                             </div>
                                             <div>
-                                                @if ($cart_item['Quantity'] < 100)
+                                                @if ($cart_item['Quantity'] < getVariantStock($cart_item['Variant_id'], $variants))
                                                     <button class="inc_cart" id="{{ $cart_item['Sno'] }}">
                                                         +
                                                     </button>
@@ -255,7 +256,8 @@
                                         </div>
                                     </td>
 
-                                    <td>{{ getVariantPrice($cart_item['Variant_id'], $variants) * $cart_item['Quantity'] }}
+                                    <td id="prct">
+                                        {{ getVariantPrice($cart_item['Variant_id'], $variants) * $cart_item['Quantity'] }}
                                     </td>
                                     <td>
                                         <a href="{{ env('APP_URL') }}/user/cart/remove/{{ $cart_item['Sno'] }}">
@@ -287,7 +289,6 @@
                                 type: "get",
                                 url: `{{ env('APP_URL') }}/user/cart/inc/${ex}`,
                                 success: function(response) {
-
                                     location.reload();
 
                                 },
@@ -305,7 +306,6 @@
                                 type: "get",
                                 url: `{{ env('APP_URL') }}/user/cart/dec/${ex}`,
                                 success: function(response) {
-
                                     location.reload();
 
                                 },

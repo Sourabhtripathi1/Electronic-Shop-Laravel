@@ -91,7 +91,7 @@ class NavigationController extends Controller
 
             $data = compact('products', 'variants', 'pictures', 'brands', 'category', 'products_all', 'cart', 'wish_count');
 
-             
+
             return view('frontend.Shop')->with($data);
         } else {
 
@@ -248,14 +248,19 @@ class NavigationController extends Controller
 
     public function userCheckout()
     {
+        $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
+        $variants = Variants::all()->toArray();
+        $products = Product::all()->toArray();
+        foreach ($cart as  $item) {
+            if(getVariantStock($item['Variant_id'],$variants)<$item['Quantity']){
+                return redirect('/user/cart')->with('error','The'.getProductNameFromVariant($item['Variant_id'],$variants,$products).'('.getVariantColor($item['Variant_id'], $variants).')'.'is out of stock, please remove  it from cart. Stock => '.getVariantStock($item['Variant_id'],$variants));
+            }
+        }
+
         $wish_count = session('user_id') ? count(Wishlist::where('User_id', session('user_id'))->get()->toArray()) : 0;
 
         $user = Customer::where('User_id', session('user_id'))->first()->toArray();
-        $cart = Cart::where('User_id', session('user_id'))->get()->toArray();
-        $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
-        $products = Product::all()->toArray();
-
         $data = compact('variants', 'pictures', 'products', 'cart', 'wish_count', 'user');
         return view('frontend.checkout')->with($data);
     }

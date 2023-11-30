@@ -227,7 +227,7 @@
 
                                     @foreach ($var as $v)
                                         <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}"
-                                            data-id="{{ $v['variant_id'] }}">
+                                            data-id="{{ $v['variant_id'] }}" data-stock="{{inStock($v['variant_id'],$var)}}">
                                             {{ $v['Color'] }}
                                         </option>
                                     @endforeach
@@ -264,11 +264,14 @@
                                     class="fa fa-shopping-cart"></i> add
                                 to
                                 cart</button>
-
-
-
                         </div>
-                        <span class="product-available">In Stock</span>
+
+                        @if (inStock($var[0]['variant_id'],$variants))
+                        <span class="product-available" id="product-available">In Stock</span>
+                        @else
+                        <span class="product-available" id="product-available">Not In Stock</span>
+                        @endif
+
                         <br><br>
 
 
@@ -296,6 +299,8 @@
                                 console.log(wishlist_url + "/" + selectedAction2);
 
                                 document.getElementById('add_wishlist_button').href = wishlist_url + "/" + selectedAction2 + "/2";
+
+                                document.getElementById('product-available').innerText=selectedOption.getAttribute('data-stock')? "in stock":"not in stock";
                             }
                         </script>
 

@@ -15,6 +15,10 @@ class PaymentValidation
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $request->validate([
+            'Hno'=>'required',
+        ]);
+
         if ($request['payment'] == "COD") {
             return $next($request);
         } else {
