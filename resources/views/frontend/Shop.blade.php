@@ -302,12 +302,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
-                            {{--
-                        <div class="clearfix visible-sm visible-xs"></div>
-                        <div class="clearfix visible-lg visible-md"></div>
-                        --}}
-
                         </div>
                         <!-- /store products -->
 

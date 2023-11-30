@@ -67,6 +67,8 @@ class NavigationController extends Controller
         $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
 
         if ($req->input('query')) {
+// echo "<pre>";
+//             print_r(json_decode(base64_decode($req->input('query'))));
 
             $category = Category::all()->toArray();
             $brands = Brand::all()->toArray();
@@ -89,7 +91,7 @@ class NavigationController extends Controller
 
             $data = compact('products', 'variants', 'pictures', 'brands', 'category', 'products_all', 'cart', 'wish_count');
 
-            //  print_r($products);
+             
             return view('frontend.Shop')->with($data);
         } else {
 

@@ -209,11 +209,13 @@
 
                         <ul class="product-links">
                             <li>Category:</li>
-                            <li><a href="#">{{ $cat_na }}</a></li>
+                            <li><a href="{{ env('APP_URL') }}/shop?query={{ base64_encode(json_encode(['category' => [$prod['Category']], 'brand' => [], 'price' => ['max' => 99999999.00, 'min' => 0.00],])) }}">{{ $cat_na }}</a></li>
                         </ul>
                         <ul class="product-links">
                             <li>Brand:</li>
-                            <li><a href="#">{{ $br_na }}</a></li>
+                            <li><a
+                                    href="{{ env('APP_URL') }}/shop?query={{ base64_encode(json_encode(['category' => [], 'brand' => [$prod['Brand']], 'price' => ['max' => 99999999.00, 'min' => 0.00],])) }}">{{ $br_na }}</a>
+                            </li>
                         </ul>
 
 
