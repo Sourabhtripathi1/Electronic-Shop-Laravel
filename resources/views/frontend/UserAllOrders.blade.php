@@ -90,7 +90,7 @@
                                     <br>
 
                                     <a href="{{ env('APP_URL') }}/user/dashboard"
-                                        class="cart_login"><button>Login</button></a>
+                                        class="cart_login"><button class="btn btn-lg">Login</button></a>
                                 @endif
                             </div>
                         </div>

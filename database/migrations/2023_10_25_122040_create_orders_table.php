@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name', 40);
             $table->string('email', 50);
             $table->string('Hno', 10);
-            $table->string('Address', 70);
+            $table->string('Address', 250);
             $table->string('Payment_Method', 15);
             $table->string('contact', 15);
             $table->float('PINCODE', 10);

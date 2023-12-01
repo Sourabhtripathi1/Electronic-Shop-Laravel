@@ -87,13 +87,13 @@ class CustomerController extends Controller
 
 
         $req->validate([
-            'email' => 'required|email',
-            'Uname' => 'required',
-            'name' => 'required',
-            'password' => 'required',
+            'email' => 'required|email|max:60',
+            'Uname' => 'required|max:30',
+            'name' => 'required|max:40',
+            'password' => 'required|max:15',
             'cnf_password' => 'required|same:password'
         ],[
-            'email.email'=>'Invalid Email Type',
+            'email.email'=>'Invalid Email',
             'cnf_password.same'=>'Confirm Password do nat match with Password'
         ]);
 

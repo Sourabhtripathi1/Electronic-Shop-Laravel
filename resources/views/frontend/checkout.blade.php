@@ -87,8 +87,8 @@
 
                                     <br>
 
-                                    <a href="{{ env('APP_URL') }}/user/dashboard"
-                                        class="cart_login"><button>Login</button></a>
+                                    <a href="{{ env('APP_URL') }}/user/dashboard" class="cart_login"><button
+                                            class="btn btn-lg">Login</button></a>
                                 @endif
                             </div>
                         </div>
@@ -167,6 +167,65 @@
             </div>
             <!-- /container -->
         </div>
+
+        @if (count($errors) > 0)
+<div class="container">
+                <ul style="margin: 0.75rem 0rem">
+
+                    @if ($errors->has('Hno'))
+                    <div class="alert alert-danger">
+                        <li>{{ $errors->first('Hno') }}</li>
+                    </div>
+                    @endif
+
+                    @if ($errors->has('area'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('area') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('city'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('city') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('state'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('state') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('country'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('country') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('zip'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('zip') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('tel'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('tel') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('name'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('name') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('email'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('email') }}</li>
+                    </div>
+                    @endif
+                    @if ($errors->has('payment'))
+                    <div class="alert alert-danger">
+                        <li> {{ $errors->first('payment') }}</li>
+                    </div>
+                    @endif
+                </ul>
+            </div>
+        @endif
 
         <div class="section">
             <!-- container -->
@@ -262,26 +321,20 @@
                             </div>
                             <div class="payment-method">
                                 <div class="input-radio">
-                                    <input type="radio" name="payment" id="payment-1" value="UPI">
+                                    <input type="radio" name="payment" id="payment-1" value="UPI" >
                                     <label for="payment-1">
                                         <span></span>
                                         UPI
                                     </label>
-                                    <div class="caption">
-                                        {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p> --}}
-                                    </div>
+
                                 </div>
                                 <div class="input-radio">
-                                    <input type="radio" name="payment" id="payment-2" value="COD">
+                                    <input type="radio" name="payment" id="payment-2" value="COD" >
                                     <label for="payment-2">
                                         <span></span>
                                         Cash on Delivery
                                     </label>
-                                    <div class="caption">
-                                        {{-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p> --}}
-                                    </div>
+
                                 </div>
 
                             </div>
