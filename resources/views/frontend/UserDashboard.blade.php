@@ -90,8 +90,8 @@
 
                                     <br>
 
-                                    <a href="{{ env('APP_URL') }}/user/dashboard"
-                                        class="cart_login"><button class="btn btn-lg">Login</button></a>
+                                    <a href="{{ env('APP_URL') }}/user/dashboard" class="cart_login"><button
+                                            class="btn btn-lg">Login</button></a>
                                 @endif
                             </div>
                         </div>
@@ -218,7 +218,7 @@
                                         <h4>Cart</h4>
                                     </div>
                                     <div class="card-count">
-                                        <h3>13</h3>
+                                        <h3>{{ count($cart) }}</h3>
                                     </div>
                                 </div>
                                 <div class="card-icon">
@@ -241,7 +241,7 @@
                                         <h4>Wishlist</h4>
                                     </div>
                                     <div class="card-count">
-                                        <h3>13</h3>
+                                        <h3>{{ $wish_count }}</h3>
                                     </div>
                                 </div>
                                 <div class="card-icon">
@@ -264,7 +264,7 @@
                                         <h4>Active Orders</h4>
                                     </div>
                                     <div class="card-count">
-                                        <h3>13</h3>
+                                        <h3>{{ $actorders }}</h3>
                                     </div>
                                 </div>
                                 <div class="card-icon">
@@ -287,7 +287,7 @@
                                         <h4>All Orders</h4>
                                     </div>
                                     <div class="card-count">
-                                        <h3>13</h3>
+                                        <h3>{{ $allorders }}</h3>
                                     </div>
                                 </div>
                                 <div class="card-icon">

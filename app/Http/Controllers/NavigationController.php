@@ -67,8 +67,8 @@ class NavigationController extends Controller
         $cart = session('user_id') ? Cart::where('User_id', session('user_id'))->get()->toArray() : Cart::all()->toArray();
 
         if ($req->input('query')) {
-// echo "<pre>";
-//             print_r(json_decode(base64_decode($req->input('query'))));
+            // echo "<pre>";
+            //             print_r(json_decode(base64_decode($req->input('query'))));
 
             $category = Category::all()->toArray();
             $brands = Brand::all()->toArray();
@@ -153,7 +153,10 @@ class NavigationController extends Controller
         $variants = Variants::all()->toArray();
         $pictures = Picture::all()->toArray();
         $products = Product::all()->toArray();
-        $data = compact('products', 'variants', 'pictures', 'cart', 'wish_count');
+        $allorders = count(Orders::where('User_id', session('user_id'))->where('Status',  'Dilevered')->get()->toArray());
+        $actorders = count(Orders::where('User_id', session('user_id'))->where('Status', '!=', 'Dilevered')->get()->toArray());
+
+        $data = compact('products', 'variants', 'pictures', 'cart', 'wish_count', 'allorders', 'actorders');
 
         return view('frontend.UserDashboard')->with($data);
     }
@@ -252,8 +255,8 @@ class NavigationController extends Controller
         $variants = Variants::all()->toArray();
         $products = Product::all()->toArray();
         foreach ($cart as  $item) {
-            if(getVariantStock($item['Variant_id'],$variants)<$item['Quantity']){
-                return redirect('/user/cart')->with('error','The'.getProductNameFromVariant($item['Variant_id'],$variants,$products).'('.getVariantColor($item['Variant_id'], $variants).')'.'is out of stock, please remove  it from cart. Stock => '.getVariantStock($item['Variant_id'],$variants));
+            if (getVariantStock($item['Variant_id'], $variants) < $item['Quantity']) {
+                return redirect('/user/cart')->with('error', 'The' . getProductNameFromVariant($item['Variant_id'], $variants, $products) . '(' . getVariantColor($item['Variant_id'], $variants) . ')' . 'is out of stock, please remove  it from cart. Stock => ' . getVariantStock($item['Variant_id'], $variants));
             }
         }
 
@@ -408,8 +411,7 @@ class NavigationController extends Controller
                 $ordet->save();
 
                 DB::table('carts')->where('Sno', $item['Sno'])->delete();
-            }
-            ;
+            };
 
             return redirect('/user/checkout');
         } else {

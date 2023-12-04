@@ -89,8 +89,8 @@
 
                                     <br>
 
-                                    <a href="{{ env('APP_URL') }}/user/dashboard"
-                                        class="cart_login"><button class="btn btn-lg">Login</button></a>
+                                    <a href="{{ env('APP_URL') }}/user/dashboard" class="cart_login"><button
+                                            class="btn btn-lg">Login</button></a>
                                 @endif
                             </div>
                         </div>
@@ -253,7 +253,7 @@
 
 
                                             <div class="prod-price">
-                                                :{{ getVariantPrice($ord_item['Variant_id'], $variants) * $ord_item['Quantity'] }}
+                                                &nbsp;&nbsp;₹{{ getVariantPrice($ord_item['Variant_id'], $variants) * $ord_item['Quantity'] }}
                                             </div>
                                         </div>
                                     @endforeach
