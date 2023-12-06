@@ -1,514 +1,492 @@
 @extends('frontend.layout.main')
 
 @push('title')
-    Product : {{ $pna }} details Page
+Product : {{ $pna }} details Page
 @endpush
 
 @section('main-section')
-    @php
+@php
 
-        $v = [];
+$v = [];
 
-        foreach ($var as $a) {
-            $v = array_merge($v, json_decode($a['Picture'], true));
-        }
+foreach ($var as $a) {
+$v = array_merge($v, json_decode($a['Picture'], true));
+}
 
-    @endphp
+@endphp
 
-    @if (session('error'))
-        <script>
-            alert("{{ session('error') }}")
-        </script>
-    @endif
+@if (session('error'))
+<script>
+    alert("{{ session('error') }}")
+</script>
+@endif
 
-    @if (session('success'))
-        <script>
-            alert("{{ session('success') }}")
-        </script>
-    @endif
-    {{-- <pre>
+@if (session('success'))
+<script>
+    alert("{{ session('success') }}")
+</script>
+@endif
+{{-- <pre>
         @php
 
         @endphp
     </pre> --}}
-    <!-- MAIN HEADER -->
-    <div id="header">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- LOGO -->
-                <div class="col-md-3">
-                    <div class="header-logo">
-                        <a href="{{ env('APP_URL') }}" class="logo">
-                            <img src="{{ env('APP_URL') }}/frontend/img/logo.png" alt="">
+<!-- MAIN HEADER -->
+<div id="header">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- LOGO -->
+            <div class="col-md-3">
+                <div class="header-logo">
+                    <a href="{{ env('APP_URL') }}/" class="logo">
+                        <img src="{{ env('APP_URL') }}/frontend/img/logo.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <!-- /LOGO -->
+
+
+
+            <!-- ACCOUNT -->
+            <div class="col-md-3 clearfix header-opt-cnt">
+                <div class="header-ctn">
+                    <!-- Wishlist -->
+                    <div>
+                        <a href="{{ env('APP_URL') }}/user/wishlist">
+                            <i class="fa fa-heart-o"></i>
+                            <span>Your Wishlist</span>
+                            @if ($wish_count > 0)
+                            <div class="qty">{{ $wish_count }}</div>
+                            @endif
                         </a>
                     </div>
-                </div>
-                <!-- /LOGO -->
+                    <!-- /Wishlist -->
 
-
-
-                <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix header-opt-cnt">
-                    <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="{{ env('APP_URL') }}/user/wishlist">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                @if ($wish_count > 0)
-                                    <div class="qty">{{ $wish_count }}</div>
-                                @endif
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
-
-                        <!-- Cart -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
-                                @if (session('user_id') !== null)
-                                    <div class="qty">{{ count($cart) }}</div>
-                                @endif
-                            </a>
-                            <div class="cart-dropdown">
-                                @if (session('user_id') !== null)
-                                    @if (count($cart) > 0)
-                                        <div class="cart-list">
-                                            @foreach ($cart as $item)
-                                                <div class="product-widget">
-                                                    <div class="product-img">
-                                                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="product-body">
-                                                        <h3 class="product-name"><a
-                                                                href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                                                {{ getProductName($item['Product_id'], $products) }}</a>
-                                                        </h3>
-                                                        <h4 class="product-price"><span
-                                                                class="qty">{{ $item['Quantity'] }}x</span>₹{{ getPrice($item['Product_id'], $variants) }}
-                                                        </h4>
-                                                    </div>
-                                                    <button class="delete"><i class="fa fa-close"></i></button>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="cart-summary">
-                                            <small>{{ count($cart) }} Item(s) selected</small>
-                                            <h5>SUBTOTAL: ₹{{ getCartTotal($cart) }}</h5>
-                                        </div>
-                                    @else
-                                        cart is empty
-                                    @endif
-                                    <div class="cart-btns">
-                                        <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
-                                        <a href="{{ env('APP_URL') }}/user/checkout">Checkout <i
-                                                class="fa fa-arrow-circle-right"></i></a>
-                                    </div>
-                                @else
-                                    Please Login !
-
-                                    <br>
-
-                                    <a href="{{ env('APP_URL') }}/user/dashboard"
-                                        class="cart_login"><button class="btn btn-lg">Login</button></a>
-                                @endif
-                            </div>
-                        </div>
-                        <!-- /Cart -->
-
-                        <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
-                        </div>
-                        <!-- /Menu Toogle -->
-                    </div>
-                </div>
-                <!-- /ACCOUNT -->
-            </div>
-            <!-- row -->
-        </div>
-        <!-- container -->
-    </div>
-    <!-- /MAIN HEADER -->
-    </header>
-    <!-- /HEADER -->
-
-    <!-- NAVIGATION -->
-    <nav id="navigation">
-        <!-- container -->
-        <div class="container">
-            <!-- responsive-nav -->
-            <div id="responsive-nav">
-                <!-- NAV -->
-                <ul class="main-nav nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/shop">Shop </a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                </ul>
-                <!-- /NAV -->
-            </div>
-            <!-- /responsive-nav -->
-        </div>
-        <!-- /container -->
-    </nav>
-    <!-- /NAVIGATION -->
-
-    <br><br>
-
-
-    <!-- SECTION -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- Product main img -->
-                <div class="col-md-5 col-md-push-2">
-                    <div id="product-main-img">
-
-                        @foreach ($pics as $p)
-                            @if (in_array($p['Picture_id'], $v))
-                                <img src="{{ asset('/storage/site-assets/') }}/{{ $p['Source'] }}" alt="">
+                    <!-- Cart -->
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Your Cart</span>
+                            @if (session('user_id') !== null)
+                            <div class="qty">{{ count($cart) }}</div>
                             @endif
-                        @endforeach
-
-
-                    </div>
-                </div>
-                <!-- /Product main img -->
-
-                <!-- Product thumb imgs -->
-                <div class="col-md-2  col-md-pull-5">
-                    <div id="product-imgs">
-                        @foreach ($pics as $p)
-                            @if (in_array($p['Picture_id'], $v))
-                                <img src="{{ asset('/storage/site-assets/') }}/{{ $p['Source'] }}" alt="">
+                        </a>
+                        <div class="cart-dropdown">
+                            @if (session('user_id') !== null)
+                            @if (count($cart) > 0)
+                            <div class="cart-list">
+                                @foreach ($cart as $item)
+                                <div class="product-widget">
+                                    <div class="product-img">
+                                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}" alt="">
+                                    </div>
+                                    <div class="product-body">
+                                        <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                                {{ getProductName($item['Product_id'], $products) }}</a>
+                                        </h3>
+                                        <h4 class="product-price"><span class="qty">{{ $item['Quantity'] }}x</span>₹{{ getPrice($item['Product_id'], $variants) }}
+                                        </h4>
+                                    </div>
+                                    <button class="delete"><i class="fa fa-close"></i></button>
+                                </div>
+                                @endforeach
+                            </div>
+                            <div class="cart-summary">
+                                <small>{{ count($cart) }} Item(s) selected</small>
+                                <h5>SUBTOTAL: ₹{{ getCartTotal($cart) }}</h5>
+                            </div>
+                            @else
+                            cart is empty
                             @endif
-                        @endforeach
+                            <div class="cart-btns">
+                                <a href="{{ env('APP_URL') }}/user/cart">View Cart</a>
+                                <a href="{{ env('APP_URL') }}/user/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                            @else
+                            Please Login !
 
+                            <br>
+
+                            <a href="{{ env('APP_URL') }}/user/dashboard" class="cart_login"><button class="btn btn-lg">Login</button></a>
+                            @endif
+                        </div>
                     </div>
-                </div>
-                <!-- /Product thumb imgs -->
+                    <!-- /Cart -->
 
-                <!-- Product details -->
-                <div class="col-md-5">
-                    <div class="product-details">
-                        <h2 class="product-name">{{ $prod['Product_name'] }}</h2>
-
-                        <div>
-                            <h3 class="product-price" id="product-price">₹{{ $var[0]['Price'] }}</h3>
-                        </div>
-
-                        <ul class="product-links">
-                            <li>Category:</li>
-                            <li><a href="{{ env('APP_URL') }}/shop?query={{ base64_encode(json_encode(['category' => [$prod['Category']], 'brand' => [], 'price' => ['max' => 99999999.00, 'min' => 0.00],])) }}">{{ $cat_na }}</a></li>
-                        </ul>
-                        <ul class="product-links">
-                            <li>Brand:</li>
-                            <li><a
-                                    href="{{ env('APP_URL') }}/shop?query={{ base64_encode(json_encode(['category' => [], 'brand' => [$prod['Brand']], 'price' => ['max' => 99999999.00, 'min' => 0.00],])) }}">{{ $br_na }}</a>
-                            </li>
-                        </ul>
-
-
-
-                        <div class="product-options">
-                            <label>
-                                Color
-                                <select class="input-select" id="varCol" onChange="changePr()">
-
-                                    @foreach ($var as $v)
-                                        <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}"
-                                            data-id="{{ $v['variant_id'] }}" data-stock="{{inStock($v['variant_id'],$var)}}">
-                                            {{ $v['Color'] }}
-                                        </option>
-                                    @endforeach
-
-
-                                </select>
-
-
-                            </label>
-                        </div>
-
-                        <div class="add-to-cart">
-                            <div class="qty-label">
-                                Qty
-                                <div class="input-number">
-                                    <input type="number" disabled value=1 id="qty">
-                                    <span class="qty-up">+</span>
-                                    <span class="qty-down">-</span>
-                                </div>
-                            </div>
-
-                            <form action="{{ env('APP_URL') }}/user/cart/add" method="POST" id="cart_form"
-                                style="display: none">
-                                @csrf
-                                <input type="text" name="prod_id" id="prod_id" value="{{ $id }}">
-                                <input type="text" name="var_id" id="var_id" value="{{ $var[0]['variant_id'] }}">
-                                <input type="text" name="qty" id="qtny" value="">
-
-
-                                <button type="submit" class="btn btn-primary">Add</button>
-                            </form>
-
-                            <button class="add-to-cart-btn" onClick="cart_form_submit()"><i
-                                    class="fa fa-shopping-cart"></i> add
-                                to
-                                cart</button>
-                        </div>
-
-                        @if (inStock($var[0]['variant_id'],$variants))
-                        <span class="product-available" id="product-available">In Stock</span>
-                        @else
-                        <span class="product-available" id="product-available">Not In Stock</span>
-                        @endif
-
-                        <br><br>
-
-
-                        <ul class="product-btns">
-                            <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}/{{ getFirstVariant($id, $products, $variants) }}/2"
-                                    id="add_wishlist_button"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-
-                        </ul>
-
-
-                        <script>
-                            function changePr() {
-                                var selectBox = document.getElementById('varCol');
-
-                                const selectedOption = selectBox.options[selectBox.selectedIndex];
-                                const selectedAction = selectedOption.getAttribute('data-price');
-                                const selectedAction2 = selectedOption.getAttribute('data-id');
-                                const wishlist_url = "{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}"
-
-                                document.getElementById('product-price').innerText = "₹" + selectedAction;
-
-                                document.getElementById('var_id').value = selectedAction2;
-                                console.log(document.getElementById('var_id').value);
-
-                                console.log(wishlist_url + "/" + selectedAction2);
-
-                                document.getElementById('add_wishlist_button').href = wishlist_url + "/" + selectedAction2 + "/2";
-
-                                document.getElementById('product-available').innerText=selectedOption.getAttribute('data-stock')? "in stock":"not in stock";
-                            }
-                        </script>
-
-
-
-
-                        <ul class="product-links">
-                            <li>Share:</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                        </ul>
-
+                    <!-- Menu Toogle -->
+                    <div class="menu-toggle">
+                        <a href="#">
+                            <i class="fa fa-bars"></i>
+                            <span>Menu</span>
+                        </a>
                     </div>
+                    <!-- /Menu Toogle -->
                 </div>
-                <!-- /Product details -->
-
-                <!-- Product tab -->
-                <div class="col-md-12">
-                    <div id="product-tab">
-                        <!-- product tab nav -->
-                        <ul class="tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                            <li><a data-toggle="tab" href="#tab3">Reviews ({{ count($reviews) }})</a></li>
-                        </ul>
-                        <!-- /product tab nav -->
-
-                        <!-- product tab content -->
-                        <div class="tab-content">
-                            <!-- tab1  -->
-                            <div id="tab1" class="tab-pane fade in active">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>
-                                            @php
-                                                echo str_replace('. ', '.<br>', $prod['Description']);
-                                            @endphp
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /tab1  -->
-
-                            <!-- tab2  -->
-                            <div id="tab2" class="tab-pane fade in">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div style="display: flex;align-items: baseline;">
-                                            <h4>Name :- </h4> &nbsp;<h5> {{ $pna }}</h5>
-                                        </div>
-                                        <div style="display: flex;align-items: baseline;">
-                                            <h4>Category :- </h4>&nbsp; <h5> {{ $cat_na }}</h5>
-                                        </div>
-                                        <div style="display: flex;align-items: baseline;">
-                                            <h4>Brand :- </h4> &nbsp;<h5> {{ $br_na }}</h5>
-                                        </div>
-                                        <h4>Description :-&nbsp; </h4><br>
-                                        <p>
-                                            @php
-                                                echo str_replace('. ', '.<br>', $prod['Description']);
-                                            @endphp
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /tab2  -->
-
-                            <!-- tab3  -->
-                            <div id="tab3" class="tab-pane fade in">
-                                <div class="row">
-
-                                    <!-- Reviews -->
-                                    <div class="col-md-6">
-                                        <div id="reviews">
-                                            <ul class="reviews">
-
-                                                @foreach ($reviews as $item)
-                                                    <li class="review_tab">
-                                                        <div class="review-heading">
-                                                            <h5 class="name">{{ $item['name'] }}</h5>
-                                                            <p class="date">{{ $item['Review_Date'] }}</p>
-
-                                                        </div>
-                                                        <div class="review-body">
-                                                            <p>{{ $item['content'] }}</p>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-
-                                            </ul>
-                                            <ul class="reviews-pagination">
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /Reviews -->
-
-                                    <!-- Review Form -->
-                                    <div class="col-md-6">
-                                        <div id="review-form">
-                                            <form class="review-form"
-                                                action="{{ env('APP_URL') }}/products/{{ $id }}/add-review"
-                                                method="POST">
-                                                @csrf
-                                                <input class="input" type="text" placeholder="Your Name"
-                                                    name="name">
-                                                <input class="input" type="text" placeholder="Your Email"
-                                                    name="mail">
-                                                <textarea class="input" placeholder="Your Review" name="content"></textarea>
-
-                                                <button class="primary-btn" type="submit">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- /Review Form -->
-                                </div>
-                            </div>
-                            <!-- /tab3  -->
-                        </div>
-                        <!-- /product tab content  -->
-                    </div>
-                </div>
-                <!-- /product tab -->
             </div>
-            <!-- /row -->
+            <!-- /ACCOUNT -->
         </div>
-        <!-- /container -->
+        <!-- row -->
     </div>
-    <!-- /SECTION -->
+    <!-- container -->
+</div>
+<!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
 
-    <!-- Section -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop </a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
 
-                <div class="col-md-12">
-                    <div class="section-title text-center">
-                        <h3 class="title">Related Products</h3>
-                    </div>
-                </div>
+<br><br>
 
 
-                @foreach ($similar_Product1 as $index => $item)
-                    @if ($item['Product_id'] != $id)
-                        <!-- product -->
-                        <div class="col-md-4 col-lg-3 col-xs-6 product_tab2">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
-                                        alt="">
-                                    <div class="product-label">
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
 
-                                    </div>
-                                </div>
-                                <div class="product-body">
-                                    <p class="product-category">
-                                        {{ getCategory($item['Category'], $category) }}
-                                    </p>
-                                    <h3 class="product-name"><a
-                                            href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                            {{ $item['Product_name'] }}
-                                        </a></h3>
-                                    <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
-                                        {{-- <del
-                                class="product-old-price">$990.00</del> --}}
-                                    </h4>
-                                    <div class="product-rating">
-
-                                    </div>
-                                    <div class="product-btns">
-                                        <button class="add-to-wishlist"
-                                            @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)"
-
-                @else
-                onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
-                                            <i class="fa fa-heart-o"></i>
-                                            <span class="tooltipp">
-                                                add to wishlist
-                                            </span>
-                                        </button>
-
-                                        <button class="quick-view"><a
-                                                href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                                <i class="fa fa-eye"></i>
-                                                <span class="tooltipp">
-                                                    quick view
-                                                </span> </a>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="add-to-cart">
-                                    <button class="add-to-cart-btn"
-                                        onclick="add_to_cart(`{{ env('APP_URL') }}/user/cart/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        add to cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /product -->
-                        @if ($index == 3)
-                        @break
+                    @foreach ($pics as $p)
+                    @if (in_array($p['Picture_id'], $v))
+                    <img src="{{ asset('/storage/site-assets/') }}/{{ $p['Source'] }}" alt="">
                     @endif
-                @endif
+                    @endforeach
+
+
+                </div>
+            </div>
+            <!-- /Product main img -->
+
+            <!-- Product thumb imgs -->
+            <div class="col-md-2  col-md-pull-5">
+                <div id="product-imgs">
+                    @foreach ($pics as $p)
+                    @if (in_array($p['Picture_id'], $v))
+                    <img src="{{ asset('/storage/site-assets/') }}/{{ $p['Source'] }}" alt="">
+                    @endif
+                    @endforeach
+
+                </div>
+            </div>
+            <!-- /Product thumb imgs -->
+
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">{{ $prod['Product_name'] }}</h2>
+
+                    <div>
+                        <h3 class="product-price" id="product-price">₹{{ $var[0]['Price'] }}</h3>
+                    </div>
+
+                    <ul class="product-links">
+                        <li>Category:</li>
+                        <li><a href="{{ env('APP_URL') }}/shop?query={{ base64_encode(json_encode(['category' => [$prod['Category']], 'brand' => [], 'price' => ['max' => 99999999.00, 'min' => 0.00],])) }}">{{ $cat_na }}</a></li>
+                    </ul>
+                    <ul class="product-links">
+                        <li>Brand:</li>
+                        <li><a href="{{ env('APP_URL') }}/shop?query={{ base64_encode(json_encode(['category' => [], 'brand' => [$prod['Brand']], 'price' => ['max' => 99999999.00, 'min' => 0.00],])) }}">{{ $br_na }}</a>
+                        </li>
+                    </ul>
+
+
+
+                    <div class="product-options">
+                        <label>
+                            Color
+                            <select class="input-select" id="varCol" onChange="changePr()">
+
+                                @foreach ($var as $v)
+                                <option value="{{ $v['Color'] }}" data-price="{{ $v['Price'] }}" data-id="{{ $v['variant_id'] }}" data-stock="{{inStock($v['variant_id'],$var)}}">
+                                    {{ $v['Color'] }}
+                                </option>
+                                @endforeach
+
+
+                            </select>
+
+
+                        </label>
+                    </div>
+
+                    <div class="add-to-cart">
+                        <div class="qty-label">
+                            Qty
+                            <div class="input-number">
+                                <input type="number" disabled value=1 id="qty">
+                                <span class="qty-up">+</span>
+                                <span class="qty-down">-</span>
+                            </div>
+                        </div>
+
+                        <form action="{{ env('APP_URL') }}/user/cart/add" method="POST" id="cart_form" style="display: none">
+                            @csrf
+                            <input type="text" name="prod_id" id="prod_id" value="{{ $id }}">
+                            <input type="text" name="var_id" id="var_id" value="{{ $var[0]['variant_id'] }}">
+                            <input type="text" name="qty" id="qtny" value="">
+
+
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+
+                        <button class="add-to-cart-btn" onClick="cart_form_submit()"><i class="fa fa-shopping-cart"></i> add
+                            to
+                            cart</button>
+                    </div>
+
+                    @if (inStock($var[0]['variant_id'],$variants))
+                    <span class="product-available" id="product-available">In Stock</span>
+                    @else
+                    <span class="product-available" id="product-available">Not In Stock</span>
+                    @endif
+
+                    <br><br>
+
+
+                    <ul class="product-btns">
+                        <li><a href="{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}/{{ getFirstVariant($id, $products, $variants) }}/2" id="add_wishlist_button"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+
+                    </ul>
+
+
+                    <script>
+                        function changePr() {
+                            var selectBox = document.getElementById('varCol');
+
+                            const selectedOption = selectBox.options[selectBox.selectedIndex];
+                            const selectedAction = selectedOption.getAttribute('data-price');
+                            const selectedAction2 = selectedOption.getAttribute('data-id');
+                            const wishlist_url = "{{ env('APP_URL') }}/products/wishlist/add/{{ $id }}"
+
+                            document.getElementById('product-price').innerText = "₹" + selectedAction;
+
+                            document.getElementById('var_id').value = selectedAction2;
+                            console.log(document.getElementById('var_id').value);
+
+                            console.log(wishlist_url + "/" + selectedAction2);
+
+                            document.getElementById('add_wishlist_button').href = wishlist_url + "/" + selectedAction2 + "/2";
+
+                            document.getElementById('product-available').innerText = selectedOption.getAttribute('data-stock') ? "in stock" : "not in stock";
+                        }
+                    </script>
+
+
+
+
+                    <ul class="product-links">
+                        <li>Share:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /Product details -->
+
+            <!-- Product tab -->
+            <div class="col-md-12">
+                <div id="product-tab">
+                    <!-- product tab nav -->
+                    <ul class="tab-nav">
+                        <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+                        <li><a data-toggle="tab" href="#tab2">Details</a></li>
+                        <li><a data-toggle="tab" href="#tab3">Reviews ({{ count($reviews) }})</a></li>
+                    </ul>
+                    <!-- /product tab nav -->
+
+                    <!-- product tab content -->
+                    <div class="tab-content">
+                        <!-- tab1  -->
+                        <div id="tab1" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        @php
+                                        echo str_replace('. ', '.<br>', $prod['Description']);
+                                        @endphp
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab1  -->
+
+                        <!-- tab2  -->
+                        <div id="tab2" class="tab-pane fade in">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="display: flex;align-items: baseline;">
+                                        <h4>Name :- </h4> &nbsp;<h5> {{ $pna }}</h5>
+                                    </div>
+                                    <div style="display: flex;align-items: baseline;">
+                                        <h4>Category :- </h4>&nbsp; <h5> {{ $cat_na }}</h5>
+                                    </div>
+                                    <div style="display: flex;align-items: baseline;">
+                                        <h4>Brand :- </h4> &nbsp;<h5> {{ $br_na }}</h5>
+                                    </div>
+                                    <h4>Description :-&nbsp; </h4><br>
+                                    <p>
+                                        @php
+                                        echo str_replace('. ', '.<br>', $prod['Description']);
+                                        @endphp
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab2  -->
+
+                        <!-- tab3  -->
+                        <div id="tab3" class="tab-pane fade in">
+                            <div class="row">
+
+                                <!-- Reviews -->
+                                <div class="col-md-6">
+                                    <div id="reviews">
+                                        <ul class="reviews">
+
+                                            @foreach ($reviews as $item)
+                                            <li class="review_tab">
+                                                <div class="review-heading">
+                                                    <h5 class="name">{{ $item['name'] }}</h5>
+                                                    <p class="date">{{ $item['Review_Date'] }}</p>
+
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>{{ $item['content'] }}</p>
+                                                </div>
+                                            </li>
+                                            @endforeach
+
+                                        </ul>
+                                        <ul class="reviews-pagination">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /Reviews -->
+
+                                <!-- Review Form -->
+                                <div class="col-md-6">
+                                    <div id="review-form">
+                                        <form class="review-form" action="{{ env('APP_URL') }}/products/{{ $id }}/add-review" method="POST">
+                                            @csrf
+                                            <input class="input" type="text" placeholder="Your Name" name="name">
+                                            <input class="input" type="text" placeholder="Your Email" name="mail">
+                                            <textarea class="input" placeholder="Your Review" name="content"></textarea>
+
+                                            <button class="primary-btn" type="submit">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- /Review Form -->
+                            </div>
+                        </div>
+                        <!-- /tab3  -->
+                    </div>
+                    <!-- /product tab content  -->
+                </div>
+            </div>
+            <!-- /product tab -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- Section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="title">Related Products</h3>
+                </div>
+            </div>
+
+
+            @foreach ($similar_Product1 as $index => $item)
+            @if ($item['Product_id'] != $id)
+            <!-- product -->
+            <div class="col-md-4 col-lg-3 col-xs-6 product_tab2">
+                <div class="product">
+                    <div class="product-img">
+                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}" alt="">
+                        <div class="product-label">
+
+                        </div>
+                    </div>
+                    <div class="product-body">
+                        <p class="product-category">
+                            {{ getCategory($item['Category'], $category) }}
+                        </p>
+                        <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                {{ $item['Product_name'] }}
+                            </a></h3>
+                        <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                            {{-- <del
+                                class="product-old-price">$990.00</del> --}}
+                        </h4>
+                        <div class="product-rating">
+
+                        </div>
+                        <div class="product-btns">
+                            <button class="add-to-wishlist" @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)" @else onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
+                                <i class="fa fa-heart-o"></i>
+                                <span class="tooltipp">
+                                    add to wishlist
+                                </span>
+                            </button>
+
+                            <button class="quick-view"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                    <i class="fa fa-eye"></i>
+                                    <span class="tooltipp">
+                                        quick view
+                                    </span> </a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="add-to-cart">
+                        <button class="add-to-cart-btn" onclick="add_to_cart(`{{ env('APP_URL') }}/user/cart/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)">
+                            <i class="fa fa-shopping-cart"></i>
+                            add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /product -->
+            @if ($index == 3)
+            @break
+            @endif
+            @endif
             @endforeach
 
             {{-- </div> --}}
@@ -516,73 +494,65 @@
 
             {{-- <div class="row"> --}}
             @foreach ($similar_Product2 as $index => $item)
-                @if ($item['Product_id'] != $id)
-                    <!-- product -->
-                    <div class="col-md-4 col-lg-3 col-xs-6 product_tab2">
-                        <div class="product">
-                            <div class="product-img">
-                                <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}"
-                                    alt="">
-                                <div class="product-label">
+            @if ($item['Product_id'] != $id)
+            <!-- product -->
+            <div class="col-md-4 col-lg-3 col-xs-6 product_tab2">
+                <div class="product">
+                    <div class="product-img">
+                        <img src="{{ asset('/storage/site-assets/') }}/{{ getVariantImage(getFirstVariant($item['Product_id'], $products, $variants), $variants, $pictures) }}" alt="">
+                        <div class="product-label">
 
-                                </div>
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">
-                                    {{ getCategory($item['Category'], $category) }}
-                                </p>
-                                <h3 class="product-name"><a
-                                        href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                        {{ $item['Product_name'] }}
-                                    </a></h3>
-                                <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
-                                    {{-- <del
-                                    class="product-old-price">$990.00</del> --}}
-                                </h4>
-                                <div class="product-rating">
-
-                                </div>
-                                <div class="product-btns">
-                                    <button class="add-to-wishlist"
-                                        @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)"
-
-                    @else
-                    onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
-                                        <i class="fa fa-heart-o"></i>
-                                        <span class="tooltipp">
-                                            add to wishlist
-                                        </span>
-                                    </button>
-
-                                    <button class="quick-view"><a
-                                            href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
-                                            <i class="fa fa-eye"></i>
-                                            <span class="tooltipp">
-                                                quick view
-                                            </span> </a>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="add-to-cart">
-                                <button class="add-to-cart-btn"
-                                    onclick="add_to_cart(`{{ env('APP_URL') }}/user/cart/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    add to cart
-                                </button>
-                            </div>
                         </div>
                     </div>
-                    <!-- /product -->
-                    @if ($index == 3)
-                    @break
-                @endif
+                    <div class="product-body">
+                        <p class="product-category">
+                            {{ getCategory($item['Category'], $category) }}
+                        </p>
+                        <h3 class="product-name"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                {{ $item['Product_name'] }}
+                            </a></h3>
+                        <h4 class="product-price">₹{{ getPrice($item['Product_id'], $variants) }}
+                            {{-- <del
+                                    class="product-old-price">$990.00</del> --}}
+                        </h4>
+                        <div class="product-rating">
+
+                        </div>
+                        <div class="product-btns">
+                            <button class="add-to-wishlist" @if (session('user_id')) onclick="add_to_wishlist(`{{ env('APP_URL') }}/products/wishlist/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)" @else onclick="alert('Unauthenticated user \nPlease login !'); window.location.href=`{{ env('APP_URL') }}/user/login`" @endif>
+                                <i class="fa fa-heart-o"></i>
+                                <span class="tooltipp">
+                                    add to wishlist
+                                </span>
+                            </button>
+
+                            <button class="quick-view"><a href="{{ env('APP_URL') }}/product/{{ $item['Product_id'] }}">
+                                    <i class="fa fa-eye"></i>
+                                    <span class="tooltipp">
+                                        quick view
+                                    </span> </a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="add-to-cart">
+                        <button class="add-to-cart-btn" onclick="add_to_cart(`{{ env('APP_URL') }}/user/cart/add/{{ $item['Product_id'] }}/{{ getFirstVariant($item['Product_id'], $products, $variants) }}`)">
+                            <i class="fa fa-shopping-cart"></i>
+                            add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /product -->
+            @if ($index == 3)
+            @break
             @endif
-        @endforeach
+            @endif
+            @endforeach
+
+        </div>
 
     </div>
-
-</div>
-<!-- /container -->
+    <!-- /container -->
 </div>
 <!-- /Section -->
 
