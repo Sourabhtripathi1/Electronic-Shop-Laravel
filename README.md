@@ -18,7 +18,7 @@ code .
 
 
 
-# To host
+## To host
 
 git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
@@ -37,6 +37,8 @@ php artisan route:cache
 php artisan view:cache
 
 php artisan storage:link
+
+chmod -R 777 /var/www/Electronic-Shop-Laravel/
 
 
 
