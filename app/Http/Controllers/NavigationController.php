@@ -278,7 +278,7 @@ class NavigationController extends Controller
             'contact' => $req->contact,
         ];
 
-        // Mail::to('ganeshprasadtripathi38@gmail.com')->send(new queryMail($mailData));
+     Mail::to('ganeshprasadtripathi38@gmail.com')->send(new queryMail($mailData));
 
         return redirect()->back()->with('success', 'Query sent Successfully');
     }
