@@ -1,4 +1,10 @@
-# Command to run code
+# Electronic-Shop Laravel
+
+<br />
+<br />
+
+---
+## Command to run code
 
 git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
 
@@ -12,8 +18,13 @@ php artisan Storage:link
 
 code .
 
+<br />
+<br />
+<br />
+<br />
 
 
+---
 ## To host
 
 git clone https://github.com/Sourabhtripathi1/Electronic-Shop-Laravel.git
